@@ -2927,20 +2927,56 @@ textarea {
 }
 
 .mobile-drawer-footer {
-  padding: 12px 20px;
-  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  padding: 16px 20px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--border-light);
   background: var(--white);
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-drawer-footer-row {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  width: 100%;
 }
 
 .mobile-user-row {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.mobile-role-toggle {
+  display: flex;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.mobile-role-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+}
+
+.mobile-role-btn.active {
+  background: var(--white);
+  color: var(--blue-700);
+  box-shadow: var(--shadow-sm);
+}
+
+.mobile-role-btn[data-role="Lead"].active {
+  background: var(--gold);
+  color: var(--gray-900);
 }
 
 .mobile-signout-btn {
