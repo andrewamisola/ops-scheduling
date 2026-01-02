@@ -88,10 +88,10 @@ const elements = {
   saveNotify: document.getElementById('saveNotify'),
   notifyEmail: document.getElementById('notifyEmail'),
   notifyText: document.getElementById('notifyText'),
-  notifySlack: document.getElementById('notifySlack'),
+  notifyTeams: document.getElementById('notifyTeams'),
   emailGroup: document.getElementById('emailGroup'),
   phoneGroup: document.getElementById('phoneGroup'),
-  slackGroup: document.getElementById('slackGroup')
+  teamsGroup: document.getElementById('teamsGroup')
 };
 
 // State
@@ -2115,7 +2115,6 @@ function handleLogin(e) {
     elements.dashboardView.classList.remove('hidden');
 
     loadDefaultSchedule();
-    pickActiveSchedule();
     renderWeekView();
     renderMyShifts();
     renderBulletin();
@@ -2491,8 +2490,8 @@ elements.notifyEmail.addEventListener('change', (e) => {
 elements.notifyText.addEventListener('change', (e) => {
   elements.phoneGroup.classList.toggle('hidden', !e.target.checked);
 });
-elements.notifySlack.addEventListener('change', (e) => {
-  elements.slackGroup.classList.toggle('hidden', !e.target.checked);
+elements.notifyTeams.addEventListener('change', (e) => {
+  elements.teamsGroup.classList.toggle('hidden', !e.target.checked);
 });
 
 // ==========================================================================

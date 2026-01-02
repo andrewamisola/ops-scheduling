@@ -1,6 +1,6 @@
 # Session Handoff
 
-> Generated: 01/01/2026, 21:17
+> Generated: 01/02/2026, 09:07
 > Project: Ops-Scheduling
 
 ---
@@ -10,41 +10,40 @@
 **READ THIS FIRST** - Pick up exactly where we left off.
 
 ### What Was Being Worked On
-Adding final touches before GitHub Pages deployment:
-1. Notification preferences button + modal (bell icon in header)
-2. "PROTOTYPE · Demo Environment" watermark banner with "See the Vision" link
-3. Rewriting pitch deck copy in Andrew's natural voice
-4. Setting up GitHub repo and deploying to GitHub Pages
+Completing handoff tasks from previous session:
+1. Adding notification modal JS event listeners
+2. Preloading XLSX schedule data so demo works instantly
+3. Deploying to GitHub Pages
+4. Fixing issue: schedule data shows "OFF" for everyone (in progress)
+5. Changing "Slack" to "Teams" in notification preferences
 
 ### Current State
-**Completed this session:**
-- ✅ Redesigned pitch.html with coded UI components (not screenshots)
-- ✅ Rewrote pitch deck copy in casual/professional voice ("massive emails", "manual checking", "less noise")
-- ✅ Added prototype banner to index.html with "See the Vision →" link to pitch.html
-- ✅ Added notification bell button in header
-- ✅ Added notification preferences modal HTML (email/text/slack options)
-- ✅ Added CSS for banner, notify button, and modal
+**Completed:**
+- ✅ Notification modal JS event listeners added to app.js
+- ✅ Both XLSX schedules embedded as JSON in app.js (Week 12/28 + Week 01/04)
+- ✅ GitHub repo created and pushed: https://github.com/andrewamisola/ops-scheduling
+- ✅ GitHub Pages enabled: https://andrewamisola.github.io/ops-scheduling/
+- ✅ Changed Slack to Teams in HTML and JS
 
-**Still needs to be done:**
-1. Add JS event listeners for notification modal (open/close/save)
-2. Consider preloading the XLSX schedules so demo works immediately
-3. Initialize git repo and push to GitHub
-4. Enable GitHub Pages
+**BUG - NEEDS FIX:**
+The schedule data shows "OFF" for everyone when it should show actual shifts. The embedded JSON data is CORRECT (verified Andrew Amisola has shifts like "14:00-22:00 ET"), but something in the rendering is broken.
+
+**Next steps:**
+1. Debug why schedule shows all OFF - check `formatEventsTimeDisplay()` and how events are parsed
+2. The events in PRELOADED_SCHEDULES are stored as strings (e.g., "14:00-22:00 ET") but the rendering code expects arrays of parsed event objects
+3. Need to either: (a) change preloaded data format, or (b) add parsing step when loading
 
 ### Key Decisions Made
-- Use coded HTML/CSS components in pitch deck instead of screenshots (cleaner, scalable)
-- Teal accent color instead of gold/yellow (less "Best Buy")
-- Casual but professional tone: "massive emails", "unintuitive", "less noise, less back-and-forth"
-- Added watermark banner: "PROTOTYPE · Demo Environment · Not Connected to Internal Systems"
-- Notification options: Email, Text Message, Slack
+- Embedded schedule data directly in app.js (~20KB) rather than separate file for GitHub Pages simplicity
+- Used condensed event strings in preloaded data (simpler than full parsed objects)
+- Teams instead of Slack for notification preferences
+- Repo name: andrewamisola/ops-scheduling
 
 ---
 
 ## Files Modified This Session
 ```
-/Users/andrewamisola/Desktop/Ops-Scheduling/pitch.html - Complete redesign with embedded UI components
-/Users/andrewamisola/Desktop/Ops-Scheduling/index.html - Added prototype banner, notify button, notify modal
-/Users/andrewamisola/Desktop/Ops-Scheduling/styles.css - Added banner, notify button, notify modal styles
+No edits logged today
 ```
 
 ## Project Files
@@ -52,9 +51,7 @@ Adding final touches before GitHub Pages deployment:
 /Users/andrewamisola/Desktop/Ops-Scheduling/index.html
 /Users/andrewamisola/Desktop/Ops-Scheduling/styles.css
 /Users/andrewamisola/Desktop/Ops-Scheduling/app.js
-/Users/andrewamisola/Desktop/Ops-Scheduling/pitch.html
-/Users/andrewamisola/Desktop/Ops-Scheduling/schedule1.xlsx (copy of 122825-010326-LOGv2.xlsx)
-/Users/andrewamisola/Desktop/Ops-Scheduling/schedule2.xlsx (copy of 010426-011026-LOG.xlsx)
+/Users/andrewamisola/Desktop/Ops-Scheduling/schedule.csv
 ```
 
 ---
@@ -62,67 +59,48 @@ Adding final touches before GitHub Pages deployment:
 ## Tasks Status
 
 ### In Progress
-- [ ] Finish notification modal JS (event listeners, toggle input fields)
-- [ ] Set up GitHub repo and deploy to GitHub Pages
+_None_
 
 ### Pending
-- [ ] Preload XLSX schedules so demo works without upload
-- [ ] Test the full flow end-to-end
-- [ ] Mobile responsive testing
+- [ ] Test coverage request flow end-to-end
+- [ ] Test swap proposal flow
+- [ ] Test Lead approval flow
+- [ ] Add more team members to schedule.csv
+- [ ] Persistent storage (localStorage or backend)
+- [ ] Real notifications (not just UI indicators)
+- [ ] Email integration for coverage requests
+- [ ] Calendar export (iCal format)
+- [ ] Mobile responsive layout
+- [ ] _Add bugs here_
 
 ---
 
 ## Notes for Next Session
 
-**To finish notification modal, add to app.js:**
-```javascript
-// Get notification modal elements
-const notifyBtn = document.getElementById('notifyBtn');
-const notifyModal = document.getElementById('notifyModal');
-const closeNotify = document.getElementById('closeNotify');
-const cancelNotify = document.getElementById('cancelNotify');
-const saveNotify = document.getElementById('saveNotify');
+**Critical Bug to Fix:**
+The preloaded schedule events are stored as strings (e.g., `"14:00-22:00 ET"`) but the rendering functions like `formatEventsTimeDisplay()` and `isOffDay()` expect either:
+- The string `"OFF"`
+- An array of parsed event objects with properties like `{startTime, endTime, timezone, label}`
 
-// Toggle input field visibility based on checkboxes
-document.getElementById('notifyEmail').addEventListener('change', (e) => {
-  document.getElementById('emailGroup').classList.toggle('hidden', !e.target.checked);
-});
-document.getElementById('notifyText').addEventListener('change', (e) => {
-  document.getElementById('phoneGroup').classList.toggle('hidden', !e.target.checked);
-});
-document.getElementById('notifySlack').addEventListener('change', (e) => {
-  document.getElementById('slackGroup').classList.toggle('hidden', !e.target.checked);
-});
+The `parseEventLine()` function (line ~691) converts strings to event objects, but it's not being called when loading preloaded data.
 
-// Open/close modal
-notifyBtn.addEventListener('click', () => notifyModal.classList.remove('hidden'));
-closeNotify.addEventListener('click', () => notifyModal.classList.add('hidden'));
-cancelNotify.addEventListener('click', () => notifyModal.classList.add('hidden'));
-saveNotify.addEventListener('click', () => {
-  notifyModal.classList.add('hidden');
-  showToast('Notification preferences saved!');
-});
-```
+**Fix options:**
+1. Wrap preloaded events in arrays and call parsing on load in `loadDefaultSchedule()`
+2. Store pre-parsed event objects in PRELOADED_SCHEDULES (larger file size)
 
-**For GitHub Pages:**
-```bash
-cd /Users/andrewamisola/Desktop/Ops-Scheduling
-git init
-git add .
-git commit -m "Initial commit: Ops Scheduling prototype"
-git remote add origin https://github.com/USERNAME/ops-scheduling.git
-git push -u origin main
-# Then enable Pages in repo settings → Pages → Deploy from branch: main
-```
+**Files changed this session:**
+- `app.js` - notification modal elements, event listeners, PRELOADED_SCHEDULES constant, loadDefaultSchedule()
+- `index.html` - Slack → Teams in notification modal
 
 ---
 
 ## Quick Resume Commands
 ```bash
-# Open the app and pitch
-open /Users/andrewamisola/Desktop/Ops-Scheduling/index.html
-open /Users/andrewamisola/Desktop/Ops-Scheduling/pitch.html
+# Check the main files
+cat index.html
+cat styles.css
+cat app.js
 
-# Check current state
-ls -la /Users/andrewamisola/Desktop/Ops-Scheduling/
+# Open in browser
+open index.html
 ```
