@@ -2970,6 +2970,18 @@ if (mobileElements.hamburgerBtn) {
   mobileElements.hamburgerBtn.addEventListener('click', openMobileDrawer);
 }
 
+// User badge also opens drawer on mobile
+const userBadge = document.getElementById('userBadge');
+if (userBadge) {
+  userBadge.addEventListener('click', (e) => {
+    // Only on mobile (<=900px)
+    if (window.innerWidth <= 900) {
+      e.preventDefault();
+      openMobileDrawer();
+    }
+  });
+}
+
 if (mobileElements.closeDrawerBtn) {
   mobileElements.closeDrawerBtn.addEventListener('click', closeMobileDrawer);
 }

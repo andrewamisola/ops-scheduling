@@ -3064,12 +3064,26 @@ textarea {
     white-space: nowrap;
   }
 
+  /* Hide hamburger - avatar is the menu trigger */
   .hamburger-btn {
-    display: flex;
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    order: 3;
+    display: none;
+  }
+
+  /* Make user badge clickable as menu trigger */
+  .header-right .user-badge {
+    cursor: pointer;
+    order: 2;
+  }
+
+  /* Hide name on mobile, just show avatar */
+  .header-right .user-name {
+    display: none;
+  }
+
+  .header-right .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
   }
 
   /* Prototype banner - minimal on mobile */
