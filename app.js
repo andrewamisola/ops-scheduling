@@ -551,7 +551,11 @@ function loadDefaultSchedule() {
   // Load preloaded schedules from XLSX data
   if (PRELOADED_SCHEDULES && PRELOADED_SCHEDULES.length > 0) {
     state.scheduleFiles = PRELOADED_SCHEDULES.map(schedule => ({
-      roster: schedule.roster,
+      // Parse each person's events from raw strings to event arrays (same as XLSX upload)
+      roster: schedule.roster.map(person => ({
+        name: person.name,
+        events: person.events.map(evt => normalizeShift(evt))
+      })),
       startDate: new Date(schedule.startDate),
       label: schedule.label
     }));
@@ -1059,10 +1063,8 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
           <div class="week-grid">
             ${weekDays.map((day, i) => {
               const date = weekDates[i];
-              const rawEvent = userSchedule.events[i];
-              // Handle both raw strings (preloaded) and already-parsed arrays (XLSX upload)
-              const events = typeof rawEvent === 'string' ? normalizeShift(rawEvent) : rawEvent;
-              const isOff = typeof rawEvent === 'string' ? isOffDay(rawEvent) : (Array.isArray(rawEvent) && rawEvent.length === 0);
+              const events = userSchedule.events[i];
+              const isOff = Array.isArray(events) && events.length === 0;
               const isTodayClass = isToday(date) ? 'today' : '';
               const offClass = isOff ? 'off' : '';
 
