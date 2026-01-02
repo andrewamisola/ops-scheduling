@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ops Scheduling</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Prototype Watermark -->
+    <div class="prototype-banner">
+      <span class="prototype-badge">PROTOTYPE</span>
+      Demo Environment · Not Connected to Internal Systems
+      <a href="pitch.html" class="vision-link" target="_blank">See the Vision →</a>
+    </div>
+
+    <div class="app" id="app">
+      <!-- Login View -->
+      <section class="login" id="loginView">
+        <div class="login-card">
+          <div class="login-brand">
+            <div class="logo">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="url(#logoGrad)"/>
+                <path d="M16 24h16M24 16v16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48">
+                    <stop offset="0%" stop-color="#1E88E5"/>
+                    <stop offset="100%" stop-color="#1565C0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h1>Ops Scheduling</h1>
+            <p class="tagline">Coverage requests & shift swaps, simplified.</p>
+          </div>
+
+          <form class="login-form" id="loginForm">
+            <div class="input-group">
+              <label for="username">Your Name</label>
+              <input type="text" id="username" placeholder="e.g. Andrew Amisola" autocomplete="off" />
+            </div>
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Enter password" />
+            </div>
+            <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
+          </form>
+
+          <div class="login-hint">
+            <span>Demo:</span> Andrew Amisola / password
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard View -->
+      <section class="dashboard hidden" id="dashboardView">
+        <!-- Lead Mode Banner -->
+        <div class="lead-banner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          Lead View — You can approve or deny shift requests
+        </div>
+
+        <!-- Top Header -->
+        <header class="header">
+          <div class="header-left">
+            <div class="logo small">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="url(#logoGrad2)"/>
+                <path d="M16 24h16M24 16v16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="logoGrad2" x1="0" y1="0" x2="48" y2="48">
+                    <stop offset="0%" stop-color="#1E88E5"/>
+                    <stop offset="100%" stop-color="#1565C0"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="header-title">
+              <h1>Ops Scheduling</h1>
+            </div>
+          </div>
+          <div class="header-right">
+            <button class="notify-btn" id="notifyBtn" title="Notification Settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+              </svg>
+            </button>
+            <div class="user-badge" id="userBadge">
+              <span class="user-avatar" id="userAvatar">AA</span>
+              <span class="user-name" id="userName">Andrew Amisola</span>
+            </div>
+            <div class="role-toggle" id="roleToggle">
+              <button class="role-btn active" data-role="Operator">Operator</button>
+              <button class="role-btn" data-role="Lead">Lead</button>
+            </div>
+            <button class="btn-ghost" id="logoutBtn">Sign Out</button>
+          </div>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="layout">
+          <!-- Left Sidebar -->
+          <aside class="sidebar">
+            <div class="sidebar-tabs">
+              <button class="tab-btn" data-tab="myShifts">My Shifts</button>
+              <button class="tab-btn active" data-tab="bulletin">
+                Bulletin
+                <span class="badge" id="bulletinBadge">2</span>
+              </button>
+            </div>
+
+            <!-- My Shifts Tab -->
+            <div class="tab-content" id="myShiftsTab">
+              <div class="sidebar-section">
+                <h3>This Week</h3>
+                <div class="shift-list" id="myShiftsList"></div>
+              </div>
+            </div>
+
+            <!-- Bulletin Tab -->
+            <div class="tab-content active" id="bulletinTab">
+              <div class="sidebar-section">
+                <h3>Open Requests</h3>
+                <p class="section-desc">Shifts needing coverage</p>
+                <div class="bulletin-filter">
+                  <label class="filter-toggle">
+                    <input type="checkbox" id="showAllRequests" />
+                    <span>Show all requests</span>
+                  </label>
+                </div>
+                <div class="bulletin-list" id="bulletinList"></div>
+              </div>
+            </div>
+
+            <!-- Lead Approvals (only visible to leads) -->
+            <div class="sidebar-section lead-only hidden" id="leadApprovals">
+              <h3>Pending Approvals</h3>
+              <div class="approval-list" id="approvalList"></div>
+            </div>
+          </aside>
+
+          <!-- Main Content - Calendar -->
+          <main class="main-content">
+            <div class="calendar-header">
+              <h2>Your Weekly Schedule</h2>
+              <p class="calendar-subtitle">Tap any shift to request coverage or propose a swap</p>
+              <div class="calendar-actions">
+                <div class="timezone-toggle" id="timezoneToggle">
+                  <span class="tz-label">Display:</span>
+                  <button class="tz-btn active" data-tz="ET">Eastern</button>
+                  <button class="tz-btn" data-tz="PT">Pacific</button>
+                </div>
+                <label class="upload-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                  </svg>
+                  Upload CSV/XLSX
+                  <input type="file" id="csvUpload" accept=".csv,.xlsx" multiple />
+                </label>
+              </div>
+            </div>
+
+            <!-- Week View -->
+            <div class="week-view" id="weekView">
+              <!-- Days will be rendered here -->
+            </div>
+
+            <!-- Full Team Schedule (collapsible) -->
+            <div class="team-schedule-section">
+              <button class="expand-btn" id="expandTeamBtn">
+                <span>View Full Team Schedule</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="team-schedule hidden" id="teamSchedule">
+                <div class="schedule-grid" id="scheduleGrid"></div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </section>
+
+      <!-- Coverage Request Modal -->
+      <div class="modal hidden" id="requestModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card">
+          <div class="modal-header">
+            <h3>Request Coverage</h3>
+            <button class="close-btn" id="closeModal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="shift-detail" id="modalShiftDetail">
+              <div class="shift-day">Saturday</div>
+              <div class="shift-time">10:00 AM - 6:00 PM ET</div>
+            </div>
+
+            <!-- Request Mode Indicator -->
+            <div class="request-mode" id="requestMode">
+              <div class="mode-current" id="modeCoverage">
+                <div class="mode-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="7" r="4"/>
+                    <path d="M5.5 21a7.5 7.5 0 0115 0"/>
+                    <path d="M18 8l2 2-2 2"/>
+                  </svg>
+                </div>
+                <div class="mode-info">
+                  <strong>Requesting Coverage</strong>
+                  <span>Your request will be posted to the bulletin</span>
+                </div>
+              </div>
+              <div class="mode-current mode-swap hidden" id="modeSwap">
+                <div class="mode-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
+                  </svg>
+                </div>
+                <div class="mode-info">
+                  <strong>Proposing Trade</strong>
+                  <span>This is a private request (leads will be notified)</span>
+                </div>
+              </div>
+              <input type="hidden" name="requestType" id="requestTypeInput" value="coverage" />
+            </div>
+
+            <div class="available-section">
+              <h4>Available This Day</h4>
+              <p class="available-desc">These team members are not scheduled and will be notified</p>
+              <div class="available-list" id="availableList">
+                <!-- Will be populated dynamically -->
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="requestNote">Reason (optional)</label>
+              <textarea id="requestNote" placeholder="e.g. Doctor's appointment, family event..."></textarea>
+            </div>
+
+            <!-- Pivot Option -->
+            <div class="pivot-option" id="pivotOption">
+              <button type="button" class="pivot-btn" id="pivotToSwap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
+                </svg>
+                Propose a trade instead?
+              </button>
+              <button type="button" class="pivot-btn hidden" id="pivotToCoverage">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="7" r="4"/>
+                  <path d="M5.5 21a7.5 7.5 0 0115 0"/>
+                </svg>
+                Request coverage instead?
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-ghost" id="cancelRequest">Cancel</button>
+            <button class="btn-primary" id="submitRequest">Post to Bulletin</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation Modal (for covering/swapping) -->
+      <div class="modal hidden" id="confirmModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card confirm-card">
+          <div class="modal-header">
+            <h3 id="confirmTitle">Confirm Coverage</h3>
+            <button class="close-btn" id="closeConfirm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="confirm-summary" id="confirmSummary">
+              <!-- Will be populated dynamically -->
+            </div>
+
+            <!-- Swap options (only shown for swaps) -->
+            <div class="swap-options hidden" id="swapOptions">
+              <h4>Select your shift to swap</h4>
+              <p class="swap-desc">Only showing shifts that work for this swap</p>
+              <div class="swap-list" id="swapList">
+                <!-- Your applicable shifts for swapping -->
+              </div>
+            </div>
+
+            <div class="confirm-note">
+              <p id="confirmNotice">A lead will review and approve this request. You'll be notified once confirmed.</p>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-ghost" id="cancelConfirm">Cancel</button>
+            <button class="btn-primary" id="submitConfirm">Confirm</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Notification -->
+      <div class="toast hidden" id="toast">
+        <div class="toast-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <span class="toast-message">Request posted to bulletin!</span>
+        <button class="toast-action hidden" id="toastAction">View Request</button>
+      </div>
+
+      <!-- Request Detail Modal -->
+      <div class="modal hidden" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card detail-card">
+          <div class="modal-header">
+            <h3>Request Details</h3>
+            <button class="close-btn" id="closeDetail">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="detail-status" id="detailStatus">
+              <span class="status-badge pending">Pending</span>
+            </div>
+
+            <div class="detail-shift" id="detailShift">
+              <!-- Shift info populated dynamically -->
+            </div>
+
+            <div class="detail-section">
+              <h4>Request Type</h4>
+              <p id="detailType">Coverage</p>
+            </div>
+
+            <div class="detail-section" id="detailReasonSection">
+              <h4>Reason</h4>
+              <p id="detailReason">No reason provided</p>
+            </div>
+
+            <div class="detail-section">
+              <h4>Available Team Members</h4>
+              <p class="detail-desc">These people are off and have been notified</p>
+              <div class="detail-available" id="detailAvailable">
+                <!-- Available people populated dynamically -->
+              </div>
+            </div>
+
+            <div class="detail-section" id="detailResponsesSection">
+              <h4>Responses</h4>
+              <div class="detail-responses" id="detailResponses">
+                <p class="no-responses">No responses yet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-outline" id="cancelDetailRequest">Cancel Request</button>
+            <button class="btn-ghost" id="closeDetailBtn">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Notification Preferences Modal -->
+      <div class="modal hidden" id="notifyModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-card notify-card">
+          <div class="modal-header">
+            <h3>Notification Preferences</h3>
+            <button class="close-btn" id="closeNotify">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p class="notify-intro">How would you like to be notified when someone responds to your coverage requests?</p>
+
+            <div class="notify-options">
+              <label class="notify-option">
+                <input type="checkbox" id="notifyEmail" checked />
+                <div class="notify-option-content">
+                  <div class="notify-option-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>Email</strong>
+                    <span>Get notified via email</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="notify-option">
+                <input type="checkbox" id="notifyText" />
+                <div class="notify-option-content">
+                  <div class="notify-option-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>Text Message</strong>
+                    <span>Get SMS alerts</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="notify-option">
+                <input type="checkbox" id="notifySlack" />
+                <div class="notify-option-content">
+                  <div class="notify-option-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+                      <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                      <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+                      <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+                      <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+                      <path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
+                      <path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+                      <path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>Slack</strong>
+                    <span>Get Slack DMs</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <div class="notify-fields">
+              <div class="input-group" id="emailGroup">
+                <label for="notifyEmailInput">Email Address</label>
+                <input type="email" id="notifyEmailInput" placeholder="you@company.com" />
+              </div>
+
+              <div class="input-group hidden" id="phoneGroup">
+                <label for="notifyPhoneInput">Phone Number</label>
+                <input type="tel" id="notifyPhoneInput" placeholder="+1 (555) 123-4567" />
+              </div>
+
+              <div class="input-group hidden" id="slackGroup">
+                <label for="notifySlackInput">Slack Username</label>
+                <input type="text" id="notifySlackInput" placeholder="@username" />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-ghost" id="cancelNotify">Cancel</button>
+            <button class="btn-primary" id="saveNotify">Save Preferences</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- XLSX parser for spreadsheet uploads -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

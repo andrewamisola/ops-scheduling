@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ops Scheduling — Proposal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      /* App colors */
+      --blue-50: #E3F2FD;
+      --blue-100: #BBDEFB;
+      --blue-200: #90CAF9;
+      --blue-400: #42A5F5;
+      --blue-500: #2196F3;
+      --blue-600: #1E88E5;
+      --blue-700: #1976D2;
+      --blue-800: #1565C0;
+      --gold: #FFB300;
+      --gold-light: #FFE082;
+      --success: #4CAF50;
+      --gray-50: #FAFAFA;
+      --gray-100: #F5F5F5;
+      --gray-200: #EEEEEE;
+      --gray-400: #BDBDBD;
+      --gray-500: #9E9E9E;
+      --gray-600: #757575;
+      --gray-900: #212121;
+
+      /* Pitch colors */
+      --dark: #0F172A;
+      --dark-card: #1E293B;
+      --teal: #14B8A6;
+      --teal-light: #5EEAD4;
+      --border: #334155;
+      --text-gray: #94A3B8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--dark);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 80px;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .slide-content {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* Slide 1: Title */
+    .slide-title {
+      background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+      text-align: center;
+    }
+
+    .proposal-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      color: rgba(255,255,255,0.85);
+      max-width: 650px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .author {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .author strong {
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Slide styles */
+    .slide-dark {
+      background: var(--dark);
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section-intro {
+      font-size: 18px;
+      color: var(--text-gray);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    /* Problem list */
+    .problem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+    }
+
+    .problem-num {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: rgba(239, 68, 68, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #F87171;
+    }
+
+    .problem-item h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .problem-item p {
+      color: var(--text-gray);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Component showcase */
+    .component-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .showcase-text h2 {
+      margin-bottom: 20px;
+    }
+
+    .showcase-text p {
+      font-size: 17px;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .try-box {
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .try-box h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--teal-light);
+      margin-bottom: 8px;
+    }
+
+    .try-box p {
+      font-size: 14px;
+      color: #CBD5E1;
+      margin: 0;
+    }
+
+    .try-box code {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+    }
+
+    /* =============================================
+       ACTUAL APP COMPONENTS (embedded)
+       ============================================= */
+
+    .app-demo {
+      background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #F5F9FF 100%);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .demo-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    /* Day Card Component */
+    .day-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
+      min-width: 200px;
+    }
+
+    .day-card.today {
+      border-color: var(--blue-500);
+      background: linear-gradient(to bottom, var(--blue-50), white);
+    }
+
+    .day-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .day-name {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+    }
+
+    .day-card.today .day-name {
+      color: var(--blue-600);
+    }
+
+    .day-date {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--blue-800);
+    }
+
+    .shift-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-800);
+      margin-bottom: 4px;
+    }
+
+    .shift-time {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+
+    .shift-checkin {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .day-card-footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .day-action {
+      font-size: 12px;
+      color: var(--blue-600);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .day-action svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Day Card - OFF */
+    .day-card.off {
+      background: var(--gray-50);
+      opacity: 0.8;
+    }
+
+    .day-card.off .day-date {
+      color: var(--gray-400);
+    }
+
+    .off-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Bulletin Card Component */
+    .bulletin-card {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .bulletin-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .bulletin-avatar {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .bulletin-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .bulletin-type {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--blue-100);
+      color: var(--blue-800);
+      margin-left: auto;
+    }
+
+    .bulletin-shift {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+    }
+
+    .bulletin-shift strong {
+      color: var(--gray-900);
+    }
+
+    .bulletin-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-cover {
+      flex: 1;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-details {
+      padding: 10px 16px;
+      background: white;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Lead Approval Card */
+    .approval-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--blue-200);
+    }
+
+    .approval-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .approval-type {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--gold-light);
+      color: #5D4037;
+    }
+
+    .approval-parties {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+    }
+
+    .approval-arrow {
+      color: var(--gray-400);
+    }
+
+    .approval-shift {
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-bottom: 14px;
+    }
+
+    .approval-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-approve {
+      flex: 1;
+      padding: 10px 16px;
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-deny {
+      padding: 10px 16px;
+      background: white;
+      color: #D32F2F;
+      border: 1px solid #FFCDD2;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Week Grid */
+    .week-demo {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* Components grid */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .component-item {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .component-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .component-item > p {
+      font-size: 14px;
+      color: var(--text-gray);
+      margin-top: -8px;
+    }
+
+    /* How it works */
+    .slide-how {
+      background: white;
+      color: var(--gray-900);
+    }
+
+    .slide-how .section-label {
+      color: var(--blue-600);
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .flow-step {
+      text-align: center;
+    }
+
+    .flow-num {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--blue-600), var(--blue-800));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .flow-step h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+
+    .flow-step p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* Try slide */
+    .slide-try {
+      background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+      text-align: center;
+    }
+
+    .instructions {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .instruction-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 28px 32px;
+      text-align: left;
+      max-width: 280px;
+    }
+
+    .instruction-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .instruction-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    .instruction-card code {
+      background: rgba(255,255,255,0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      color: var(--blue-800);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      transition: transform 0.2s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    .nav-dots {
+      position: fixed;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-dot:hover, .nav-dot.active {
+      background: white;
+      transform: scale(1.3);
+    }
+
+    .slide-counter {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+
+    .slide-how .slide-counter {
+      color: var(--gray-400);
+    }
+
+    @media (max-width: 1024px) {
+      .slide { padding: 40px 24px; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 32px; }
+      .component-showcase, .components-grid, .flow-steps, .week-demo { grid-template-columns: 1fr; }
+      .instructions { flex-direction: column; align-items: center; }
+      .nav-dots { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-dots">
+    <button class="nav-dot active" onclick="scrollToSlide(0)"></button>
+    <button class="nav-dot" onclick="scrollToSlide(1)"></button>
+    <button class="nav-dot" onclick="scrollToSlide(2)"></button>
+    <button class="nav-dot" onclick="scrollToSlide(3)"></button>
+    <button class="nav-dot" onclick="scrollToSlide(4)"></button>
+    <button class="nav-dot" onclick="scrollToSlide(5)"></button>
+  </nav>
+
+  <!-- Slide 1: Title -->
+  <section class="slide slide-title">
+    <div class="slide-content">
+      <div class="proposal-badge">Internal Tool Prototype</div>
+      <h1>A simpler way to<br/>handle coverage</h1>
+      <p class="subtitle">Right now, getting coverage means massive emails and a lot of manual checking. I built a prototype to make that process clearer and faster.</p>
+      <p class="author">Built by <strong>Andrew Amisola</strong></p>
+    </div>
+    <div class="slide-counter">1 / 6</div>
+  </section>
+
+  <!-- Slide 2: Problem -->
+  <section class="slide slide-dark">
+    <div class="slide-content">
+      <div class="section-label">The Current Process</div>
+      <h2>How coverage works right now</h2>
+      <p class="section-intro">It works, but it's unintuitive and slow:</p>
+
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-num">1</div>
+          <div>
+            <h3>Massive emails go out</h3>
+            <p>Someone needs coverage, so they send out a big email. Replies start coming in from people who may or may not actually be available.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-num">2</div>
+          <div>
+            <h3>Manual checking</h3>
+            <p>Everyone has to pull up the schedule and cross-reference to see if they're even off that day before responding.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-num">3</div>
+          <div>
+            <h3>Leads piece it together</h3>
+            <p>Leads have to track who offered, confirm everything, and document it—often across multiple threads.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">2 / 6</div>
+  </section>
+
+  <!-- Slide 3: Solution with Day Card -->
+  <section class="slide slide-dark">
+    <div class="slide-content">
+      <div class="component-showcase">
+        <div class="showcase-text">
+          <div class="section-label">The Prototype</div>
+          <h2>Ops Scheduling</h2>
+          <p>Upload the schedule, and it turns into an interactive dashboard. You can request coverage directly from your shift, it only surfaces people who are actually off, posts to a bulletin, and gives leads a clean approval queue.</p>
+          <p>Less noise. Less back-and-forth. A much clearer process for everyone.</p>
+
+          <div class="try-box">
+            <h4>Try it yourself</h4>
+            <p>Upload any schedule XLSX. Log in with any name from the roster. Password is <code>password</code>.</p>
+          </div>
+        </div>
+
+        <div class="app-demo">
+          <div class="demo-label">Your Week View</div>
+          <div class="week-demo">
+            <!-- Today card -->
+            <div class="day-card today">
+              <div class="day-card-header">
+                <span class="day-name">Tuesday</span>
+                <span class="day-date">31</span>
+              </div>
+              <div class="day-shift">
+                <div class="shift-title">ESPN/Star Logging</div>
+                <div class="shift-time">2p - 10p ET</div>
+                <div class="shift-checkin">Check-in: 1:30p</div>
+              </div>
+              <div class="day-card-footer">
+                <span class="day-action">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                  Request
+                </span>
+              </div>
+            </div>
+
+            <!-- OFF card -->
+            <div class="day-card off">
+              <div class="day-card-header">
+                <span class="day-name">Wednesday</span>
+                <span class="day-date">1</span>
+              </div>
+              <div class="off-label">OFF</div>
+            </div>
+
+            <!-- Regular card -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <span class="day-name">Thursday</span>
+                <span class="day-date">2</span>
+              </div>
+              <div class="day-shift">
+                <div class="shift-title">D+ WYNTK</div>
+                <div class="shift-time">12p - 8p ET</div>
+                <div class="shift-checkin">Check-in: 11:30a</div>
+              </div>
+              <div class="day-card-footer">
+                <span class="day-action">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                  Request
+                </span>
+              </div>
+            </div>
+
+            <!-- Another card -->
+            <div class="day-card">
+              <div class="day-card-header">
+                <span class="day-name">Friday</span>
+                <span class="day-date">3</span>
+              </div>
+              <div class="day-shift">
+                <div class="shift-title">College Football</div>
+                <div class="shift-time">4p - 12a ET</div>
+                <div class="shift-checkin">Check-in: 3:30p</div>
+              </div>
+              <div class="day-card-footer">
+                <span class="day-action">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                  Request
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">3 / 6</div>
+  </section>
+
+  <!-- Slide 4: Components -->
+  <section class="slide slide-dark">
+    <div class="slide-content">
+      <div class="section-label">Key Components</div>
+      <h2>What the tool does</h2>
+
+      <div class="components-grid">
+        <!-- Bulletin Card -->
+        <div class="component-item">
+          <h3>Public Bulletin</h3>
+          <p>Only people who are actually off see the request</p>
+          <div class="app-demo" style="padding: 24px;">
+            <div class="bulletin-card">
+              <div class="bulletin-header">
+                <div class="bulletin-avatar">RC</div>
+                <div class="bulletin-name">Rosa Chen</div>
+                <span class="bulletin-type">Coverage</span>
+              </div>
+              <div class="bulletin-shift">
+                <strong>Saturday, Jan 4</strong><br/>
+                ESPN/Star Logging · 10a - 6p ET
+              </div>
+              <div class="bulletin-actions">
+                <button class="btn-cover">I Can Cover</button>
+                <button class="btn-details">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lead Approval -->
+        <div class="component-item">
+          <h3>Clean Approval Queue</h3>
+          <p>Leads see everything in one place</p>
+          <div class="app-demo" style="padding: 24px;">
+            <div class="approval-card">
+              <div class="approval-header">
+                <span class="approval-type">Pending</span>
+              </div>
+              <div class="approval-parties">
+                <strong>Jordan Baker</strong>
+                <span class="approval-arrow">→</span>
+                covers for
+                <span class="approval-arrow">→</span>
+                <strong>Rosa Chen</strong>
+              </div>
+              <div class="approval-shift">
+                Saturday, Jan 4 · ESPN/Star Logging · 10a - 6p
+              </div>
+              <div class="approval-actions">
+                <button class="btn-approve">Approve</button>
+                <button class="btn-deny">Deny</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Request card -->
+        <div class="component-item">
+          <h3>Request Tracking</h3>
+          <p>You always know where things stand</p>
+          <div class="app-demo" style="padding: 24px;">
+            <div class="bulletin-card" style="background: var(--blue-50); border-color: var(--blue-200);">
+              <div class="bulletin-header">
+                <div class="bulletin-avatar">AA</div>
+                <div class="bulletin-name">Your Request</div>
+                <span class="bulletin-type" style="background: var(--gold-light); color: #5D4037;">Pending</span>
+              </div>
+              <div class="bulletin-shift">
+                <strong>Tuesday, Dec 31</strong><br/>
+                ESPN/Star Logging · 2p - 10p ET
+              </div>
+              <div style="font-size: 12px; color: var(--gray-500); margin-top: 8px; padding: 8px; background: white; border-radius: 6px;">
+                Jordan Baker offered to cover · Awaiting lead approval
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">4 / 6</div>
+  </section>
+
+  <!-- Slide 5: Flow -->
+  <section class="slide slide-how">
+    <div class="slide-content">
+      <div class="section-label">The Flow</div>
+      <h2>Three steps, no noise</h2>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <h3>Request</h3>
+          <p>Click your shift, add a note if you want, submit. No massive emails—it just posts to the bulletin.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <h3>Offer</h3>
+          <p>Only people who are actually off see it. One click to offer coverage. No manual checking required.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <h3>Approve</h3>
+          <p>Lead sees who offered, approves it. Everyone gets notified. Done—no chasing threads.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-counter">5 / 6</div>
+  </section>
+
+  <!-- Slide 6: Try it -->
+  <section class="slide slide-try">
+    <div class="slide-content">
+      <div class="section-label">Try It Yourself</div>
+      <h2>It's a working prototype</h2>
+      <p class="subtitle">Upload a real schedule, walk through the flow, see if it makes sense for how we work.</p>
+
+      <div class="instructions">
+        <div class="instruction-card">
+          <h4>1. Upload a schedule</h4>
+          <p>Drop in any XLSX. It parses names and shifts automatically.</p>
+        </div>
+        <div class="instruction-card">
+          <h4>2. Log in as anyone</h4>
+          <p>Pick any name from the roster. Password is <code>password</code>.</p>
+        </div>
+        <div class="instruction-card">
+          <h4>3. Try the whole flow</h4>
+          <p>Request coverage, switch to Lead view, approve it. See how it feels.</p>
+        </div>
+      </div>
+
+      <a class="cta-btn" href="index.html" target="_blank">
+        Open the Prototype
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+        </svg>
+      </a>
+    </div>
+    <div class="slide-counter">6 / 6</div>
+  </section>
+
+  <script>
+    function scrollToSlide(index) {
+      document.querySelectorAll('.slide')[index].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(document.querySelectorAll('.slide')).indexOf(entry.target);
+          document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
+  </script>
+</body>
+</html>
