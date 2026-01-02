@@ -896,10 +896,12 @@ function formatEventsTimeDisplay(events) {
   // Find first start and last end time
   let firstStart = null;
   let lastEnd = null;
+  let storedTz = 'ET'; // Default timezone of stored data
 
   events.forEach(evt => {
     if (evt.startTime) {
       if (!firstStart || evt.startTime < firstStart) firstStart = evt.startTime;
+      if (evt.timezone) storedTz = evt.timezone;
     }
     if (evt.endTime) {
       if (!lastEnd || evt.endTime > lastEnd) lastEnd = evt.endTime;
@@ -908,18 +910,27 @@ function formatEventsTimeDisplay(events) {
 
   if (!firstStart) return events[0]?.label || 'Shift';
 
-  const fmt = (timeStr) => {
-    const [h, m] = timeStr.split(':').map(n => parseInt(n, 10));
+  const fmt = (timeStr, convertFn = null) => {
+    let [h, m] = timeStr.split(':').map(n => parseInt(n, 10));
+    if (convertFn) h = convertFn(h);
     const period = h >= 12 ? 'p' : 'a';
     const hour12 = h % 12 === 0 ? 12 : h % 12;
     return m ? `${hour12}:${m.toString().padStart(2, '0')}${period}` : `${hour12}${period}`;
   };
 
+  // Determine if conversion is needed
+  let convertFn = null;
+  if (state.displayTimezone === 'PT' && storedTz === 'ET') {
+    convertFn = convertETtoPT;
+  } else if (state.displayTimezone === 'ET' && storedTz === 'PT') {
+    convertFn = convertPTtoET;
+  }
+
   const tz = state.displayTimezone;
   if (!lastEnd || firstStart === lastEnd) {
-    return `${fmt(firstStart)} ${tz}`;
+    return `${fmt(firstStart, convertFn)} ${tz}`;
   }
-  return `${fmt(firstStart)}-${fmt(lastEnd)} ${tz}`;
+  return `${fmt(firstStart, convertFn)}-${fmt(lastEnd, convertFn)} ${tz}`;
 }
 
 // Get all event labels from an events array
@@ -937,6 +948,7 @@ function formatEventsCheckIn(events) {
   // Find the earliest check-in time
   // First event's check-in or 1 hour before first start
   const firstEvt = events[0];
+  const storedTz = firstEvt.timezone || 'ET';
 
   // Skip check-in for ESPN/Star Logging (check-in same as start)
   if (firstEvt.label && firstEvt.label.toLowerCase().includes('espn/star logging')) {
@@ -953,7 +965,15 @@ function formatEventsCheckIn(events) {
 
   if (!checkInTime) return '';
 
-  const [h, m] = checkInTime.split(':').map(n => parseInt(n, 10));
+  let [h, m] = checkInTime.split(':').map(n => parseInt(n, 10));
+
+  // Convert timezone if needed
+  if (state.displayTimezone === 'PT' && storedTz === 'ET') {
+    h = convertETtoPT(h);
+  } else if (state.displayTimezone === 'ET' && storedTz === 'PT') {
+    h = convertPTtoET(h);
+  }
+
   const period = h >= 12 ? 'p' : 'a';
   const hour12 = h % 12 === 0 ? 12 : h % 12;
   const timeLabel = m ? `${hour12}:${m.toString().padStart(2, '0')}${period}` : `${hour12}${period}`;
@@ -2021,8 +2041,19 @@ function openRequestModal(day, dayIndex, events) {
 // Format a single event's time for display
 function formatEventTime(evt) {
   if (!evt.startTime || !evt.endTime) return '';
+  const storedTz = evt.timezone || 'ET';
+
+  // Determine if conversion is needed
+  let convertFn = null;
+  if (state.displayTimezone === 'PT' && storedTz === 'ET') {
+    convertFn = convertETtoPT;
+  } else if (state.displayTimezone === 'ET' && storedTz === 'PT') {
+    convertFn = convertPTtoET;
+  }
+
   const fmt = (timeStr) => {
-    const [h, m] = timeStr.split(':').map(n => parseInt(n, 10));
+    let [h, m] = timeStr.split(':').map(n => parseInt(n, 10));
+    if (convertFn) h = convertFn(h);
     const period = h >= 12 ? 'p' : 'a';
     const hour12 = h % 12 === 0 ? 12 : h % 12;
     return m ? `${hour12}:${m.toString().padStart(2, '0')}${period}` : `${hour12}${period}`;
