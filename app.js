@@ -1060,8 +1060,9 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
             ${weekDays.map((day, i) => {
               const date = weekDates[i];
               const rawEvent = userSchedule.events[i];
-              const events = normalizeShift(rawEvent);
-              const isOff = isOffDay(rawEvent);
+              // Handle both raw strings (preloaded) and already-parsed arrays (XLSX upload)
+              const events = typeof rawEvent === 'string' ? normalizeShift(rawEvent) : rawEvent;
+              const isOff = typeof rawEvent === 'string' ? isOffDay(rawEvent) : (Array.isArray(rawEvent) && rawEvent.length === 0);
               const isTodayClass = isToday(date) ? 'today' : '';
               const offClass = isOff ? 'off' : '';
 
