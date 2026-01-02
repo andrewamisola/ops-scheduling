@@ -42,14 +42,22 @@
             </div>
             <div class="input-group">
               <label for="password">Password</label>
-              <input type="password" id="password" placeholder="Enter password" />
+              <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Enter password" />
+                <button type="button" class="toggle-password" id="togglePassword">
+                  <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <svg class="eye-closed hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                </button>
+              </div>
             </div>
             <button type="submit" class="btn-primary" id="loginBtn">Sign In</button>
           </form>
-
-          <div class="login-hint">
-            <span>Demo:</span> Andrew Amisola / password
-          </div>
         </div>
       </section>
 
@@ -104,6 +112,12 @@
         <div class="layout">
           <!-- Left Sidebar -->
           <aside class="sidebar">
+            <!-- Lead Approvals (only visible to leads) - at top -->
+            <div class="sidebar-section lead-only hidden" id="leadApprovals">
+              <h3>Pending Approvals</h3>
+              <div class="approval-list" id="approvalList"></div>
+            </div>
+
             <div class="sidebar-tabs">
               <button class="tab-btn" data-tab="myShifts">My Shifts</button>
               <button class="tab-btn active" data-tab="bulletin">
@@ -115,7 +129,6 @@
             <!-- My Shifts Tab -->
             <div class="tab-content" id="myShiftsTab">
               <div class="sidebar-section">
-                <h3>This Week</h3>
                 <div class="shift-list" id="myShiftsList"></div>
               </div>
             </div>
@@ -133,12 +146,6 @@
                 </div>
                 <div class="bulletin-list" id="bulletinList"></div>
               </div>
-            </div>
-
-            <!-- Lead Approvals (only visible to leads) -->
-            <div class="sidebar-section lead-only hidden" id="leadApprovals">
-              <h3>Pending Approvals</h3>
-              <div class="approval-list" id="approvalList"></div>
             </div>
           </aside>
 
@@ -311,9 +318,14 @@
 
       <!-- Toast Notification -->
       <div class="toast hidden" id="toast">
-        <div class="toast-icon">
+        <div class="toast-icon toast-icon-success">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <div class="toast-icon toast-icon-error hidden">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
           </svg>
         </div>
         <span class="toast-message">Request posted to bulletin!</span>
@@ -390,7 +402,28 @@
           </div>
 
           <div class="modal-body">
-            <p class="notify-intro">How would you like to be notified when someone responds to your coverage requests?</p>
+            <p class="notify-intro">What would you like to be notified about?</p>
+
+            <div class="notify-types">
+              <label class="notify-type-option">
+                <input type="checkbox" checked />
+                <span>Someone responds to my coverage request</span>
+              </label>
+              <label class="notify-type-option">
+                <input type="checkbox" checked />
+                <span>My request is approved or denied</span>
+              </label>
+              <label class="notify-type-option">
+                <input type="checkbox" checked />
+                <span>Someone posts a new coverage request</span>
+              </label>
+              <label class="notify-type-option">
+                <input type="checkbox" />
+                <span>Schedule changes affecting me</span>
+              </label>
+            </div>
+
+            <p class="notify-intro" style="margin-top: 20px;">How would you like to receive notifications?</p>
 
             <div class="notify-options">
               <label class="notify-option">
@@ -468,6 +501,11 @@
         </div>
       </div>
     </div>
+
+    <!-- Disclaimer Footer -->
+    <footer class="disclaimer-footer">
+      <span>Internal prototype for demonstration only · Not an official tool · Data is simulated</span>
+    </footer>
 
     <!-- XLSX parser for spreadsheet uploads -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>

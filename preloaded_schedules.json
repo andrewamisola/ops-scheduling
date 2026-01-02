@@ -1,0 +1,2438 @@
+[
+  {
+    "roster": [
+      {
+        "name": "Eric Rodriguez",
+        "events": [
+          "Request Off",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Ryan Anderegg",
+        "events": [
+          "4a-12p ESPN/STAR SUP*",
+          "Request Off",
+          "7a-3p ESPN/STAR SUP",
+          "8a ADMIN*",
+          "Request Off",
+          "9a ADMIN",
+          "6a-2p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Lawrence Borchardt",
+        "events": [
+          "All Day",
+          "7a-3p ESPN/STAR SUP",
+          "10a ADMIN",
+          "10a ADMIN",
+          "All Day",
+          "All Day",
+          "11a-7p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Jim McMasters",
+        "events": [
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Alex Szarejko",
+        "events": [
+          "Request Off",
+          "11a-7p ESPN/STAR SUP",
+          "Request Off",
+          "*12p-8p ESPN/STAR SUP",
+          "Request Off",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Derek Schlieman",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "12p-8p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Michael Cummings",
+        "events": [
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Gregg LaMotta",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "8a-4p ESPN/STAR SUP*",
+          "7a-3p ESPN/STAR SUP",
+          "Request Off",
+          "7a-3p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "David Luchino",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Jeff O'Connor",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "9a-5p ESPN/STAR SUP*"
+        ]
+      },
+      {
+        "name": "David Brandt",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "7p-3:30a ESPN/STAR SUP",
+          "8p-4:30a ESPN/STAR SUP",
+          "7p-3:30a ESPN/STAR SUP",
+          "7p-3:30a ESPN/STAR SUP",
+          "8p-4:30a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Jabari Bishop",
+        "events": [
+          "*11a-7p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "11a-7p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Carlos Ceballos",
+        "events": [
+          "11a-7p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "Request Off",
+          "2p-10p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Joseph Chiafolo",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "7a-3p ESPN/STAR SUP*",
+          "Request Off",
+          "7a-3p ESPN/STAR SUP",
+          "8a-4p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Kenneth Humiston",
+        "events": [
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Mackenzie Kiem",
+        "events": [
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "All Day",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Vivian Morales",
+        "events": [
+          "Request Off",
+          "1p-9p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "1p-9p ESPN/STAR SUP",
+          "1p-9p ESPN/STAR SUP",
+          "1p-9p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Adam O'Connor Jamia",
+        "events": [
+          "11a-7p ESPN/STAR SUP",
+          "All Day",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP",
+          "All Day",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Matt Ostrofsky",
+        "events": [
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "*2p-10p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Thomas Rojas",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "9a-5p ESPN/STAR SUP",
+          "Request Off",
+          "*8a-4p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Robert Saal",
+        "events": [
+          "All Day",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "All Day",
+          "4p-12a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Irving Sanchez",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Steve Spanopoulos",
+        "events": [
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "All Day",
+          "All Day",
+          "All Day",
+          "9a-5p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Michael Violante",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Graham Williams",
+        "events": [
+          "3p-11p ESPN/STAR SUP",
+          "All Day",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "All Day",
+          "All Day",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Zack Witzel",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Ricky Wroy",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Tony Funston",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Welland Lau",
+        "events": [
+          "All Day",
+          "7p-3:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP",
+          "All Day",
+          "4p-12:30a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Kory Wallace",
+        "events": [
+          "*7p-3:30a ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "*12p-8:30p ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Alex Choi",
+        "events": [
+          "10p-6a Star Logging",
+          "Request Off",
+          "Request Off",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Paul Dorsa",
+        "events": [
+          "5:30a-1:30p Star Logging",
+          "Request Off",
+          "Request Off",
+          "5:30a-2:00p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Besim Dushaj",
+        "events": [
+          "Request Off",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "All Day",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Zack Holcomb",
+        "events": [
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "All Day",
+          "All Day",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Robert Johnson",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Omar Keita",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "*3p-11p Star Logging",
+          "10a-6p Star Logging*",
+          "10a-6p Star Logging*",
+          "*3p-11p Star Logging",
+          "*3p-11p Star Logging"
+        ]
+      },
+      {
+        "name": "Kevin Kiem",
+        "events": [
+          "9a-5p Star Logging",
+          "Request Off",
+          "Request Off",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging"
+        ]
+      },
+      {
+        "name": "Aubrey Rubino",
+        "events": [
+          "*12p-8p Star Logging",
+          "Request Off",
+          "*12p-8p Star Logging",
+          "*11a-7p Star Logging",
+          "Request Off",
+          "*12p-8p Star Logging",
+          "*12p-8p Star Logging"
+        ]
+      },
+      {
+        "name": "Eric Soimes",
+        "events": [
+          "5:30a-1:30p Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Chelsey Williams",
+        "events": [
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "All Day",
+          "Request Off",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Alex Agius",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "12p-8p ESPN/Star Logging",
+          "12:30p(3:30p) ESPN NHL",
+          "1p(4p) ESPN NHL\r\n4p-8p ESPN/Star Logging",
+          "All Day",
+          "4p-7p ESPN/Star Logging\r\n8p(11:15p) ESPN NFL on ESPN: Doubleheader Saturday"
+        ]
+      },
+      {
+        "name": "Andrew Amisola",
+        "events": [
+          "All Day",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "All Day",
+          "4:10p(7:40p) ESPN College Football Playoff Quarterfinal at the Rose Bowl Game Presented by Prudential",
+          "5p(5:30p) D+ VibeCheck\r\n5:30p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Mohanna Aziz",
+        "events": [
+          "12p-8p ESPN/Star Logging",
+          "All Day",
+          "Request Off",
+          "All Day",
+          "4:10p(7:40p) ESPN Field Pass with McAfee: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential",
+          "12p-8p ESPN/Star Logging",
+          "12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Keith Bogan",
+        "events": [
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL",
+          "All Day",
+          "4p(7p) ESPN NHL",
+          "4:10p(7:40p) ESPN Command Center: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential",
+          "All Day",
+          "4p(7p) ESPN NHL\r\n7p-11p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Dylan Brennan",
+        "events": [
+          "Request Off",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "All Day",
+          "3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging",
+          "3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging",
+          "All Day",
+          "3:30p(6:30p) ESPN NHL\r\n6:30p-10:30p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Joseph Caracappa",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "9a-5p ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Sean Cerise",
+        "events": [
+          "*10a-6p ESPN BRB",
+          "2p-10p ESPN BRB",
+          "All Day",
+          "Out by 11pm",
+          "2p-10p ESPN BRB",
+          "2p-10p ESPN BRB",
+          "*10a-6p ESPN BRB"
+        ]
+      },
+      {
+        "name": "Robert Connolly",
+        "events": [
+          "Request Off",
+          "10a-6p ESPN/Star Logging",
+          "630p+",
+          "clear by 4p",
+          "*8:10p(11:40p) ESPN Command Center: CFP Quarterfinal at the Allstate Sugar Bowl",
+          "5p+",
+          "10a-6p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Daniel Contreras",
+        "events": [
+          "5am - 12pm",
+          "8a-4p ESPN/Star Logging",
+          "Request Off",
+          "5am - 12pm",
+          "Request Off",
+          "8a-4p ESPN/Star Logging",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Michael Contreras",
+        "events": [
+          "11a-7p ESPN/Star Logging",
+          "11a-7p ESPN/Star Logging",
+          "Request Off",
+          "All Day",
+          "12:10p(3:40p) ESPN Command Center: CFP Quarterfinal at the Capital One Orange Bowl\r\n3:40p-7p ESPN/Star Logging",
+          "11a-7p ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Lance Counts",
+        "events": [
+          "10:30a(11a) D+ SC+\r\n11a-3p ESPN/Star Logging*",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*",
+          "Request Off",
+          "Request Off",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*",
+          "Switch Off",
+          "Before 3pm"
+        ]
+      },
+      {
+        "name": "Brian Cruz",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Christopher Dalton",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Anastasiia Denysiuk",
+        "events": [
+          "Request Off",
+          "All Day",
+          "5p(6p) ESPN Tue, 12/30 - ESPN FC\r\n7p(9p) ESPN NBA G League",
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Nicholas DiCinti",
+        "events": [
+          "10a-6p ESPN/Star Logging",
+          "12p(3p) ESPN Mon, 12/29 - The Rich Eisen Show*",
+          "12p(3p) ESPN Tue, 12/30 - The Rich Eisen Show",
+          "9a-7p",
+          "*10:30a(12:30p) ESPN ACL\r\n12:30p-4p ESPN/Star Logging*",
+          "9a-6p",
+          "*8a-1p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Nikolas Donadic",
+        "events": [
+          "11a-7p ESPN BRB",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "11a(1p) ESPN The Rose Parade Presented by Honda\r\n1p-6p ESPN/Star Logging",
+          "11a-7p ESPN BRB",
+          "11a-7p ESPN BRB"
+        ]
+      },
+      {
+        "name": "Robert Duffy",
+        "events": [
+          "12p-8p ESPN/Star Logging",
+          "5p(6p) ESPN Mon, 12/29 - ESPN FC\r\n8p(11:15p) ESPN Monday Night Football (S)",
+          "12p-8p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "12p-8p ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Kyle Fader",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "3p(6:30p) ESPN Cheez-It Citrus Bowl",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "3p(6p) ESPN NHL\r\n8p(11p) ESPN NHL",
+          "4p(7p) ESPN NHL\r\n9p(12a) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Patrick Flood",
+        "events": [
+          "5p(8p) ESPN NHL",
+          "2:30p-6:30p ESPN/Star Logging\r\n7:30p(10:30p) ESPN NHL",
+          "2p-10p ESPN/Star Logging",
+          "7am - 3 pm",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "John Gjoni",
+        "events": [
+          "Request Off",
+          "6p-7p starts",
+          "6p-7p starts",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Jay Giampietro",
+        "events": [
+          "Request Off",
+          "12p(4p) ESPN McAfee*",
+          "Request Off",
+          "Request Off",
+          "12-7pm",
+          "12p(4p) ESPN McAfee*",
+          "*11a-5p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Fiorella Gomez",
+        "events": [
+          "11a-7p ESPN BRB",
+          "2p-10p ESPN BRB",
+          "2p-10p ESPN BRB",
+          "Out by 6p",
+          "All Day",
+          "11a-7p ESPN BRB",
+          "11a-7p ESPN BRB"
+        ]
+      },
+      {
+        "name": "Nigel Gordon",
+        "events": [
+          "4p-111p",
+          "*10a-6p ESPN/Star Logging",
+          "*10a-6p ESPN/Star Logging",
+          "10a-6p",
+          "3p-10p",
+          "*10a-6p ESPN/Star Logging",
+          "*10a-4p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "James Graceffo",
+        "events": [
+          "Request Off",
+          "8p(11p) ESPN NHL",
+          "7p(10p) ESPN NHL",
+          "Done by 5p",
+          "Request Off",
+          "12p(3p) ESPN Fri, 1/2 - The Rich Eisen Show*",
+          "12p(3p) ESPN ABC Hockey Saturday*"
+        ]
+      },
+      {
+        "name": "Adam Grassani",
+        "events": [
+          "12p-8p ESPN/Star Logging",
+          "Switch Off",
+          "All Day",
+          "All Day",
+          "4:30p(6p) ESPN ACL\r\n8:30p(10:30p) ESPN ACL",
+          "12p-8p ESPN/Star Logging",
+          "*9a-5p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "James Griffo",
+        "events": [
+          "1p(4p) D+ NFL Seahawks vs. Panthers*",
+          "12p-8p ESPN/Star Logging",
+          "All Day",
+          "8am-6pm",
+          "4:10p(7:40p) ESPN SkyCast: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential",
+          "12p-8p ESPN/Star Logging",
+          "12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Jason Hancock",
+        "events": [
+          "11a-3p ESPN/Star Logging\r\n4:25p(7:30p) D+ NFL Eagles vs. Bills",
+          "Request Off",
+          "Request Off",
+          "All Day",
+          "4p-7p ESPN/Star Logging\r\n8:10p(11:40p) ESPN College Football Playoff Quarterfinal at the Allstate Sugar Bowl",
+          "2p-10p ESPN/Star Logging",
+          "4:30p(7:30p) ESPN NFL on ESPN: Doubleheader Saturday\r\n9p(11:30p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Antonio Hernandez",
+        "events": [
+          "7a-3p ESPN/Star Logging*",
+          "10a-6p ESPN/Star Logging",
+          "All Day",
+          "Until 9pm",
+          "Request Off",
+          "10a-6p ESPN/Star Logging",
+          "8a-4p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Joseph Hersh",
+        "events": [
+          "12p-8p ESPN/Star Logging",
+          "12p-8p ESPN/Star Logging",
+          "1p-6p ESPN/Star Logging",
+          "Out by 7pm",
+          "After 2pm",
+          "12p-8p ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Oscar Jimenez",
+        "events": [
+          "Request Off",
+          "*10p(1a) ESPN NHL",
+          "2pm +",
+          "5p(5:30p) D+ VibeCheck\r\n6:30p(9:30p) ESPN NHL*",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "2pm +",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Dylan Jock",
+        "events": [
+          "11a-7p ESPN BRB",
+          "Request Off",
+          "Request Off",
+          "3p-6:30p ESPN/Star Logging\r\n7:37p(11p) ESPN SkyCast: CFP Quarterfinal at the Goodyear Cotton Bowl Classic",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Michael Jozwiak",
+        "events": [
+          "8a-3p ESPN/Star Logging*",
+          "Out by 2p",
+          "Out by 2p",
+          "Out by 3p",
+          "All Day",
+          "8a-3p ESPN/Star Logging*",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Glenn King",
+        "events": [
+          "7a-1p ESPN/Star Logging*",
+          "5AM-1PM",
+          "5AM-1PM",
+          "5AM-12PM",
+          "Request Off",
+          "10:30a(12:30p) ESPN ACL*",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Elizabeth Krajewski",
+        "events": [
+          "Switch Off",
+          "All Day",
+          "All Day",
+          "All Day",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "12p(5p) ESPN ACL"
+        ]
+      },
+      {
+        "name": "Michael Lee",
+        "events": [
+          "Request Off",
+          "*7p(10p) ESPN NHL",
+          "*7p(10p) ESPN NHL",
+          "*7p(10p) ESPN NHL",
+          "Available from 9am to 11pm",
+          "Available from 9am to 11pm",
+          "7p(10p) ESPN NHL*"
+        ]
+      },
+      {
+        "name": "Kevin Martin",
+        "events": [
+          "All Day",
+          "11a-7p ESPN/Star Logging",
+          "12p(4p) ESPN McAfee",
+          "Request Off",
+          "Request Off",
+          "11a-7p ESPN/Star Logging",
+          "11a-7p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Roberto Medina",
+        "events": [
+          "12p-8p ESPN/Star Logging",
+          "All Day",
+          "Request Off",
+          "All Day",
+          "12p-8p ESPN/Star Logging",
+          "12p-8p ESPN/Star Logging",
+          "12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Rose Miller",
+        "events": [
+          "All Day",
+          "10a-6p ESPN/Star Logging",
+          "1:30p-6:30p ESPN/Star Logging\r\n7:30p(9:30p) ESPN NBA G League",
+          "Request Off",
+          "Request Off",
+          "10a-6p ESPN/Star Logging",
+          "2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Kimberly Morales",
+        "events": [
+          "Request Off",
+          "9a-5p ESPN/Star Logging",
+          "9a-5p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "9a-5p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Maya Peart",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Matthew Press",
+        "events": [
+          "3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "4:30p-8:30p ESPN/Star Logging\r\n9:30p(12:30a) ESPN NHL",
+          "All Day",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends",
+          "7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Melissa Robilotta",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "*8:30p(10:30p) ESPN ACL",
+          "9:00 AM - 4:00 PM"
+        ]
+      },
+      {
+        "name": "Jacob Rossi",
+        "events": [
+          "Request Off",
+          "3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Cavaliers vs. Spurs",
+          "3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA 76ers vs. Grizzlies",
+          "Request Off",
+          "Request Off",
+          "All Day",
+          "2p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Jack Schneider",
+        "events": [
+          "3p(5p) ESPN TGL Presented by SoFi\r\n7:30p(8:15p) ESPN NFL PrimeTime on ESPN+",
+          "All Day",
+          "Request Off",
+          "5p(6p) ESPN Wed, 12/31 - ESPN FC\r\n7:37p(11p) ESPN College Football Playoff Quarterfinal at the Goodyear Cotton Bowl Classic",
+          "4p-7p ESPN/Star Logging\r\n8:10p(11:40p) ESPN SkyCast: CFP Quarterfinal at the Allstate Sugar Bowl",
+          "2p-10p ESPN/Star Logging",
+          "4p-6:45p ESPN/Star Logging\r\n7:50p(11:15p) ESPN NFL on ESPN Playbook with Next Gen Stats"
+        ]
+      },
+      {
+        "name": "Eddie Segarra",
+        "events": [
+          "*1p(4p) D+ NFL Steelers vs. Browns\r\n4p-8p ESPN/Star Logging",
+          "All Day",
+          "2p-7p ESPN/Star Logging\r\n8p(10p) ESPN NBA G League",
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "3p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) ESPN ACL"
+        ]
+      },
+      {
+        "name": "Franco Sevillano",
+        "events": [
+          "Request Off",
+          "12p-8p ESPN/Star Logging",
+          "7p(9p) ESPN NBA G League",
+          "9A to 5P",
+          "12:10p(3:40p) ESPN College Football Playoff Quarterfinal at the Capital One Orange Bowl*",
+          "Request Off",
+          "Switch Off"
+        ]
+      },
+      {
+        "name": "Oswaldo Sevillano",
+        "events": [
+          "11a-7p ESPN/Star Logging",
+          "All Day",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "12:10p(3:40p) ESPN SkyCast: CFP Quarterfinal at the Capital One Orange Bowl\r\n3:30p-7p ESPN/Star Logging",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Willy Sevillano",
+        "events": [
+          "Request Off",
+          "*10a-6p ESPN/Star Logging",
+          "3p-7p ESPN/Star Logging\r\n8p(10:30p) ESPN NBA G League",
+          "10A+",
+          "Request Off",
+          "*10a-6p ESPN/Star Logging",
+          "*10a-6p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Justin Silverman",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "*12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Chad Townsend",
+        "events": [
+          "Request Off",
+          "6PM+",
+          "6PM+",
+          "Out by 7PM",
+          "All Day",
+          "Request Off",
+          "3p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) D+ WNBL Canberra Capitals vs. Perth Lynx"
+        ]
+      },
+      {
+        "name": "David Turner",
+        "events": [
+          "Request Off",
+          "9p(12a) ESPN NHL",
+          "8:30p(11:30p) ESPN NHL",
+          "4p(7p) ESPN NHL\r\n9p(12a) ESPN NHL",
+          "7p(10p) ESPN NHL",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Nicholas Violante",
+        "events": [
+          "Out by 2p",
+          "Out by 2p",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*",
+          "All Day",
+          "8a-4p ESPN/Star Logging",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Michael Witte",
+        "events": [
+          "5p(8p) ESPN NHL",
+          "*9p(12a) ESPN NHL",
+          "*7p(10p) ESPN NHL",
+          "*8p(11p) ESPN NHL",
+          "Request Off",
+          "6pm in time - 3am out time",
+          "7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Brandon Worden",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "After 4p",
+          "*4p-11p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Matt Zofchak",
+        "events": [
+          "2p-6p ESPN BRB\r\n7p(10p) ESPN NHL",
+          "Request Off",
+          "2p-10p ESPN BRB",
+          "All Day",
+          "2p-6p ESPN BRB\r\n7p(10p) ESPN NHL",
+          "2p-10p ESPN BRB",
+          "2p-6p ESPN BRB\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Sebastian Diaz",
+        "events": [
+          "All Day",
+          "9p(12a) ESPN NHL",
+          "All Day",
+          "4:30p-8:30p ESPN/Star Logging\r\n9:30p(12:30a) ESPN NHL",
+          "3:30p-7:30p ESPN/Star Logging\r\n8:30p(11:30p) ESPN NHL",
+          "5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Chris Evers",
+        "events": [
+          "All Day",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "5:30p-9:30p ESPN/Star Logging\r\n10:30p(1a) D+ NBA Trail Blazers vs. Thunder",
+          "8:30p(10:30p) ESPN Ohio Valley Conference Basketball\r\n12a(2a) ESPN Women's College Basketball",
+          "All Day",
+          "8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20\r\n11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20"
+        ]
+      },
+      {
+        "name": "Hanna Garcia",
+        "events": [
+          "All Day",
+          "3p(6p) ESPN Freddie & Harry\r\n6p-10p ESPN/Star Logging",
+          "3p(6p) ESPN Freddie & Harry\r\n7p(9p) ESPN NBA G League",
+          "All Day",
+          "7p(9:30p) D+ NBA Heat vs. Pistons\r\n10p(12:30a) D+ NBA Celtics vs. Kings",
+          "4p-12a ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Ayannah Green",
+        "events": [
+          "Request Off",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "5p(6p) ESPN Fri, 1/2 - ESPN FC\r\n8p(10:30p) ESPN National Lacrosse League",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Elijah Hernandez",
+        "events": [
+          "3p-7p ESPN/Star Logging\r\n8p(10:30p) ESPN National Lacrosse League",
+          "4p-12a ESPN/Star Logging",
+          "Request Off",
+          "All Day",
+          "All Day",
+          "3p(6p) ESPN Freddie & Harry\r\n8p(10p) ESPN ACC Men's Basketball",
+          "5p(5:30p) ESPN ESPN FC\r\n7p(9:30p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Greyson Hines",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "Request Off",
+          "All Day",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Halle Holmes",
+        "events": [
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "Out by 7pm",
+          "All Day",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Yash Kapadia",
+        "events": [
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "Request Off",
+          "Request Off",
+          "8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20\r\n11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Julio Marquez",
+        "events": [
+          "4p-12a ESPN/Star Logging",
+          "5p-12 am PST",
+          "*10:30p(1a) D+ NBA Pistons vs. Lakers",
+          "Request Off",
+          "5p(6p) ESPN Thu, 1/1 - ESPN FC\r\n7p(9p) ESPN NBA G League",
+          "4p-12a ESPN/Star Logging",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Mario Mendoza",
+        "events": [
+          "*9:30p(12a) D+ NBA Kings vs. Lakers",
+          "Request Off",
+          "After 4:30pm",
+          "All Day",
+          "Request Off",
+          "Request Off",
+          "*10p(12:30a) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Moises Miranda",
+        "events": [
+          "All Day",
+          "All Day",
+          "4p-12a ESPN/Star Logging",
+          "All Day",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Marcos Pinto-Leite",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "7p(9p) ESPN TGL Presented by SoFi\r\n10:30p(1:30a) ESPN NHL",
+          "4p-12a ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Felix Quinonez",
+        "events": [
+          "Request Off",
+          "PTO",
+          "PTO",
+          "PTO",
+          "Request Off",
+          "4p-12a ESPN/Star Logging",
+          "Switch Off"
+        ]
+      },
+      {
+        "name": "Felipe Reis",
+        "events": [
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "All Day",
+          "All Day",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Greg Tietz",
+        "events": [
+          "All Day",
+          "4p-12a ESPN/Star Logging",
+          "4p-12a ESPN/Star Logging",
+          "Available 7a-5p",
+          "Request Off",
+          "2p-10p ESPN/Star Logging",
+          "5p(9p) ESPN Dogs\r\n9p-12a ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Leonel Tolentino",
+        "events": [
+          "4p-12a ESPN/Star Logging",
+          "Request Off",
+          "After 530p",
+          "Request Off",
+          "Request Off",
+          "After 530p",
+          "*10:30p(12:30a) D+ NBL Breakers vs. Wildcats"
+        ]
+      }
+    ],
+    "startDate": "12/28/2025",
+    "label": "Week of 12/28"
+  },
+  {
+    "roster": [
+      {
+        "name": "Eric Rodriguez",
+        "events": [
+          "Request Off",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "9:30a ADMIN",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Ryan Anderegg",
+        "events": [
+          "4a-12p ESPN/STAR SUP*",
+          "Request Off",
+          "9a ADMIN",
+          "9a ADMIN",
+          "9a ADMIN",
+          "9a ADMIN",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Lawrence Borchardt",
+        "events": [
+          "12p-8p ESPN/STAR SUP",
+          "10a ADMIN",
+          "10a ADMIN",
+          "10a ADMIN",
+          "All Day",
+          "All Day",
+          "10a-6p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Jim McMasters",
+        "events": [
+          "All Day",
+          "All Day",
+          "All Day",
+          "All Day",
+          "All Day",
+          "All Day",
+          "All Day"
+        ]
+      },
+      {
+        "name": "Alex Szarejko",
+        "events": [
+          "Request Off",
+          "All Day",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "12p-8p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Derek Schlieman",
+        "events": [
+          "Request Off",
+          "All Day",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "TBD ADMIN",
+          "2p-10p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Michael Cummings",
+        "events": [
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Gregg LaMotta",
+        "events": [
+          "5a-1p ESPN/STAR SUP*",
+          "7a-3p ESPN/STAR SUP*",
+          "6a-2p ESPN/STAR SUP*",
+          "7a-3p ESPN/STAR SUP*",
+          "Request Off",
+          "Request Off",
+          "*7a-3p ESPN/STAR SUP*"
+        ]
+      },
+      {
+        "name": "David Luchino",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "9a-5p ADMIN",
+          "9a-5p ADMIN",
+          "9a-5p ADMIN",
+          "9a-5p ADMIN",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Jeff O'Connor",
+        "events": [
+          "Request Off",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "Request Off",
+          "9a-5p ESPN/STAR SUP*",
+          "9a-5p ESPN/STAR SUP*",
+          "9a-5p ESPN/STAR SUP*"
+        ]
+      },
+      {
+        "name": "David Brandt",
+        "events": [
+          "7p-3:30a ESPN/STAR SUP",
+          "7p-3:30a ESPN/STAR SUP",
+          "Request Off",
+          "after 3p",
+          "*6p-2:30a ESPN/STAR SUP",
+          "*6p-2:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Jabari Bishop",
+        "events": [
+          "8a-4p ESPN/STAR SUP*",
+          "9a-5p ESPN/STAR SUP*",
+          "9a-5p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "10a-6p ESPN/STAR SUP*",
+          "12p-8p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Carlos Ceballos",
+        "events": [
+          "11a-7p ESPN/STAR SUP",
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "11a-7p ESPN/STAR SUP*"
+        ]
+      },
+      {
+        "name": "Joseph Chiafolo",
+        "events": [
+          "9a-5p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "8a-4p ESPN/STAR SUP",
+          "7a-3p ESPN/STAR SUP",
+          "7a-3p ESPN/STAR SUP",
+          "5a-1p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Kenneth Humiston",
+        "events": [
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Mackenzie Kiem",
+        "events": [
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Vivian Morales",
+        "events": [
+          "1p-9p ESPN/STAR SUP",
+          "1p-9p ESPN/STAR SUP",
+          "1p-9p ESPN/STAR SUP",
+          "1p-9p ESPN/STAR SUP",
+          "Request Off",
+          "All Day",
+          "1p-9p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Adam O'Connor Jamia",
+        "events": [
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP",
+          "All Day",
+          "All Day",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Matt Ostrofsky",
+        "events": [
+          "Request Off",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Thomas Rojas",
+        "events": [
+          "*8a-4p ESPN/STAR SUP",
+          "Request Off",
+          "In time 9am",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Robert Saal",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Irving Sanchez",
+        "events": [
+          "All Day",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "4p-12a ESPN/STAR SUP",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Steve Spanopoulos",
+        "events": [
+          "6a-2p ESPN/STAR SUP*",
+          "Request Off",
+          "All Day",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP",
+          "9a-5p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Michael Violante",
+        "events": [
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "All Day",
+          "All Day",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Graham Williams",
+        "events": [
+          "All Day",
+          "All Day",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP",
+          "3p-11p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Zack Witzel",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "11a-7p ESPN/STAR SUP",
+          "11a-7p ESPN/STAR SUP",
+          "available after 11 a.m.",
+          "available after 8 a.m.",
+          "10a-6p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Ricky Wroy",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP",
+          "2p-10p ESPN/STAR SUP*",
+          "11a-7p ESPN/STAR SUP*"
+        ]
+      },
+      {
+        "name": "Tony Funston",
+        "events": [
+          "Request Off",
+          "All Day",
+          "4p-12:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP",
+          "1p-9:30p ESPN/STAR SUP*",
+          "4p-12:30a ESPN/STAR SUP",
+          "4p-12:30a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Welland Lau",
+        "events": [
+          "All Day",
+          "All Day",
+          "7p-3:30a ESPN/STAR SUP",
+          "8p-4:30a ESPN/STAR SUP",
+          "7p-3:30a ESPN/STAR SUP",
+          "8p-4:30a ESPN/STAR SUP",
+          "7p-3:30a ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Kory Wallace",
+        "events": [
+          "*12p-8:30p ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP",
+          "Request Off",
+          "Request Off",
+          "*12p-8:30p ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP",
+          "*12p-8:30p ESPN/STAR SUP"
+        ]
+      },
+      {
+        "name": "Alex Choi",
+        "events": [
+          "10p-6a Star Logging",
+          "BETWEEN 7PM AND 3AM",
+          "BETWEEN 7PM AND 3AM",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Paul Dorsa",
+        "events": [
+          "5:30a-1:30p Star Logging",
+          "Request Off",
+          "Request Off",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Besim Dushaj",
+        "events": [
+          "5:30a-1:30p Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Zack Holcomb",
+        "events": [
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "All Day",
+          "All Day",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Robert Johnson",
+        "events": [
+          "All Day",
+          "All Day",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Omar Keita",
+        "events": [
+          "*3p-11p Star Logging",
+          "Request Off",
+          "*3p-11p Star Logging",
+          "10a-6p Star Logging*",
+          "*3p-11p Star Logging",
+          "*3p-11p Star Logging",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Kevin Kiem",
+        "events": [
+          "9a-5p Star Logging",
+          "Request Off",
+          "Request Off",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging",
+          "9a-5p Star Logging"
+        ]
+      },
+      {
+        "name": "Aubrey Rubino",
+        "events": [
+          "*12p-8p Star Logging*",
+          "Request Off",
+          "*12p-8p Star Logging*",
+          "Request Off",
+          "*12p-8p Star Logging*",
+          "*12p-8p Star Logging*",
+          "*12p-8p Star Logging*"
+        ]
+      },
+      {
+        "name": "Eric Soimes",
+        "events": [
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "5:30a-1:30p Star Logging",
+          "All Day",
+          "All Day",
+          "5:30a-1:30p Star Logging"
+        ]
+      },
+      {
+        "name": "Chelsey Williams",
+        "events": [
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "All Day",
+          "All Day",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging",
+          "10p-6a Star Logging"
+        ]
+      },
+      {
+        "name": "Andrew Amisola",
+        "events": [
+          "All Day",
+          "All Day",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "4p-8:30p ESPN/Star Logging\r\n9:30p(12a) ESPN NBA Miércoles",
+          "7:30p(11p) ESPN College Football Playoff Semifinal at the Vrbo Fiesta Bowl (S)",
+          "12p(6p) ESPN Mecum Auctions: Kissimmee 2026",
+          "12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Mohanna Aziz",
+        "events": [
+          "11a-4p ESPN/Star Logging\r\n5p(7p) ESPN Holiday Hoops",
+          "8am-5p",
+          "3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Heat vs. Timberwolves*",
+          "2p-11p",
+          "3p-6:30p ESPN/Star Logging\r\n7:30p(9:30p) ESPN NBA G League",
+          "3p(6p) ESPN Freddie & Harry",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Keith Bogan",
+        "events": [
+          "All Day",
+          "2p-10p ESPN/Star Logging",
+          "5p(6p) ESPN Tue, 1/6 - ESPN FC\r\n8p(11p) ESPN NHL",
+          "5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "3p+",
+          "11a-6p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Dylan Brennan",
+        "events": [
+          "All Day",
+          "5p(6p) ESPN Mon, 1/5 - ESPN FC\r\n7:30p(10:30p) ESPN FCS Football Championship",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "Request Off",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "All Day",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Joseph Caracappa",
+        "events": [
+          "10a(3p) ESPN ACL Myrtle Beach Signature",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "All Day",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Sean Cerise",
+        "events": [
+          "12p-8p ESPN BRB",
+          "All Day",
+          "All Day",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging*",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "2p-10p ESPN BRB",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Robert Connolly",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "All Day",
+          "All Day",
+          "*7p(9:30p) ESPN NBA Miércoles",
+          "*8p(11p) ESPN Missouri High School Basketball",
+          "5p(6p) ESPN Fri, 1/9 - ESPN FC\r\n8p(11p) ESPN Missouri High School Basketball",
+          "*8p(10p) D+ AEW: Collision"
+        ]
+      },
+      {
+        "name": "Daniel Contreras",
+        "events": [
+          "10a-6p ESPN/Star Logging",
+          "All Day",
+          "All Day",
+          "Request Off",
+          "2:30p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Heat vs. Bulls",
+          "10a-6p ESPN/Star Logging",
+          "10a-6p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Lance Counts",
+        "events": [
+          "10:30a(11a) D+ SC+\r\n11a-3p ESPN/Star Logging*",
+          "Before 2pm",
+          "Request Off",
+          "Request Off",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*",
+          "7a-3p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Brian Cruz",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "*8p(10:30p) ESPN ESPN+ Hockey Night",
+          "*8p(11p) ESPN NHL",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Christopher Dalton",
+        "events": [
+          "6:30pm on",
+          "7:30pm on",
+          "*9p(12a) ESPN NHL",
+          "*9:30p(12:30a) ESPN NHL",
+          "*9p(12a) ESPN NHL",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Anastasiia Denysiuk",
+        "events": [
+          "Request Off",
+          "All Day",
+          "All Day",
+          "3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League",
+          "1:30p(4p) ESPN SuperCopa Football\r\n4p-8p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "6am-11am"
+        ]
+      },
+      {
+        "name": "Nicholas DiCinti",
+        "events": [
+          "8a-1p",
+          "12p(3p) ESPN Mon, 1/5 - The Rich Eisen Show",
+          "12p(3p) ESPN Tue, 1/6 - The Rich Eisen Show",
+          "12p(3p) ESPN Wed, 1/7 - The Rich Eisen Show",
+          "12p(3p) ESPN Thu, 1/8 - The Rich Eisen Show",
+          "9a-6p",
+          "8a-1p"
+        ]
+      },
+      {
+        "name": "Nikolas Donadic",
+        "events": [
+          "11a-7p ESPN BRB",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "2p-10p ESPN BRB",
+          "1p-9p ESPN BRB*",
+          "1p-9p ESPN BRB*"
+        ]
+      },
+      {
+        "name": "Kyle Fader",
+        "events": [
+          "Request Off",
+          "5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL",
+          "2p-10p ESPN/Star Logging",
+          "2:30p-6:30p ESPN/Star Logging\r\n7:30p(10:30p) ESPN NHL",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "All Day",
+          "4p(6p) ESPN Sprouts Farmers Market Collegiate Quad\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Patrick Flood",
+        "events": [
+          "2p(5p) ESPN NHL\r\n5p-9p ESPN/Star Logging",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "7 am - 5pm",
+          "3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL",
+          "All Day",
+          "7am - 3 pm"
+        ]
+      },
+      {
+        "name": "John Gjoni",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "6p-7p starts",
+          "Request Off",
+          "*7p(9p) ESPN NBA G League",
+          "Request Off",
+          "12p(6p) ESPN Mecum Auctions: Kissimmee 2026"
+        ]
+      },
+      {
+        "name": "Jay Giampietro",
+        "events": [
+          "2:30p(6p) ESPN LaLiga*",
+          "3p(6p) ESPN Freddie & Harry*",
+          "Request Off",
+          "Request Off",
+          "12p(4p) ESPN McAfee*",
+          "11am-5pm",
+          "*11a-5p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Nigel Gordon",
+        "events": [
+          "10a-1:45p ESPN/Star Logging\r\n2:50p(5p) ESPN LaLiga",
+          "12p(4p) ESPN McAfee",
+          "12p(4p) ESPN McAfee",
+          "3p(4p) D+ NBA Today\r\n5p(6p) ESPN Wed, 1/7 - ESPN FC\r\n7:12p(9:35p) ESPN NBA Wednesday",
+          "10a-7p",
+          "10a-6p",
+          "10a-4p"
+        ]
+      },
+      {
+        "name": "James Graceffo",
+        "events": [
+          "Hard Out by 4:45p",
+          "7:30p(10:30p) ESPN NHL",
+          "4:30p(5p) ESPN The Point\r\n7p(10p) ESPN NHL",
+          "12p(4p) ESPN McAfee*",
+          "Hard Out by 4:45p",
+          "12p(3p) ESPN Fri, 1/9 - The Rich Eisen Show*",
+          "1p(4p) ESPN ABC Hockey Saturday*"
+        ]
+      },
+      {
+        "name": "Jason Hancock",
+        "events": [
+          "2:50p(5p) ESPN LaLiga\r\n7:30p(8:15p) ESPN NFL PrimeTime on ESPN+",
+          "Request Off",
+          "Request Off",
+          "3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League",
+          "Request Off",
+          "3p-11p ESPN/Star Logging",
+          "3p-11p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Antonio Hernandez",
+        "events": [
+          "8a-4p ESPN/Star Logging*",
+          "8a-4p ESPN/Star Logging",
+          "All Day",
+          "1:30p(4p) ESPN SuperCopa Football*",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Oscar Jimenez",
+        "events": [
+          "5p(6p) ESPN En Español - ESPN FC\r\n7p(10p) ESPN NHL",
+          "All Day",
+          "All Day",
+          "9:35p(12:05a) ESPN NBA Wednesday Presented by State Farm",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL",
+          "5p(5:30p) D+ VibeCheck\r\n5:30p-11p ESPN/Star Logging",
+          "2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Dylan Jock",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Michael Jozwiak",
+        "events": [
+          "Request Off",
+          "3p-7:30p ESPN/Star Logging\r\n8:30p(11p) D+ NBA Nuggets vs. 76ers",
+          "Out by 3pm",
+          "All Day",
+          "9a-5p ESPN/Star Logging",
+          "9a-5p ESPN/Star Logging",
+          "9a-5p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Elizabeth Krajewski",
+        "events": [
+          "1p(4p) D+ NFL Colts vs. Texans\r\n4p-8p ESPN/Star Logging",
+          "All Day",
+          "5p(7p) ESPN TGL Presented by SoFi\r\n9p(11p) ESPN NBA G League",
+          "All Day",
+          "5p(6p) ESPN Thu, 1/8 - ESPN FC\r\n7p(9p) ESPN NBA G League",
+          "All Day",
+          "1p-9p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Michael Lee",
+        "events": [
+          "3p(6p) ESPN NHL",
+          "Available from 5:00pm to 11pm",
+          "*7p(10p) ESPN NHL",
+          "Available from 5:00pm to 11pm",
+          "*7p(10p) ESPN NHL",
+          "Available from 5:00pm to 11pm",
+          "7p(10p) ESPN NHL*"
+        ]
+      },
+      {
+        "name": "Roberto Medina",
+        "events": [
+          "1p(4p) D+ NFL Cowboys vs. Giants\r\n4p-8p ESPN/Star Logging",
+          "All Day",
+          "All Day",
+          "All Day",
+          "3p-7p ESPN/Star Logging\r\n8p(11p) ESPN Missouri High School Basketball",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Rose Miller",
+        "events": [
+          "11a-3:30p ESPN/Star Logging\r\n4:30p(6:30p) ESPN ACL Myrtle Beach Signature",
+          "10a-6p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "10a-6p ESPN/Star Logging",
+          "10a-6p ESPN/Star Logging",
+          "7p(9:30a) ESPN FA Cup Soccer\r\n12:30p(1p) ESPN ABC Hockey Saturday Pregame"
+        ]
+      },
+      {
+        "name": "Kimberly Morales",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "7am-5pm",
+          "*11a-5p ESPN/Star Logging*",
+          "*11a-5p ESPN/Star Logging*",
+          "9a-5p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Maya Peart",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "1:30p-7:30p ESPN/Star Logging\r\n8:30p(9:30p) ESPN Thu, 1/8 - Futbol Americas",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "Until noon"
+        ]
+      },
+      {
+        "name": "Matthew Press",
+        "events": [
+          "5p(8p) ESPN NHL\r\n8p-11p ESPN/Star Logging",
+          "All Day",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "Request Off",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20",
+          "4p(7p) ESPN NHL\r\n10p(1a) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Melissa Robilotta",
+        "events": [
+          "All Day",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "7:00 PM - 10:00 PM",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Jack Schneider",
+        "events": [
+          "All Day",
+          "2p-5:30p ESPN/Star Logging\r\n6:40p(10:10p) ESPN Men's Dream 11 Super Smash T20",
+          "3p(4p) D+ NBA Today\r\n6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20",
+          "8:10p(11:40p) ESPN Men's Dream 11 Super Smash T20",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20",
+          "Request Off",
+          "2:30p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) D+ 2025 WNBL: Round 13"
+        ]
+      },
+      {
+        "name": "Eddie Segarra",
+        "events": [
+          "*12p-8p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "2p-10p ESPN/Star Logging",
+          "All Day",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Franco Sevillano",
+        "events": [
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "*8:30p(11p) ESPN Men's College Club Hockey",
+          "*11a-5p ESPN/Star Logging*"
+        ]
+      },
+      {
+        "name": "Willy Sevillano",
+        "events": [
+          "*10a-6p ESPN/Star Logging",
+          "10A+",
+          "10A+",
+          "10A+",
+          "1:30p-7:30p ESPN/Star Logging\r\n8:30p(9:30p) ESPN Kevin Young Show",
+          "*12p-8p ESPN/Star Logging",
+          "*12p-8p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Justin Silverman",
+        "events": [
+          "9a-5p ESPN/Star Logging",
+          "Request Off",
+          "Request Off",
+          "Request Off",
+          "All Day",
+          "9a-5p ESPN/Star Logging",
+          "9a-5p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Chad Townsend",
+        "events": [
+          "All Day",
+          "7PM+",
+          "7PM+",
+          "7PM+",
+          "*8p(10p) ESPN NBA G League",
+          "Request Off",
+          "11a-7p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "David Turner",
+        "events": [
+          "7p(10p) ESPN NHL",
+          "*9:30p(12:30a) ESPN NHL",
+          "*7:30p(10p) ESPN ESPN+ Hockey Night",
+          "*9:30p(12:30a) ESPN NHL",
+          "Request Off",
+          "Request Off",
+          "Request Off"
+        ]
+      },
+      {
+        "name": "Nicholas Violante",
+        "events": [
+          "Out by 2p",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*",
+          "9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*",
+          "12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging",
+          "All Day",
+          "8a-4p ESPN/Star Logging"
+        ]
+      },
+      {
+        "name": "Michael Witte",
+        "events": [
+          "All Day",
+          "6pm in time - 2am out time",
+          "*7:30p(10:30p) ESPN NHL",
+          "6pm in time - 2am out time",
+          "*7p(10p) ESPN NHL",
+          "*8p(11p) ESPN NHL",
+          "3:30p(6:30p) ESPN NHL\r\n8p(11p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Matt Zofchak",
+        "events": [
+          "All Day",
+          "2pm+",
+          "5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL",
+          "2p-10p ESPN BRB",
+          "2p-10p ESPN BRB",
+          "4p-8p ESPN/Star Logging\r\n9p(12a) ESPN NHL",
+          "3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Sebastian Diaz",
+        "events": [
+          "All Day",
+          "5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL",
+          "Request Off",
+          "5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL",
+          "10p(1a) ESPN NHL",
+          "4:30p-8:30p ESPN/Star Logging\r\n9:30p(12a) ESPN National Lacrosse League",
+          "4p(7p) ESPN NHL\r\n10p(1a) ESPN NHL"
+        ]
+      },
+      {
+        "name": "Elijah Hernandez",
+        "events": [
+          "4:30p-8:30p ESPN/Star Logging\r\n9:30p(12a) D+ NBA Grizzlies vs. Lakers",
+          "Before 6pm",
+          "7p(9p) ESPN NBA G League\r\n10p(12a) ESPN NBA G League",
+          "All Day",
+          "All Day",
+          "7p(9:30p) D+ NBA 76ers vs. Magic\r\n10p(12:30a) D+ NBA Rockets vs. Trail Blazers",
+          "5p(6p) ESPN Sat, 1/10 - ESPN FC\r\n7:30p(10p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Julio Marquez",
+        "events": [
+          "All Day",
+          "*10:50p(2:20a) ESPN Women's Dream 11 Super Smash T20",
+          "*10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "5p-12am PST",
+          "Request Off",
+          "*11p(1a) D+ 2025 WNBL: Round 13",
+          "6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20"
+        ]
+      },
+      {
+        "name": "Mario Mendoza",
+        "events": [
+          "4p-12a ESPN/Star Logging",
+          "All Day",
+          "After 4:30pm",
+          "After 4:00pm",
+          "After 4pm",
+          "After 4:30pm",
+          "7p(9:30p) D+ NBA Heat vs. Pacers\r\n10:30p(12:30a) D+ 2025 NBL: Round 16"
+        ]
+      },
+      {
+        "name": "Moises Miranda",
+        "events": [
+          "All Day",
+          "All Day",
+          "3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League",
+          "7p(9p) ESPN NBA G League\r\n10p(12a) ESPN NBA G League",
+          "All Day",
+          "7p(9:30p) ESPN National Lacrosse League\r\n10:30p(1a) ESPN National Lacrosse League",
+          "2p(4p) ESPN Ivy League Basketball\r\n6p(8p) ESPN Missouri Valley Conference Basketball"
+        ]
+      },
+      {
+        "name": "Felix Quinonez",
+        "events": [
+          "All Day",
+          "7p(9:30p) D+ NBA Knicks vs. Pistons\r\n10p(12:30a) D+ NBA Warriors vs. Clippers",
+          "3p(6p) ESPN Freddie & Harry\r\n7:30p(9:30p) ESPN NBA G League",
+          "Request Off",
+          "After 11a",
+          "7p(9:30p) ESPN National Lacrosse League\r\n10:30p(1a) ESPN National Lacrosse League",
+          "2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Greg Tietz",
+        "events": [
+          "4:25p(7:30p) D+ NFL Chargers vs. Broncos",
+          "All Day",
+          "Request Off",
+          "3p(6p) ESPN Freddie & Harry\r\n8p(9p) ESPN BYU Countdown to Tip-Off*",
+          "3p(6p) ESPN Freddie & Harry\r\n7p(9p) ESPN NBA G League",
+          "1p-9p ESPN/Star Logging*",
+          "2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"
+        ]
+      },
+      {
+        "name": "Leonel Tolentino",
+        "events": [
+          "Request Off",
+          "All Day",
+          "*11p(1:30a) D+ NBA Mavericks vs. Kings",
+          "*12:20a(3:50a) ESPN Women's Dream 11 Super Smash T20",
+          "*10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20",
+          "*11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20",
+          "After 530p"
+        ]
+      }
+    ],
+    "startDate": "01/04/2026",
+    "label": "Week of 01/04"
+  }
+]

@@ -94,6 +94,40 @@ const elements = {
   teamsGroup: document.getElementById('teamsGroup')
 };
 
+// Leads/Admins/Supervisors - excluded from operator pool
+const EXCLUDED_LEADS = [
+  'Rodriguez, Eric',
+  'Anderegg, Ryan',
+  'Borchardt, Lawrence',
+  'McMasters, Jim',
+  'Szarejko, Alex',
+  'Schlieman, Derek',
+  'Cummings, Michael',
+  'LaMotta, Gregg',
+  'Luchino, David',
+  'O\'Connor, Jeff',
+  'Brandt, David',
+  'Bishop, Jabari',
+  'Ceballos, Carlos',
+  'Chiafolo, Joseph',
+  'Humiston, Kenneth',
+  'Kiem, Mackenzie',
+  'Morales, Vivian',
+  'O\'Connor Jamia, Adam',
+  'Ostrofsky, Matt',
+  'Rojas, Thomas',
+  'Saal, Robert',
+  'Sanchez, Irving',
+  'Spanopoulos, Steve',
+  'Violante, Michael',
+  'Williams, Graham',
+  'Witzel, Zack',
+  'Wroy, Ricky',
+  'Funston, Tony',
+  'Lau, Welland',
+  'Wallace, Kory'
+].map(name => name.toLowerCase());
+
 // State
 const state = {
   currentUser: null,
@@ -113,7 +147,7 @@ const state = {
   coverageRequests: [
     {
       id: 1,
-      requesterName: 'Claire Hughes',
+      requesterName: 'Demo User A',
       day: 'Saturday',
       dayIndex: 6,
       time: '10:00-18:00 ET',
@@ -123,51 +157,91 @@ const state = {
     },
     {
       id: 2,
-      requesterName: 'Jordan Baker',
+      requesterName: 'Demo User B',
       day: 'Sunday',
       dayIndex: 0,
-      time: '14:00-22:00 PT',
+      time: '14:00-22:00 ET',
       type: 'coverage',
       note: 'Need coverage for training.',
       timestamp: Date.now() - 7200000
+    },
+    {
+      id: 3,
+      requesterName: 'Demo User C',
+      day: 'Tuesday',
+      dayIndex: 2,
+      time: '2p-10p ET',
+      type: 'coverage',
+      note: 'Doctor appointment.',
+      timestamp: Date.now() - 1800000
     }
   ],
   approvals: [
     {
       id: 101,
       type: 'swap',
-      requesterName: 'Mina Chen',
-      responderName: 'Rosa Alvarez',
-      requesterShift: { day: 'Saturday', time: '09:30-17:30 ET' },
-      responderShift: { day: 'Saturday', time: '10:00-18:00 ET' },
+      requesterName: 'Demo User A',
+      responderName: 'Demo User D',
+      requesterShift: { day: 'Saturday', time: '10:00-18:00 ET' },
+      responderShift: { day: 'Saturday', time: '2p-10p ET' },
       status: 'pending'
     },
     {
       id: 102,
       type: 'coverage',
-      requesterName: 'Ramon Diaz',
-      responderName: 'Taylor Nguyen',
-      requesterShift: { day: 'Sunday', time: '13:00-21:00 CT' },
+      requesterName: 'Demo User B',
+      responderName: 'Andrew Amisola',
+      requesterShift: { day: 'Sunday', time: '14:00-22:00 ET' },
       responderShift: null,
       status: 'pending'
+    },
+    {
+      id: 103,
+      type: 'coverage',
+      requesterName: 'Demo User C',
+      responderName: 'Demo User E',
+      requesterShift: { day: 'Tuesday', time: '2p-10p ET' },
+      responderShift: null,
+      status: 'pending'
+    }
+  ],
+  activityLog: [
+    // Example completed approvals for demo
+    {
+      id: 1001,
+      type: 'coverage_approved',
+      requesterName: 'Demo User F',
+      responderName: 'Demo User G',
+      shift: { day: 'Monday', time: '9a-5p ET' },
+      approvedBy: 'Szarejko, Alex',
+      timestamp: new Date(Date.now() - 86400000).toISOString() // Yesterday
+    },
+    {
+      id: 1002,
+      type: 'swap_approved',
+      requesterName: 'Demo User H',
+      responderName: 'Demo User I',
+      shift: { day: 'Wednesday', time: '2p-10p ET' },
+      approvedBy: 'McMasters, Jim',
+      timestamp: new Date(Date.now() - 172800000).toISOString() // 2 days ago
     }
   ]
 };
 
 // Credentials (demo) - accepts any password for demo names in roster
 const validCredentials = [
-  { username: 'Andrew Amisola', password: 'password' },
-  { username: 'Alvarez Rosa', password: 'password' },
-  { username: 'Baker Jordan', password: 'password' },
-  { username: 'Chen Mina', password: 'password' },
-  { username: 'Diaz Ramon', password: 'password' },
-  { username: 'Hughes Claire', password: 'password' },
-  { username: 'Nguyen Taylor', password: 'password' },
-  { username: 'Patel Anand', password: 'password' }
+  { username: 'Andrew Amisola', password: 'Disney123!' },
+  { username: 'Alvarez Rosa', password: 'Disney123!' },
+  { username: 'Baker Jordan', password: 'Disney123!' },
+  { username: 'Chen Mina', password: 'Disney123!' },
+  { username: 'Diaz Ramon', password: 'Disney123!' },
+  { username: 'Hughes Claire', password: 'Disney123!' },
+  { username: 'Nguyen Taylor', password: 'Disney123!' },
+  { username: 'Patel Anand', password: 'Disney123!' }
 ];
 
 // Preloaded schedule data (from XLSX files)
-const PRELOADED_SCHEDULES = [{"roster":[{"name":"Eric Rodriguez","events":["OFF","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","OFF"]},{"name":"Ryan Anderegg","events":["04:00-12:00 ET","OFF","07:00-15:00 ET","8a ADMIN","OFF","9a ADMIN","06:00-14:00 ET"]},{"name":"Lawrence Borchardt","events":["OFF","07:00-15:00 ET","10a ADMIN","10a ADMIN","OFF","OFF","11:00-19:00 ET"]},{"name":"Jim McMasters","events":["14:00-22:00 ET","14:00-22:00 ET","14:00-22:00 ET","OFF","OFF","OFF","14:00-22:00 ET"]},{"name":"Alex Szarejko","events":["OFF","11:00-19:00 ET","OFF","12:00-20:00 ET","OFF","11:00-19:00 ET","11:00-19:00 ET"]},{"name":"Derek Schlieman","events":["OFF","OFF","OFF","OFF","OFF","OFF","12:00-20:00 ET"]},{"name":"Michael Cummings","events":["15:00-23:00 ET","15:00-23:00 ET","OFF","OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Gregg LaMotta","events":["OFF","OFF","OFF","08:00-16:00 ET","07:00-15:00 ET","OFF","07:00-15:00 ET"]},{"name":"David Luchino","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Jeff O'Connor","events":["OFF","OFF","OFF","OFF","OFF","OFF","09:00-17:00 ET"]},{"name":"David Brandt","events":["OFF","OFF","19:00-03:30 ET","20:00-04:30 ET","19:00-03:30 ET","19:00-03:30 ET","20:00-04:30 ET"]},{"name":"Jabari Bishop","events":["11:00-19:00 ET","OFF","OFF","OFF","OFF","OFF","11:00-19:00 ET"]},{"name":"Carlos Ceballos","events":["11:00-19:00 ET","OFF","OFF","14:00-22:00 ET","14:00-22:00 ET","OFF","14:00-22:00 ET"]},{"name":"Joseph Chiafolo","events":["OFF","OFF","OFF","07:00-15:00 ET","OFF","07:00-15:00 ET","08:00-16:00 ET"]},{"name":"Kenneth Humiston","events":["16:00-00:00 ET","16:00-00:00 ET","OFF","OFF","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET"]},{"name":"Mackenzie Kiem","events":["16:00-00:00 ET","16:00-00:00 ET","OFF","OFF","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET"]},{"name":"Vivian Morales","events":["OFF","13:00-21:00 ET","OFF","OFF","13:00-21:00 ET","13:00-21:00 ET","13:00-21:00 ET"]},{"name":"Adam O'Connor Jamia","events":["11:00-19:00 ET","OFF","11:00-19:00 ET","11:00-19:00 ET","11:00-19:00 ET","OFF","OFF"]},{"name":"Matt Ostrofsky","events":["OFF","15:00-23:00 ET","OFF","OFF","15:00-23:00 ET","15:00-23:00 ET","14:00-22:00 ET"]},{"name":"Thomas Rojas","events":["OFF","OFF","OFF","OFF","09:00-17:00 ET","OFF","08:00-16:00 ET"]},{"name":"Robert Saal","events":["OFF","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","OFF","16:00-00:00 ET"]},{"name":"Irving Sanchez","events":["OFF","OFF","OFF","16:00-00:00 ET","16:00-00:00 ET","OFF","OFF"]},{"name":"Steve Spanopoulos","events":["09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","OFF","OFF","OFF","09:00-17:00 ET"]},{"name":"Michael Violante","events":["OFF","OFF","15:00-23:00 ET","OFF","OFF","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Graham Williams","events":["15:00-23:00 ET","OFF","15:00-23:00 ET","15:00-23:00 ET","OFF","OFF","15:00-23:00 ET"]},{"name":"Zack Witzel","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Ricky Wroy","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Tony Funston","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Welland Lau","events":["OFF","19:00-03:30 ET","16:00-00:30 ET","16:00-00:30 ET","16:00-00:30 ET","OFF","16:00-00:30 ET"]},{"name":"Kory Wallace","events":["19:00-03:30 ET","12:00-20:30 ET","OFF","OFF","12:00-20:30 ET","12:00-20:30 ET","12:00-20:30 ET"]},{"name":"Alex Choi","events":["22:00-06:00 ET","OFF","OFF","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Paul Dorsa","events":["05:30-13:30 ET","OFF","OFF","05:30-14:00 ET","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET"]},{"name":"Besim Dushaj","events":["OFF","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET","OFF","05:30-13:30 ET"]},{"name":"Zack Holcomb","events":["22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","OFF","OFF","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Robert Johnson","events":["OFF","OFF","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Omar Keita","events":["OFF","OFF","15:00-23:00 ET","10:00-18:00 ET","10:00-18:00 ET","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Kevin Kiem","events":["09:00-17:00 ET","OFF","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Aubrey Rubino","events":["12:00-20:00 ET","OFF","12:00-20:00 ET","11:00-19:00 ET","OFF","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Eric Soimes","events":["05:30-13:30 ET","OFF","OFF","OFF","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET"]},{"name":"Chelsey Williams","events":["22:00-06:00 ET","22:00-06:00 ET","OFF","OFF","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Alex Agius","events":["09:00-17:00 ET","14:00-18:00 ET","12:00-20:00 ET","12:30p(3:30p) ESPN NHL","16:00-20:00 ET","OFF","16:00-19:00 ET"]},{"name":"Andrew Amisola","events":["OFF","14:00-22:00 ET","14:00-22:00 ET","OFF","4:10p(7:40p) ESPN CFP Quarterfinal","17:30-22:00 ET","14:00-22:00 ET"]},{"name":"Mohanna Aziz","events":["12:00-20:00 ET","OFF","OFF","OFF","4:10p(7:40p) ESPN Field Pass","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Keith Bogan","events":["14:00-18:00 ET","5p D+ VibeCheck / 7p ESPN NHL","OFF","4p(7p) ESPN NHL","4:10p ESPN Command Center","OFF","19:00-23:00 ET"]},{"name":"Dylan Brennan","events":["OFF","17:00-21:00 ET","OFF","18:00-22:00 ET","18:00-22:00 ET","OFF","18:30-22:30 ET"]},{"name":"Joseph Caracappa","events":["09:00-17:00 ET","OFF","OFF","OFF","OFF","09:00-17:00 ET","OFF"]},{"name":"Sean Cerise","events":["10:00-18:00 ET","14:00-22:00 ET","OFF","Out by 11pm","14:00-22:00 ET","14:00-22:00 ET","10:00-18:00 ET"]},{"name":"Robert Connolly","events":["OFF","10:00-18:00 ET","630p+","clear by 4p","8:10p ESPN Command Center","5p+","10:00-18:00 ET"]},{"name":"Daniel Contreras","events":["5am - 12pm","08:00-16:00 ET","OFF","5am - 12pm","OFF","08:00-16:00 ET","08:00-16:00 ET"]},{"name":"Michael Contreras","events":["11:00-19:00 ET","11:00-19:00 ET","OFF","OFF","15:40-19:00 ET","11:00-19:00 ET","OFF"]},{"name":"Lance Counts","events":["11:00-15:00 ET","9a D+ SC+ / 10a ESPN Clinton","OFF","OFF","9a D+ SC+ / 10a ESPN Clinton","Switch Off","Before 3pm"]},{"name":"Brian Cruz","events":["OFF","OFF","OFF","OFF","OFF","OFF","18:00-22:00 ET"]},{"name":"Christopher Dalton","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Nicholas DiCinti","events":["10:00-18:00 ET","12p(3p) ESPN Rich Eisen","12p(3p) ESPN Rich Eisen","09:00-19:00 ET","12:30-16:00 ET","09:00-18:00 ET","08:00-13:00 ET"]},{"name":"Nikolas Donadic","events":["11:00-19:00 ET","12:30-19:00 ET","OFF","OFF","13:00-18:00 ET","11:00-19:00 ET","11:00-19:00 ET"]},{"name":"Robert Duffy","events":["12:00-20:00 ET","5p ESPN FC / 8p MNF","12:00-20:00 ET","OFF","OFF","12:00-20:00 ET","OFF"]},{"name":"Kyle Fader","events":["OFF","OFF","14:00-22:00 ET","3p ESPN Citrus Bowl","14:00-18:00 ET","3p/8p ESPN NHL","4p/9p ESPN NHL"]},{"name":"Patrick Flood","events":["5p(8p) ESPN NHL","14:30-18:30 ET","14:00-22:00 ET","7am - 3 pm","OFF","14:00-22:00 ET","18:00-22:00 ET"]},{"name":"John Gjoni","events":["OFF","18:00-19:00 ET","18:00-19:00 ET","OFF","OFF","OFF","OFF"]},{"name":"Jay Giampietro","events":["OFF","12p(4p) ESPN McAfee","OFF","OFF","12:00-19:00 ET","12p(4p) ESPN McAfee","11:00-17:00 ET"]},{"name":"Fiorella Gomez","events":["11:00-19:00 ET","14:00-22:00 ET","14:00-22:00 ET","Out by 6p","OFF","11:00-19:00 ET","11:00-19:00 ET"]},{"name":"Nigel Gordon","events":["16:00-13:11 ET","10:00-18:00 ET","10:00-18:00 ET","10:00-18:00 ET","15:00-22:00 ET","10:00-18:00 ET","10:00-16:00 ET"]},{"name":"James Graceffo","events":["OFF","8p(11p) ESPN NHL","7p(10p) ESPN NHL","Done by 5p","OFF","12p Rich Eisen","12p ABC Hockey Saturday"]},{"name":"Adam Grassani","events":["12:00-20:00 ET","Switch Off","OFF","OFF","4:30p/8:30p ESPN ACL","12:00-20:00 ET","09:00-17:00 ET"]},{"name":"James Griffo","events":["1p D+ NFL","12:00-20:00 ET","OFF","8am-6pm","4:10p ESPN SkyCast CFP","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Jason Hancock","events":["11:00-15:00 ET","OFF","OFF","OFF","16:00-19:00 ET","14:00-22:00 ET","4:30p ESPN NFL / 9p NLL"]},{"name":"Antonio Hernandez","events":["07:00-15:00 ET","10:00-18:00 ET","OFF","Until 9pm","OFF","10:00-18:00 ET","08:00-16:00 ET"]},{"name":"Joseph Hersh","events":["12:00-20:00 ET","12:00-20:00 ET","13:00-18:00 ET","Out by 7pm","After 2pm","12:00-20:00 ET","OFF"]},{"name":"Oscar Jimenez","events":["OFF","10p(1a) ESPN NHL","2pm +","5p VibeCheck / 6:30p NHL","14:00-18:00 ET","2pm +","14:00-18:00 ET"]},{"name":"Dylan Jock","events":["11:00-19:00 ET","OFF","OFF","15:00-18:30 ET","OFF","OFF","OFF"]},{"name":"Michael Jozwiak","events":["08:00-15:00 ET","Out by 2p","Out by 2p","Out by 3p","OFF","08:00-15:00 ET","08:00-16:00 ET"]},{"name":"Glenn King","events":["07:00-13:00 ET","5AM-1PM","5AM-1PM","5AM-12PM","OFF","10:30a ESPN ACL","OFF"]},{"name":"Elizabeth Krajewski","events":["Switch Off","OFF","OFF","OFF","14:00-22:00 ET","14:00-22:00 ET","12p(5p) ESPN ACL"]},{"name":"Michael Lee","events":["OFF","7p(10p) ESPN NHL","7p(10p) ESPN NHL","7p(10p) ESPN NHL","Available 9am-11pm","Available 9am-11pm","7p(10p) ESPN NHL"]},{"name":"Kevin Martin","events":["OFF","11:00-19:00 ET","12p(4p) ESPN McAfee","OFF","OFF","11:00-19:00 ET","11:00-19:00 ET"]},{"name":"Roberto Medina","events":["12:00-20:00 ET","OFF","OFF","OFF","12:00-20:00 ET","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Rose Miller","events":["OFF","10:00-18:00 ET","13:30-18:30 ET","OFF","OFF","10:00-18:00 ET","14:00-18:00 ET"]},{"name":"Kimberly Morales","events":["OFF","09:00-17:00 ET","09:00-17:00 ET","OFF","OFF","OFF","09:00-17:00 ET"]},{"name":"Maya Peart","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Matthew Press","events":["15:00-19:00 ET","17:00-21:00 ET","17:00-21:00 ET","16:30-20:30 ET","OFF","9a D+ SC+ / 10a Clinton","7p(10p) ESPN NHL"]},{"name":"Melissa Robilotta","events":["OFF","OFF","OFF","OFF","OFF","8:30p ESPN ACL","9:00 AM - 4:00 PM"]},{"name":"Jacob Rossi","events":["OFF","15:00-19:00 ET","15:00-19:00 ET","OFF","OFF","OFF","14:00-22:00 ET"]},{"name":"Jack Schneider","events":["3p TGL / 7:30p NFL PrimeTime","OFF","OFF","5p ESPN FC / 7:37p CFP Cotton Bowl","16:00-19:00 ET","14:00-22:00 ET","16:00-18:45 ET"]},{"name":"Eddie Segarra","events":["16:00-20:00 ET","OFF","14:00-19:00 ET","OFF","OFF","14:00-22:00 ET","15:00-19:30 ET"]},{"name":"Franco Sevillano","events":["OFF","12:00-20:00 ET","7p ESPN NBA G League","9A to 5P","12:10p CFP Orange Bowl","OFF","Switch Off"]},{"name":"Oswaldo Sevillano","events":["11:00-19:00 ET","OFF","12:30-19:00 ET","12:30-19:00 ET","15:30-19:00 ET","12:30-19:00 ET","OFF"]},{"name":"Willy Sevillano","events":["OFF","10:00-18:00 ET","15:00-19:00 ET","10A+","OFF","10:00-18:00 ET","10:00-18:00 ET"]},{"name":"Justin Silverman","events":["09:00-17:00 ET","OFF","OFF","OFF","OFF","OFF","12:00-20:00 ET"]},{"name":"Chad Townsend","events":["OFF","6PM+","6PM+","Out by 7PM","OFF","OFF","15:00-19:30 ET"]},{"name":"David Turner","events":["OFF","9p(12a) ESPN NHL","8:30p ESPN NHL","4p/9p ESPN NHL","7p(10p) ESPN NHL","OFF","OFF"]},{"name":"Nicholas Violante","events":["Out by 2p","Out by 2p","9a D+ SC+ / 10a Clinton","9a D+ SC+ / 10a Clinton","OFF","08:00-16:00 ET","08:00-16:00 ET"]},{"name":"Michael Witte","events":["5p(8p) ESPN NHL","9p(12a) ESPN NHL","7p(10p) ESPN NHL","8p(11p) ESPN NHL","OFF","6pm-3am","7p(10p) ESPN NHL"]},{"name":"Brandon Worden","events":["OFF","OFF","OFF","OFF","OFF","After 4p","16:00-23:00 ET"]},{"name":"Matt Zofchak","events":["14:00-18:00 ET","OFF","14:00-22:00 ET","OFF","14:00-18:00 ET","14:00-22:00 ET","14:00-18:00 ET"]},{"name":"Sebastian Diaz","events":["OFF","9p(12a) ESPN NHL","OFF","16:30-20:30 ET","15:30-19:30 ET","17:30-21:30 ET","17:00-21:00 ET"]},{"name":"Hanna Garcia","events":["OFF","18:00-22:00 ET","3p Freddie & Harry / 7p NBA G","OFF","7p/10p D+ NBA","16:00-00:00 ET","OFF"]},{"name":"Ayannah Green","events":["OFF","16:00-00:00 ET","16:00-00:00 ET","OFF","OFF","5p ESPN FC / 8p NLL","OFF"]},{"name":"Elijah Hernandez","events":["15:00-19:00 ET","16:00-00:00 ET","OFF","OFF","OFF","3p Freddie & Harry / 8p ACC","5p ESPN FC / 7p NLL"]},{"name":"Greyson Hines","events":["OFF","OFF","14:00-22:00 ET","OFF","OFF","14:00-22:00 ET","14:00-22:00 ET"]},{"name":"Halle Holmes","events":["14:00-22:00 ET","14:00-22:00 ET","14:00-22:00 ET","14:00-22:00 ET","Out by 7pm","OFF","OFF"]},{"name":"Julio Marquez","events":["16:00-00:00 ET","17:00-12:00 ET","10:30p D+ NBA","OFF","5p ESPN FC / 7p NBA G","16:00-00:00 ET","OFF"]},{"name":"Mario Mendoza","events":["9:30p D+ NBA","OFF","After 4:30pm","OFF","OFF","OFF","10p ESPN NLL"]},{"name":"Moises Miranda","events":["OFF","OFF","16:00-00:00 ET","OFF","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET"]},{"name":"Marcos Pinto-Leite","events":["OFF","OFF","OFF","OFF","17:00-21:00 ET","7p TGL / 10:30p NHL","16:00-00:00 ET"]},{"name":"Felix Quinonez","events":["OFF","PTO","PTO","PTO","OFF","16:00-00:00 ET","Switch Off"]},{"name":"Felipe Reis","events":["16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","OFF","OFF","OFF"]},{"name":"Greg Tietz","events":["OFF","16:00-00:00 ET","16:00-00:00 ET","07:00-17:00 ET","OFF","14:00-22:00 ET","21:00-00:00 ET"]},{"name":"Leonel Tolentino","events":["16:00-00:00 ET","OFF","After 530p","OFF","OFF","After 530p","10:30p D+ NBL"]}],"startDate":"12/28/2025","label":"Week of 12/28"},{"roster":[{"name":"Eric Rodriguez","events":["OFF","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","OFF"]},{"name":"Ryan Anderegg","events":["04:00-12:00 ET","OFF","9a ADMIN","9a ADMIN","9a ADMIN","9a ADMIN","OFF"]},{"name":"Lawrence Borchardt","events":["12:00-20:00 ET","10a ADMIN","10a ADMIN","10a ADMIN","OFF","OFF","10:00-18:00 ET"]},{"name":"Jim McMasters","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Alex Szarejko","events":["OFF","OFF","TBD ADMIN","TBD ADMIN","TBD ADMIN","TBD ADMIN","12:00-20:00 ET"]},{"name":"Derek Schlieman","events":["OFF","OFF","TBD ADMIN","TBD ADMIN","TBD ADMIN","TBD ADMIN","14:00-22:00 ET"]},{"name":"Michael Cummings","events":["15:00-23:00 ET","OFF","OFF","OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Gregg LaMotta","events":["05:00-13:00 ET","07:00-15:00 ET","06:00-14:00 ET","07:00-15:00 ET","OFF","OFF","07:00-15:00 ET"]},{"name":"David Luchino","events":["OFF","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","OFF"]},{"name":"Jeff O'Connor","events":["OFF","14:00-22:00 ET","14:00-22:00 ET","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"David Brandt","events":["19:00-03:30 ET","19:00-03:30 ET","OFF","after 3p","18:00-02:30 ET","18:00-02:30 ET","16:00-00:30 ET"]},{"name":"Jabari Bishop","events":["08:00-16:00 ET","09:00-17:00 ET","09:00-17:00 ET","OFF","OFF","10:00-18:00 ET","12:00-20:00 ET"]},{"name":"Carlos Ceballos","events":["11:00-19:00 ET","OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET","OFF","11:00-19:00 ET"]},{"name":"Joseph Chiafolo","events":["09:00-17:00 ET","OFF","OFF","08:00-16:00 ET","07:00-15:00 ET","07:00-15:00 ET","05:00-13:00 ET"]},{"name":"Kenneth Humiston","events":["16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","OFF","OFF","16:00-00:00 ET","16:00-00:00 ET"]},{"name":"Mackenzie Kiem","events":["16:00-00:00 ET","OFF","16:00-00:00 ET","16:00-00:00 ET","OFF","16:00-00:00 ET","16:00-00:00 ET"]},{"name":"Vivian Morales","events":["13:00-21:00 ET","13:00-21:00 ET","13:00-21:00 ET","13:00-21:00 ET","OFF","OFF","13:00-21:00 ET"]},{"name":"Adam O'Connor Jamia","events":["11:00-19:00 ET","11:00-19:00 ET","OFF","OFF","11:00-19:00 ET","11:00-19:00 ET","11:00-19:00 ET"]},{"name":"Matt Ostrofsky","events":["OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET","OFF","OFF","OFF"]},{"name":"Thomas Rojas","events":["08:00-16:00 ET","OFF","In time 9am","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Robert Saal","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Irving Sanchez","events":["OFF","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","16:00-00:00 ET","OFF","OFF"]},{"name":"Steve Spanopoulos","events":["06:00-14:00 ET","OFF","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Michael Violante","events":["15:00-23:00 ET","15:00-23:00 ET","OFF","OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Graham Williams","events":["OFF","OFF","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Zack Witzel","events":["OFF","OFF","11:00-19:00 ET","11:00-19:00 ET","after 11am","after 8am","10:00-18:00 ET"]},{"name":"Ricky Wroy","events":["OFF","OFF","14:00-22:00 ET","14:00-22:00 ET","14:00-22:00 ET","14:00-22:00 ET","11:00-19:00 ET"]},{"name":"Tony Funston","events":["OFF","OFF","16:00-00:30 ET","16:00-00:30 ET","13:00-21:30 ET","16:00-00:30 ET","16:00-00:30 ET"]},{"name":"Welland Lau","events":["OFF","OFF","19:00-03:30 ET","20:00-04:30 ET","19:00-03:30 ET","20:00-04:30 ET","19:00-03:30 ET"]},{"name":"Kory Wallace","events":["12:00-20:30 ET","12:00-20:30 ET","OFF","OFF","12:00-20:30 ET","12:00-20:30 ET","12:00-20:30 ET"]},{"name":"Alex Choi","events":["22:00-06:00 ET","7PM-3AM","7PM-3AM","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Paul Dorsa","events":["05:30-13:30 ET","OFF","OFF","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET"]},{"name":"Besim Dushaj","events":["05:30-13:30 ET","OFF","OFF","OFF","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET"]},{"name":"Zack Holcomb","events":["22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","OFF","OFF","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Robert Johnson","events":["OFF","OFF","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Omar Keita","events":["15:00-23:00 ET","OFF","15:00-23:00 ET","10:00-18:00 ET","15:00-23:00 ET","15:00-23:00 ET","OFF"]},{"name":"Kevin Kiem","events":["09:00-17:00 ET","OFF","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Aubrey Rubino","events":["12:00-20:00 ET","OFF","12:00-20:00 ET","OFF","12:00-20:00 ET","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Eric Soimes","events":["05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET","05:30-13:30 ET","OFF","OFF","05:30-13:30 ET"]},{"name":"Chelsey Williams","events":["22:00-06:00 ET","22:00-06:00 ET","OFF","OFF","22:00-06:00 ET","22:00-06:00 ET","22:00-06:00 ET"]},{"name":"Andrew Amisola","events":["OFF","OFF","12:30-19:00 ET","16:00-20:30 ET","7:30p CFP Semifinal Fiesta Bowl","12p Mecum Auctions","12:00-20:00 ET"]},{"name":"Mohanna Aziz","events":["11:00-16:00 ET","8am-5p","15:00-19:00 ET","14:00-23:00 ET","15:00-18:30 ET","3p Freddie & Harry","OFF"]},{"name":"Keith Bogan","events":["OFF","14:00-22:00 ET","5p ESPN FC / 8p NHL","5p VibeCheck / 7p NHL","14:00-18:00 ET","3p+","11:00-18:00 ET"]},{"name":"Dylan Brennan","events":["OFF","5p ESPN FC / 7:30p FCS Championship","14:00-18:00 ET","OFF","14:00-18:00 ET","OFF","14:00-18:00 ET"]},{"name":"Joseph Caracappa","events":["10a ACL Myrtle Beach","OFF","OFF","OFF","OFF","OFF","08:00-16:00 ET"]},{"name":"Sean Cerise","events":["12:00-20:00 ET","OFF","OFF","12:30-19:00 ET","14:00-18:00 ET","14:00-22:00 ET","14:00-18:00 ET"]},{"name":"Robert Connolly","events":["09:00-17:00 ET","OFF","OFF","7p NBA Miércoles","8p MO HS Basketball","5p ESPN FC / 8p MO HS","8p AEW Collision"]},{"name":"Daniel Contreras","events":["10:00-18:00 ET","OFF","OFF","OFF","14:30-19:00 ET","10:00-18:00 ET","10:00-18:00 ET"]},{"name":"Lance Counts","events":["11:00-15:00 ET","Before 2pm","OFF","OFF","9a D+ SC+ / 10a Clinton","9a D+ SC+ / 10a Clinton","07:00-15:00 ET"]},{"name":"Brian Cruz","events":["OFF","OFF","OFF","OFF","8p ESPN+ Hockey Night","8p(11p) ESPN NHL","14:00-18:00 ET"]},{"name":"Christopher Dalton","events":["6:30pm on","7:30pm on","9p(12a) ESPN NHL","9:30p ESPN NHL","9p(12a) ESPN NHL","OFF","OFF"]},{"name":"Nicholas DiCinti","events":["08:00-13:00 ET","12p Rich Eisen","12p Rich Eisen","12p Rich Eisen","12p Rich Eisen","09:00-18:00 ET","08:00-13:00 ET"]},{"name":"Nikolas Donadic","events":["11:00-19:00 ET","12:30-19:00 ET","OFF","OFF","14:00-22:00 ET","13:00-21:00 ET","13:00-21:00 ET"]},{"name":"Kyle Fader","events":["OFF","5p VibeCheck / 7p NHL","14:00-22:00 ET","14:30-18:30 ET","14:00-18:00 ET","OFF","4p/7p ESPN NHL"]},{"name":"Patrick Flood","events":["17:00-21:00 ET","14:00-18:00 ET","14:00-18:00 ET","7am - 5pm","15:00-19:00 ET","OFF","7am - 3 pm"]},{"name":"John Gjoni","events":["OFF","OFF","18:00-19:00 ET","OFF","7p NBA G League","OFF","12p Mecum Auctions"]},{"name":"Jay Giampietro","events":["2:30p LaLiga","3p Freddie & Harry","OFF","OFF","12p McAfee","11am-5pm","11:00-17:00 ET"]},{"name":"Nigel Gordon","events":["10:00-13:45 ET","12p McAfee","12p McAfee","3p NBA Today / 5p ESPN FC / 7:12p NBA Wed","10:00-19:00 ET","10:00-18:00 ET","10:00-16:00 ET"]},{"name":"James Graceffo","events":["Hard Out 4:45p","7:30p ESPN NHL","4:30p The Point / 7p NHL","12p McAfee","Hard Out 4:45p","12p Rich Eisen","1p ABC Hockey Saturday"]},{"name":"Jason Hancock","events":["2:50p LaLiga / 7:30p NFL PrimeTime","OFF","OFF","15:00-20:00 ET","OFF","15:00-23:00 ET","15:00-23:00 ET"]},{"name":"Antonio Hernandez","events":["08:00-16:00 ET","08:00-16:00 ET","OFF","1:30p SuperCopa Football","OFF","OFF","OFF"]},{"name":"Oscar Jimenez","events":["5p ESPN FC / 7p NHL","OFF","OFF","9:35p NBA Wednesday","14:00-18:00 ET","17:30-23:00 ET","14:00-18:00 ET"]},{"name":"Dylan Jock","events":["OFF","OFF","OFF","OFF","OFF","OFF","OFF"]},{"name":"Michael Jozwiak","events":["OFF","15:00-19:30 ET","Out by 3pm","OFF","09:00-17:00 ET","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Elizabeth Krajewski","events":["16:00-20:00 ET","OFF","5p TGL / 9p NBA G League","OFF","5p ESPN FC / 7p NBA G League","OFF","13:00-21:00 ET"]},{"name":"Michael Lee","events":["3p(6p) ESPN NHL","5pm-11pm","7p(10p) ESPN NHL","5pm-11pm","7p(10p) ESPN NHL","5pm-11pm","7p(10p) ESPN NHL"]},{"name":"Roberto Medina","events":["16:00-20:00 ET","OFF","OFF","OFF","15:00-19:00 ET","14:00-22:00 ET","14:00-22:00 ET"]},{"name":"Rose Miller","events":["11:00-15:30 ET","10:00-18:00 ET","OFF","OFF","10:00-18:00 ET","10:00-18:00 ET","7p FA Cup / 12:30p ABC Hockey Pregame"]},{"name":"Kimberly Morales","events":["09:00-17:00 ET","OFF","OFF","7am-5pm","11:00-17:00 ET","11:00-17:00 ET","09:00-17:00 ET"]},{"name":"Maya Peart","events":["OFF","OFF","OFF","OFF","13:30-19:30 ET","12:30-19:00 ET","Until noon"]},{"name":"Matthew Press","events":["20:00-23:00 ET","OFF","17:00-21:00 ET","OFF","17:00-21:00 ET","8:10p Super Smash T20","4p/10p ESPN NHL"]},{"name":"Melissa Robilotta","events":["OFF","OFF","OFF","OFF","OFF","7-10pm","08:00-16:00 ET"]},{"name":"Jack Schneider","events":["OFF","14:00-17:30 ET","3p NBA Today / 6:40p Super Smash","8:10p Super Smash T20","6:40p Super Smash T20","OFF","14:30-19:30 ET"]},{"name":"Eddie Segarra","events":["12:00-20:00 ET","14:00-22:00 ET","14:00-22:00 ET","OFF","OFF","OFF","OFF"]},{"name":"Franco Sevillano","events":["OFF","OFF","OFF","OFF","OFF","8:30p College Club Hockey","11:00-17:00 ET"]},{"name":"Willy Sevillano","events":["10:00-18:00 ET","10A+","10A+","10A+","13:30-19:30 ET","12:00-20:00 ET","12:00-20:00 ET"]},{"name":"Justin Silverman","events":["09:00-17:00 ET","OFF","OFF","OFF","OFF","09:00-17:00 ET","09:00-17:00 ET"]},{"name":"Chad Townsend","events":["OFF","7PM+","7PM+","7PM+","8p NBA G League","OFF","11:00-19:00 ET"]},{"name":"David Turner","events":["7p(10p) ESPN NHL","9:30p ESPN NHL","7:30p ESPN+ Hockey Night","9:30p ESPN NHL","OFF","OFF","OFF"]},{"name":"Nicholas Violante","events":["Out by 2p","9a D+ SC+ / 10a Clinton","9a D+ SC+ / 10a Clinton","9a D+ SC+ / 10a Clinton","12:30-19:00 ET","OFF","08:00-16:00 ET"]},{"name":"Michael Witte","events":["OFF","6pm-2am","7:30p ESPN NHL","6pm-2am","7p(10p) ESPN NHL","8p(11p) ESPN NHL","3:30p/8p ESPN NHL"]},{"name":"Matt Zofchak","events":["OFF","2pm+","17:00-21:00 ET","14:00-22:00 ET","14:00-22:00 ET","16:00-20:00 ET","15:00-19:00 ET"]},{"name":"Sebastian Diaz","events":["OFF","17:30-21:30 ET","OFF","17:30-21:30 ET","10p(1a) ESPN NHL","16:30-20:30 ET","4p/10p ESPN NHL"]},{"name":"Elijah Hernandez","events":["16:30-20:30 ET","Before 6pm","7p/10p NBA G League","OFF","OFF","7p/10p D+ NBA","5p ESPN FC / 7:30p NLL"]},{"name":"Julio Marquez","events":["OFF","10:50p Super Smash T20","10:25p Super Smash T20","17:00-00:00 ET","OFF","11p WNBL","6:40p/10:25p Super Smash T20"]},{"name":"Mario Mendoza","events":["16:00-00:00 ET","OFF","After 4:30pm","After 4pm","After 4pm","After 4:30pm","7p/10:30p D+ NBA/NBL"]},{"name":"Moises Miranda","events":["OFF","OFF","15:00-20:00 ET","7p/10p NBA G League","OFF","7p/10:30p NLL","2p Ivy League / 6p MVC Basketball"]},{"name":"Felix Quinonez","events":["OFF","7p/10p D+ NBA","3p Freddie & Harry / 7:30p NBA G","OFF","After 11a","7p/10:30p NLL","14:00-18:00 ET"]},{"name":"Greg Tietz","events":["4:25p D+ NFL","OFF","OFF","3p Freddie & Harry / 8p BYU Countdown","3p Freddie & Harry / 7p NBA G League","13:00-21:00 ET","14:00-18:00 ET"]},{"name":"Leonel Tolentino","events":["OFF","OFF","11p D+ NBA","12:20a Super Smash T20","10:25p Super Smash T20","11:55p Super Smash T20","After 530p"]}],"startDate":"01/04/2026","label":"Week of 01/04"}];
+const PRELOADED_SCHEDULES = [{"roster":[{"name":"Eric Rodriguez","events":["Request Off","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","Request Off"]},{"name":"Ryan Anderegg","events":["4a-12p ESPN/STAR SUP*","Request Off","7a-3p ESPN/STAR SUP","8a ADMIN*","Request Off","9a ADMIN","6a-2p ESPN/STAR SUP"]},{"name":"Lawrence Borchardt","events":["All Day","7a-3p ESPN/STAR SUP","10a ADMIN","10a ADMIN","All Day","All Day","11a-7p ESPN/STAR SUP"]},{"name":"Jim McMasters","events":["2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","Request Off","Request Off","Request Off","2p-10p ESPN/STAR SUP"]},{"name":"Alex Szarejko","events":["Request Off","11a-7p ESPN/STAR SUP","Request Off","*12p-8p ESPN/STAR SUP","Request Off","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP"]},{"name":"Derek Schlieman","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","12p-8p ESPN/STAR SUP"]},{"name":"Michael Cummings","events":["3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","Request Off","Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP"]},{"name":"Gregg LaMotta","events":["Request Off","Request Off","Request Off","8a-4p ESPN/STAR SUP*","7a-3p ESPN/STAR SUP","Request Off","7a-3p ESPN/STAR SUP"]},{"name":"David Luchino","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Jeff O'Connor","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","9a-5p ESPN/STAR SUP*"]},{"name":"David Brandt","events":["Request Off","Request Off","7p-3:30a ESPN/STAR SUP","8p-4:30a ESPN/STAR SUP","7p-3:30a ESPN/STAR SUP","7p-3:30a ESPN/STAR SUP","8p-4:30a ESPN/STAR SUP"]},{"name":"Jabari Bishop","events":["*11a-7p ESPN/STAR SUP","Request Off","Request Off","Request Off","Request Off","Request Off","11a-7p ESPN/STAR SUP"]},{"name":"Carlos Ceballos","events":["11a-7p ESPN/STAR SUP","Request Off","Request Off","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","Request Off","2p-10p ESPN/STAR SUP"]},{"name":"Joseph Chiafolo","events":["Request Off","Request Off","Request Off","7a-3p ESPN/STAR SUP*","Request Off","7a-3p ESPN/STAR SUP","8a-4p ESPN/STAR SUP"]},{"name":"Kenneth Humiston","events":["4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","Request Off","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP"]},{"name":"Mackenzie Kiem","events":["4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","All Day","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP"]},{"name":"Vivian Morales","events":["Request Off","1p-9p ESPN/STAR SUP","Request Off","Request Off","1p-9p ESPN/STAR SUP","1p-9p ESPN/STAR SUP","1p-9p ESPN/STAR SUP"]},{"name":"Adam O'Connor Jamia","events":["11a-7p ESPN/STAR SUP","All Day","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP","All Day","All Day"]},{"name":"Matt Ostrofsky","events":["Request Off","3p-11p ESPN/STAR SUP","Request Off","Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","*2p-10p ESPN/STAR SUP"]},{"name":"Thomas Rojas","events":["Request Off","Request Off","Request Off","Request Off","9a-5p ESPN/STAR SUP","Request Off","*8a-4p ESPN/STAR SUP"]},{"name":"Robert Saal","events":["All Day","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","All Day","4p-12a ESPN/STAR SUP"]},{"name":"Irving Sanchez","events":["Request Off","Request Off","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","Request Off","Request Off"]},{"name":"Steve Spanopoulos","events":["9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","All Day","All Day","All Day","9a-5p ESPN/STAR SUP"]},{"name":"Michael Violante","events":["Request Off","Request Off","3p-11p ESPN/STAR SUP","Request Off","Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP"]},{"name":"Graham Williams","events":["3p-11p ESPN/STAR SUP","All Day","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","All Day","All Day","3p-11p ESPN/STAR SUP"]},{"name":"Zack Witzel","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Ricky Wroy","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Tony Funston","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Welland Lau","events":["All Day","7p-3:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP","All Day","4p-12:30a ESPN/STAR SUP"]},{"name":"Kory Wallace","events":["*7p-3:30a ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP","Request Off","Request Off","*12p-8:30p ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP"]},{"name":"Alex Choi","events":["10p-6a Star Logging","Request Off","Request Off","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Paul Dorsa","events":["5:30a-1:30p Star Logging","Request Off","Request Off","5:30a-2:00p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging"]},{"name":"Besim Dushaj","events":["Request Off","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","All Day","5:30a-1:30p Star Logging"]},{"name":"Zack Holcomb","events":["10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","All Day","All Day","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Robert Johnson","events":["Request Off","Request Off","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Omar Keita","events":["Request Off","Request Off","*3p-11p Star Logging","10a-6p Star Logging*","10a-6p Star Logging*","*3p-11p Star Logging","*3p-11p Star Logging"]},{"name":"Kevin Kiem","events":["9a-5p Star Logging","Request Off","Request Off","9a-5p Star Logging","9a-5p Star Logging","9a-5p Star Logging","9a-5p Star Logging"]},{"name":"Aubrey Rubino","events":["*12p-8p Star Logging","Request Off","*12p-8p Star Logging","*11a-7p Star Logging","Request Off","*12p-8p Star Logging","*12p-8p Star Logging"]},{"name":"Eric Soimes","events":["5:30a-1:30p Star Logging","Request Off","Request Off","Request Off","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging"]},{"name":"Chelsey Williams","events":["10p-6a Star Logging","10p-6a Star Logging","All Day","Request Off","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Alex Agius","events":["9a-5p ESPN/Star Logging","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","12p-8p ESPN/Star Logging","12:30p(3:30p) ESPN NHL","1p(4p) ESPN NHL\r\n4p-8p ESPN/Star Logging","All Day","4p-7p ESPN/Star Logging\r\n8p(11:15p) ESPN NFL on ESPN: Doubleheader Saturday"]},{"name":"Andrew Amisola","events":["All Day","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","All Day","4:10p(7:40p) ESPN College Football Playoff Quarterfinal at the Rose Bowl Game Presented by Prudential","5p(5:30p) D+ VibeCheck\r\n5:30p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging"]},{"name":"Mohanna Aziz","events":["12p-8p ESPN/Star Logging","All Day","Request Off","All Day","4:10p(7:40p) ESPN Field Pass with McAfee: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential","12p-8p ESPN/Star Logging","12p-8p ESPN/Star Logging"]},{"name":"Keith Bogan","events":["2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL","All Day","4p(7p) ESPN NHL","4:10p(7:40p) ESPN Command Center: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential","All Day","4p(7p) ESPN NHL\r\n7p-11p ESPN/Star Logging"]},{"name":"Dylan Brennan","events":["Request Off","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","All Day","3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging","3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging","All Day","3:30p(6:30p) ESPN NHL\r\n6:30p-10:30p ESPN/Star Logging"]},{"name":"Joseph Caracappa","events":["9a-5p ESPN/Star Logging","Request Off","Request Off","Request Off","Request Off","9a-5p ESPN/Star Logging","All Day"]},{"name":"Sean Cerise","events":["*10a-6p ESPN BRB","2p-10p ESPN BRB","All Day","Out by 11pm","2p-10p ESPN BRB","2p-10p ESPN BRB","*10a-6p ESPN BRB"]},{"name":"Robert Connolly","events":["Request Off","10a-6p ESPN/Star Logging","630p+","clear by 4p","*8:10p(11:40p) ESPN Command Center: CFP Quarterfinal at the Allstate Sugar Bowl","5p+","10a-6p ESPN/Star Logging"]},{"name":"Daniel Contreras","events":["5am - 12pm","8a-4p ESPN/Star Logging","Request Off","5am - 12pm","Request Off","8a-4p ESPN/Star Logging","8a-4p ESPN/Star Logging"]},{"name":"Michael Contreras","events":["11a-7p ESPN/Star Logging","11a-7p ESPN/Star Logging","Request Off","All Day","12:10p(3:40p) ESPN Command Center: CFP Quarterfinal at the Capital One Orange Bowl\r\n3:40p-7p ESPN/Star Logging","11a-7p ESPN/Star Logging","All Day"]},{"name":"Lance Counts","events":["10:30a(11a) D+ SC+\r\n11a-3p ESPN/Star Logging*","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*","Request Off","Request Off","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*","Switch Off","Before 3pm"]},{"name":"Brian Cruz","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging"]},{"name":"Christopher Dalton","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Anastasiia Denysiuk","events":["Request Off","All Day","5p(6p) ESPN Tue, 12/30 - ESPN FC\r\n7p(9p) ESPN NBA G League","Request Off","Request Off","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging"]},{"name":"Nicholas DiCinti","events":["10a-6p ESPN/Star Logging","12p(3p) ESPN Mon, 12/29 - The Rich Eisen Show*","12p(3p) ESPN Tue, 12/30 - The Rich Eisen Show","9a-7p","*10:30a(12:30p) ESPN ACL\r\n12:30p-4p ESPN/Star Logging*","9a-6p","*8a-1p ESPN/Star Logging*"]},{"name":"Nikolas Donadic","events":["11a-7p ESPN BRB","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","Request Off","Request Off","11a(1p) ESPN The Rose Parade Presented by Honda\r\n1p-6p ESPN/Star Logging","11a-7p ESPN BRB","11a-7p ESPN BRB"]},{"name":"Robert Duffy","events":["12p-8p ESPN/Star Logging","5p(6p) ESPN Mon, 12/29 - ESPN FC\r\n8p(11:15p) ESPN Monday Night Football (S)","12p-8p ESPN/Star Logging","Request Off","Request Off","12p-8p ESPN/Star Logging","All Day"]},{"name":"Kyle Fader","events":["Request Off","Request Off","2p-10p ESPN/Star Logging","3p(6:30p) ESPN Cheez-It Citrus Bowl","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","3p(6p) ESPN NHL\r\n8p(11p) ESPN NHL","4p(7p) ESPN NHL\r\n9p(12a) ESPN NHL"]},{"name":"Patrick Flood","events":["5p(8p) ESPN NHL","2:30p-6:30p ESPN/Star Logging\r\n7:30p(10:30p) ESPN NHL","2p-10p ESPN/Star Logging","7am - 3 pm","Request Off","2p-10p ESPN/Star Logging","3p(6p) ESPN NHL\r\n6p-10p ESPN/Star Logging"]},{"name":"John Gjoni","events":["Request Off","6p-7p starts","6p-7p starts","Request Off","Request Off","Request Off","Request Off"]},{"name":"Jay Giampietro","events":["Request Off","12p(4p) ESPN McAfee*","Request Off","Request Off","12-7pm","12p(4p) ESPN McAfee*","*11a-5p ESPN/Star Logging*"]},{"name":"Fiorella Gomez","events":["11a-7p ESPN BRB","2p-10p ESPN BRB","2p-10p ESPN BRB","Out by 6p","All Day","11a-7p ESPN BRB","11a-7p ESPN BRB"]},{"name":"Nigel Gordon","events":["4p-111p","*10a-6p ESPN/Star Logging","*10a-6p ESPN/Star Logging","10a-6p","3p-10p","*10a-6p ESPN/Star Logging","*10a-4p ESPN/Star Logging*"]},{"name":"James Graceffo","events":["Request Off","8p(11p) ESPN NHL","7p(10p) ESPN NHL","Done by 5p","Request Off","12p(3p) ESPN Fri, 1/2 - The Rich Eisen Show*","12p(3p) ESPN ABC Hockey Saturday*"]},{"name":"Adam Grassani","events":["12p-8p ESPN/Star Logging","Switch Off","All Day","All Day","4:30p(6p) ESPN ACL\r\n8:30p(10:30p) ESPN ACL","12p-8p ESPN/Star Logging","*9a-5p ESPN/Star Logging*"]},{"name":"James Griffo","events":["1p(4p) D+ NFL Seahawks vs. Panthers*","12p-8p ESPN/Star Logging","All Day","8am-6pm","4:10p(7:40p) ESPN SkyCast: CFP Quarterfinal at the Rose Bowl Game Presented by Prudential","12p-8p ESPN/Star Logging","12p-8p ESPN/Star Logging"]},{"name":"Jason Hancock","events":["11a-3p ESPN/Star Logging\r\n4:25p(7:30p) D+ NFL Eagles vs. Bills","Request Off","Request Off","All Day","4p-7p ESPN/Star Logging\r\n8:10p(11:40p) ESPN College Football Playoff Quarterfinal at the Allstate Sugar Bowl","2p-10p ESPN/Star Logging","4:30p(7:30p) ESPN NFL on ESPN: Doubleheader Saturday\r\n9p(11:30p) ESPN National Lacrosse League"]},{"name":"Antonio Hernandez","events":["7a-3p ESPN/Star Logging*","10a-6p ESPN/Star Logging","All Day","Until 9pm","Request Off","10a-6p ESPN/Star Logging","8a-4p ESPN/Star Logging*"]},{"name":"Joseph Hersh","events":["12p-8p ESPN/Star Logging","12p-8p ESPN/Star Logging","1p-6p ESPN/Star Logging","Out by 7pm","After 2pm","12p-8p ESPN/Star Logging","All Day"]},{"name":"Oscar Jimenez","events":["Request Off","*10p(1a) ESPN NHL","2pm +","5p(5:30p) D+ VibeCheck\r\n6:30p(9:30p) ESPN NHL*","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","2pm +","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"]},{"name":"Dylan Jock","events":["11a-7p ESPN BRB","Request Off","Request Off","3p-6:30p ESPN/Star Logging\r\n7:37p(11p) ESPN SkyCast: CFP Quarterfinal at the Goodyear Cotton Bowl Classic","Request Off","Request Off","Request Off"]},{"name":"Michael Jozwiak","events":["8a-3p ESPN/Star Logging*","Out by 2p","Out by 2p","Out by 3p","All Day","8a-3p ESPN/Star Logging*","8a-4p ESPN/Star Logging"]},{"name":"Glenn King","events":["7a-1p ESPN/Star Logging*","5AM-1PM","5AM-1PM","5AM-12PM","Request Off","10:30a(12:30p) ESPN ACL*","Request Off"]},{"name":"Elizabeth Krajewski","events":["Switch Off","All Day","All Day","All Day","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","12p(5p) ESPN ACL"]},{"name":"Michael Lee","events":["Request Off","*7p(10p) ESPN NHL","*7p(10p) ESPN NHL","*7p(10p) ESPN NHL","Available from 9am to 11pm","Available from 9am to 11pm","7p(10p) ESPN NHL*"]},{"name":"Kevin Martin","events":["All Day","11a-7p ESPN/Star Logging","12p(4p) ESPN McAfee","Request Off","Request Off","11a-7p ESPN/Star Logging","11a-7p ESPN/Star Logging"]},{"name":"Roberto Medina","events":["12p-8p ESPN/Star Logging","All Day","Request Off","All Day","12p-8p ESPN/Star Logging","12p-8p ESPN/Star Logging","12p-8p ESPN/Star Logging"]},{"name":"Rose Miller","events":["All Day","10a-6p ESPN/Star Logging","1:30p-6:30p ESPN/Star Logging\r\n7:30p(9:30p) ESPN NBA G League","Request Off","Request Off","10a-6p ESPN/Star Logging","2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"]},{"name":"Kimberly Morales","events":["Request Off","9a-5p ESPN/Star Logging","9a-5p ESPN/Star Logging","Request Off","Request Off","Request Off","9a-5p ESPN/Star Logging"]},{"name":"Maya Peart","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Matthew Press","events":["3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","4:30p-8:30p ESPN/Star Logging\r\n9:30p(12:30a) ESPN NHL","All Day","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends","7p(10p) ESPN NHL"]},{"name":"Melissa Robilotta","events":["Request Off","Request Off","Request Off","Request Off","Request Off","*8:30p(10:30p) ESPN ACL","9:00 AM - 4:00 PM"]},{"name":"Jacob Rossi","events":["Request Off","3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Cavaliers vs. Spurs","3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA 76ers vs. Grizzlies","Request Off","Request Off","All Day","2p-10p ESPN/Star Logging"]},{"name":"Jack Schneider","events":["3p(5p) ESPN TGL Presented by SoFi\r\n7:30p(8:15p) ESPN NFL PrimeTime on ESPN+","All Day","Request Off","5p(6p) ESPN Wed, 12/31 - ESPN FC\r\n7:37p(11p) ESPN College Football Playoff Quarterfinal at the Goodyear Cotton Bowl Classic","4p-7p ESPN/Star Logging\r\n8:10p(11:40p) ESPN SkyCast: CFP Quarterfinal at the Allstate Sugar Bowl","2p-10p ESPN/Star Logging","4p-6:45p ESPN/Star Logging\r\n7:50p(11:15p) ESPN NFL on ESPN Playbook with Next Gen Stats"]},{"name":"Eddie Segarra","events":["*1p(4p) D+ NFL Steelers vs. Browns\r\n4p-8p ESPN/Star Logging","All Day","2p-7p ESPN/Star Logging\r\n8p(10p) ESPN NBA G League","Request Off","Request Off","2p-10p ESPN/Star Logging","3p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) ESPN ACL"]},{"name":"Franco Sevillano","events":["Request Off","12p-8p ESPN/Star Logging","7p(9p) ESPN NBA G League","9A to 5P","12:10p(3:40p) ESPN College Football Playoff Quarterfinal at the Capital One Orange Bowl*","Request Off","Switch Off"]},{"name":"Oswaldo Sevillano","events":["11a-7p ESPN/Star Logging","All Day","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","12:10p(3:40p) ESPN SkyCast: CFP Quarterfinal at the Capital One Orange Bowl\r\n3:30p-7p ESPN/Star Logging","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","All Day"]},{"name":"Willy Sevillano","events":["Request Off","*10a-6p ESPN/Star Logging","3p-7p ESPN/Star Logging\r\n8p(10:30p) ESPN NBA G League","10A+","Request Off","*10a-6p ESPN/Star Logging","*10a-6p ESPN/Star Logging"]},{"name":"Justin Silverman","events":["9a-5p ESPN/Star Logging","Request Off","Request Off","Request Off","Request Off","Request Off","*12p-8p ESPN/Star Logging"]},{"name":"Chad Townsend","events":["Request Off","6PM+","6PM+","Out by 7PM","All Day","Request Off","3p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) D+ WNBL Canberra Capitals vs. Perth Lynx"]},{"name":"David Turner","events":["Request Off","9p(12a) ESPN NHL","8:30p(11:30p) ESPN NHL","4p(7p) ESPN NHL\r\n9p(12a) ESPN NHL","7p(10p) ESPN NHL","Request Off","Request Off"]},{"name":"Nicholas Violante","events":["Out by 2p","Out by 2p","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton & Friends*","All Day","8a-4p ESPN/Star Logging","8a-4p ESPN/Star Logging"]},{"name":"Michael Witte","events":["5p(8p) ESPN NHL","*9p(12a) ESPN NHL","*7p(10p) ESPN NHL","*8p(11p) ESPN NHL","Request Off","6pm in time - 3am out time","7p(10p) ESPN NHL"]},{"name":"Brandon Worden","events":["Request Off","Request Off","Request Off","Request Off","Request Off","After 4p","*4p-11p ESPN/Star Logging"]},{"name":"Matt Zofchak","events":["2p-6p ESPN BRB\r\n7p(10p) ESPN NHL","Request Off","2p-10p ESPN BRB","All Day","2p-6p ESPN BRB\r\n7p(10p) ESPN NHL","2p-10p ESPN BRB","2p-6p ESPN BRB\r\n7p(10p) ESPN NHL"]},{"name":"Sebastian Diaz","events":["All Day","9p(12a) ESPN NHL","All Day","4:30p-8:30p ESPN/Star Logging\r\n9:30p(12:30a) ESPN NHL","3:30p-7:30p ESPN/Star Logging\r\n8:30p(11:30p) ESPN NHL","5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL"]},{"name":"Chris Evers","events":["All Day","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","5:30p-9:30p ESPN/Star Logging\r\n10:30p(1a) D+ NBA Trail Blazers vs. Thunder","8:30p(10:30p) ESPN Ohio Valley Conference Basketball\r\n12a(2a) ESPN Women's College Basketball","All Day","8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20\r\n11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20"]},{"name":"Hanna Garcia","events":["All Day","3p(6p) ESPN Freddie & Harry\r\n6p-10p ESPN/Star Logging","3p(6p) ESPN Freddie & Harry\r\n7p(9p) ESPN NBA G League","All Day","7p(9:30p) D+ NBA Heat vs. Pistons\r\n10p(12:30a) D+ NBA Celtics vs. Kings","4p-12a ESPN/Star Logging","All Day"]},{"name":"Ayannah Green","events":["Request Off","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","Request Off","Request Off","5p(6p) ESPN Fri, 1/2 - ESPN FC\r\n8p(10:30p) ESPN National Lacrosse League","All Day"]},{"name":"Elijah Hernandez","events":["3p-7p ESPN/Star Logging\r\n8p(10:30p) ESPN National Lacrosse League","4p-12a ESPN/Star Logging","Request Off","All Day","All Day","3p(6p) ESPN Freddie & Harry\r\n8p(10p) ESPN ACC Men's Basketball","5p(5:30p) ESPN ESPN FC\r\n7p(9:30p) ESPN National Lacrosse League"]},{"name":"Greyson Hines","events":["Request Off","Request Off","2p-10p ESPN/Star Logging","Request Off","All Day","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging"]},{"name":"Halle Holmes","events":["2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","Out by 7pm","All Day","All Day"]},{"name":"Yash Kapadia","events":["6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","Request Off","Request Off","8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20\r\n11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","All Day"]},{"name":"Julio Marquez","events":["4p-12a ESPN/Star Logging","5p-12 am PST","*10:30p(1a) D+ NBA Pistons vs. Lakers","Request Off","5p(6p) ESPN Thu, 1/1 - ESPN FC\r\n7p(9p) ESPN NBA G League","4p-12a ESPN/Star Logging","All Day"]},{"name":"Mario Mendoza","events":["*9:30p(12a) D+ NBA Kings vs. Lakers","Request Off","After 4:30pm","All Day","Request Off","Request Off","*10p(12:30a) ESPN National Lacrosse League"]},{"name":"Moises Miranda","events":["All Day","All Day","4p-12a ESPN/Star Logging","All Day","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging"]},{"name":"Marcos Pinto-Leite","events":["Request Off","Request Off","Request Off","Request Off","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","7p(9p) ESPN TGL Presented by SoFi\r\n10:30p(1:30a) ESPN NHL","4p-12a ESPN/Star Logging"]},{"name":"Felix Quinonez","events":["Request Off","PTO","PTO","PTO","Request Off","4p-12a ESPN/Star Logging","Switch Off"]},{"name":"Felipe Reis","events":["4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","All Day","All Day","All Day"]},{"name":"Greg Tietz","events":["All Day","4p-12a ESPN/Star Logging","4p-12a ESPN/Star Logging","Available 7a-5p","Request Off","2p-10p ESPN/Star Logging","5p(9p) ESPN Dogs\r\n9p-12a ESPN/Star Logging"]},{"name":"Leonel Tolentino","events":["4p-12a ESPN/Star Logging","Request Off","After 530p","Request Off","Request Off","After 530p","*10:30p(12:30a) D+ NBL Breakers vs. Wildcats"]}],"startDate":"12/28/2025","label":"Week of 12/28"},{"roster":[{"name":"Eric Rodriguez","events":["Request Off","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","9:30a ADMIN","Request Off"]},{"name":"Ryan Anderegg","events":["4a-12p ESPN/STAR SUP*","Request Off","9a ADMIN","9a ADMIN","9a ADMIN","9a ADMIN","Request Off"]},{"name":"Lawrence Borchardt","events":["12p-8p ESPN/STAR SUP","10a ADMIN","10a ADMIN","10a ADMIN","All Day","All Day","10a-6p ESPN/STAR SUP"]},{"name":"Jim McMasters","events":["All Day","All Day","All Day","All Day","All Day","All Day","All Day"]},{"name":"Alex Szarejko","events":["Request Off","All Day","TBD ADMIN","TBD ADMIN","TBD ADMIN","TBD ADMIN","12p-8p ESPN/STAR SUP"]},{"name":"Derek Schlieman","events":["Request Off","All Day","TBD ADMIN","TBD ADMIN","TBD ADMIN","TBD ADMIN","2p-10p ESPN/STAR SUP"]},{"name":"Michael Cummings","events":["3p-11p ESPN/STAR SUP","Request Off","Request Off","Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP"]},{"name":"Gregg LaMotta","events":["5a-1p ESPN/STAR SUP*","7a-3p ESPN/STAR SUP*","6a-2p ESPN/STAR SUP*","7a-3p ESPN/STAR SUP*","Request Off","Request Off","*7a-3p ESPN/STAR SUP*"]},{"name":"David Luchino","events":["Request Off","Request Off","9a-5p ADMIN","9a-5p ADMIN","9a-5p ADMIN","9a-5p ADMIN","Request Off"]},{"name":"Jeff O'Connor","events":["Request Off","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","Request Off","9a-5p ESPN/STAR SUP*","9a-5p ESPN/STAR SUP*","9a-5p ESPN/STAR SUP*"]},{"name":"David Brandt","events":["7p-3:30a ESPN/STAR SUP","7p-3:30a ESPN/STAR SUP","Request Off","after 3p","*6p-2:30a ESPN/STAR SUP","*6p-2:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP"]},{"name":"Jabari Bishop","events":["8a-4p ESPN/STAR SUP*","9a-5p ESPN/STAR SUP*","9a-5p ESPN/STAR SUP","Request Off","Request Off","10a-6p ESPN/STAR SUP*","12p-8p ESPN/STAR SUP"]},{"name":"Carlos Ceballos","events":["11a-7p ESPN/STAR SUP","Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","Request Off","11a-7p ESPN/STAR SUP*"]},{"name":"Joseph Chiafolo","events":["9a-5p ESPN/STAR SUP","Request Off","Request Off","8a-4p ESPN/STAR SUP","7a-3p ESPN/STAR SUP","7a-3p ESPN/STAR SUP","5a-1p ESPN/STAR SUP"]},{"name":"Kenneth Humiston","events":["4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","Request Off","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP"]},{"name":"Mackenzie Kiem","events":["4p-12a ESPN/STAR SUP","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","Request Off","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP"]},{"name":"Vivian Morales","events":["1p-9p ESPN/STAR SUP","1p-9p ESPN/STAR SUP","1p-9p ESPN/STAR SUP","1p-9p ESPN/STAR SUP","Request Off","All Day","1p-9p ESPN/STAR SUP"]},{"name":"Adam O'Connor Jamia","events":["11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP","All Day","All Day","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP"]},{"name":"Matt Ostrofsky","events":["Request Off","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","Request Off","Request Off","Request Off"]},{"name":"Thomas Rojas","events":["*8a-4p ESPN/STAR SUP","Request Off","In time 9am","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP"]},{"name":"Robert Saal","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Irving Sanchez","events":["All Day","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","4p-12a ESPN/STAR SUP","Request Off","Request Off"]},{"name":"Steve Spanopoulos","events":["6a-2p ESPN/STAR SUP*","Request Off","All Day","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP","9a-5p ESPN/STAR SUP"]},{"name":"Michael Violante","events":["3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","All Day","All Day","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP"]},{"name":"Graham Williams","events":["All Day","All Day","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP","3p-11p ESPN/STAR SUP"]},{"name":"Zack Witzel","events":["Request Off","Request Off","11a-7p ESPN/STAR SUP","11a-7p ESPN/STAR SUP","available after 11 a.m.","available after 8 a.m.","10a-6p ESPN/STAR SUP"]},{"name":"Ricky Wroy","events":["Request Off","Request Off","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP","2p-10p ESPN/STAR SUP*","11a-7p ESPN/STAR SUP*"]},{"name":"Tony Funston","events":["Request Off","All Day","4p-12:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP","1p-9:30p ESPN/STAR SUP*","4p-12:30a ESPN/STAR SUP","4p-12:30a ESPN/STAR SUP"]},{"name":"Welland Lau","events":["All Day","All Day","7p-3:30a ESPN/STAR SUP","8p-4:30a ESPN/STAR SUP","7p-3:30a ESPN/STAR SUP","8p-4:30a ESPN/STAR SUP","7p-3:30a ESPN/STAR SUP"]},{"name":"Kory Wallace","events":["*12p-8:30p ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP","Request Off","Request Off","*12p-8:30p ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP","*12p-8:30p ESPN/STAR SUP"]},{"name":"Alex Choi","events":["10p-6a Star Logging","BETWEEN 7PM AND 3AM","BETWEEN 7PM AND 3AM","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Paul Dorsa","events":["5:30a-1:30p Star Logging","Request Off","Request Off","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging"]},{"name":"Besim Dushaj","events":["5:30a-1:30p Star Logging","Request Off","Request Off","Request Off","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging"]},{"name":"Zack Holcomb","events":["10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","All Day","All Day","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Robert Johnson","events":["All Day","All Day","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Omar Keita","events":["*3p-11p Star Logging","Request Off","*3p-11p Star Logging","10a-6p Star Logging*","*3p-11p Star Logging","*3p-11p Star Logging","Request Off"]},{"name":"Kevin Kiem","events":["9a-5p Star Logging","Request Off","Request Off","9a-5p Star Logging","9a-5p Star Logging","9a-5p Star Logging","9a-5p Star Logging"]},{"name":"Aubrey Rubino","events":["*12p-8p Star Logging*","Request Off","*12p-8p Star Logging*","Request Off","*12p-8p Star Logging*","*12p-8p Star Logging*","*12p-8p Star Logging*"]},{"name":"Eric Soimes","events":["5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","5:30a-1:30p Star Logging","All Day","All Day","5:30a-1:30p Star Logging"]},{"name":"Chelsey Williams","events":["10p-6a Star Logging","10p-6a Star Logging","All Day","All Day","10p-6a Star Logging","10p-6a Star Logging","10p-6a Star Logging"]},{"name":"Andrew Amisola","events":["All Day","All Day","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","4p-8:30p ESPN/Star Logging\r\n9:30p(12a) ESPN NBA Miércoles","7:30p(11p) ESPN College Football Playoff Semifinal at the Vrbo Fiesta Bowl (S)","12p(6p) ESPN Mecum Auctions: Kissimmee 2026","12p-8p ESPN/Star Logging"]},{"name":"Mohanna Aziz","events":["11a-4p ESPN/Star Logging\r\n5p(7p) ESPN Holiday Hoops","8am-5p","3p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Heat vs. Timberwolves*","2p-11p","3p-6:30p ESPN/Star Logging\r\n7:30p(9:30p) ESPN NBA G League","3p(6p) ESPN Freddie & Harry","Request Off"]},{"name":"Keith Bogan","events":["All Day","2p-10p ESPN/Star Logging","5p(6p) ESPN Tue, 1/6 - ESPN FC\r\n8p(11p) ESPN NHL","5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","3p+","11a-6p ESPN/Star Logging*"]},{"name":"Dylan Brennan","events":["All Day","5p(6p) ESPN Mon, 1/5 - ESPN FC\r\n7:30p(10:30p) ESPN FCS Football Championship","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","Request Off","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","All Day","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"]},{"name":"Joseph Caracappa","events":["10a(3p) ESPN ACL Myrtle Beach Signature","Request Off","Request Off","Request Off","Request Off","All Day","8a-4p ESPN/Star Logging"]},{"name":"Sean Cerise","events":["12p-8p ESPN BRB","All Day","All Day","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging*","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","2p-10p ESPN BRB","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"]},{"name":"Robert Connolly","events":["9a-5p ESPN/Star Logging","All Day","All Day","*7p(9:30p) ESPN NBA Miércoles","*8p(11p) ESPN Missouri High School Basketball","5p(6p) ESPN Fri, 1/9 - ESPN FC\r\n8p(11p) ESPN Missouri High School Basketball","*8p(10p) D+ AEW: Collision"]},{"name":"Daniel Contreras","events":["10a-6p ESPN/Star Logging","All Day","All Day","Request Off","2:30p-7p ESPN/Star Logging\r\n8p(10:30p) D+ NBA Heat vs. Bulls","10a-6p ESPN/Star Logging","10a-6p ESPN/Star Logging"]},{"name":"Lance Counts","events":["10:30a(11a) D+ SC+\r\n11a-3p ESPN/Star Logging*","Before 2pm","Request Off","Request Off","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*","7a-3p ESPN/Star Logging*"]},{"name":"Brian Cruz","events":["Request Off","Request Off","Request Off","Request Off","*8p(10:30p) ESPN ESPN+ Hockey Night","*8p(11p) ESPN NHL","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"]},{"name":"Christopher Dalton","events":["6:30pm on","7:30pm on","*9p(12a) ESPN NHL","*9:30p(12:30a) ESPN NHL","*9p(12a) ESPN NHL","Request Off","Request Off"]},{"name":"Anastasiia Denysiuk","events":["Request Off","All Day","All Day","3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League","1:30p(4p) ESPN SuperCopa Football\r\n4p-8p ESPN/Star Logging","2p-10p ESPN/Star Logging","6am-11am"]},{"name":"Nicholas DiCinti","events":["8a-1p","12p(3p) ESPN Mon, 1/5 - The Rich Eisen Show","12p(3p) ESPN Tue, 1/6 - The Rich Eisen Show","12p(3p) ESPN Wed, 1/7 - The Rich Eisen Show","12p(3p) ESPN Thu, 1/8 - The Rich Eisen Show","9a-6p","8a-1p"]},{"name":"Nikolas Donadic","events":["11a-7p ESPN BRB","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","Request Off","Request Off","2p-10p ESPN BRB","1p-9p ESPN BRB*","1p-9p ESPN BRB*"]},{"name":"Kyle Fader","events":["Request Off","5p(5:30p) D+ VibeCheck\r\n7p(10p) ESPN NHL","2p-10p ESPN/Star Logging","2:30p-6:30p ESPN/Star Logging\r\n7:30p(10:30p) ESPN NHL","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","All Day","4p(6p) ESPN Sprouts Farmers Market Collegiate Quad\r\n7p(10p) ESPN NHL"]},{"name":"Patrick Flood","events":["2p(5p) ESPN NHL\r\n5p-9p ESPN/Star Logging","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","7 am - 5pm","3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL","All Day","7am - 3 pm"]},{"name":"John Gjoni","events":["Request Off","Request Off","6p-7p starts","Request Off","*7p(9p) ESPN NBA G League","Request Off","12p(6p) ESPN Mecum Auctions: Kissimmee 2026"]},{"name":"Jay Giampietro","events":["2:30p(6p) ESPN LaLiga*","3p(6p) ESPN Freddie & Harry*","Request Off","Request Off","12p(4p) ESPN McAfee*","11am-5pm","*11a-5p ESPN/Star Logging*"]},{"name":"Nigel Gordon","events":["10a-1:45p ESPN/Star Logging\r\n2:50p(5p) ESPN LaLiga","12p(4p) ESPN McAfee","12p(4p) ESPN McAfee","3p(4p) D+ NBA Today\r\n5p(6p) ESPN Wed, 1/7 - ESPN FC\r\n7:12p(9:35p) ESPN NBA Wednesday","10a-7p","10a-6p","10a-4p"]},{"name":"James Graceffo","events":["Hard Out by 4:45p","7:30p(10:30p) ESPN NHL","4:30p(5p) ESPN The Point\r\n7p(10p) ESPN NHL","12p(4p) ESPN McAfee*","Hard Out by 4:45p","12p(3p) ESPN Fri, 1/9 - The Rich Eisen Show*","1p(4p) ESPN ABC Hockey Saturday*"]},{"name":"Jason Hancock","events":["2:50p(5p) ESPN LaLiga\r\n7:30p(8:15p) ESPN NFL PrimeTime on ESPN+","Request Off","Request Off","3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League","Request Off","3p-11p ESPN/Star Logging","3p-11p ESPN/Star Logging"]},{"name":"Antonio Hernandez","events":["8a-4p ESPN/Star Logging*","8a-4p ESPN/Star Logging","All Day","1:30p(4p) ESPN SuperCopa Football*","Request Off","Request Off","Request Off"]},{"name":"Oscar Jimenez","events":["5p(6p) ESPN En Español - ESPN FC\r\n7p(10p) ESPN NHL","All Day","All Day","9:35p(12:05a) ESPN NBA Wednesday Presented by State Farm","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL","5p(5:30p) D+ VibeCheck\r\n5:30p-11p ESPN/Star Logging","2p-6p ESPN/Star Logging\r\n7p(10p) ESPN NHL"]},{"name":"Dylan Jock","events":["Request Off","Request Off","Request Off","Request Off","Request Off","Request Off","Request Off"]},{"name":"Michael Jozwiak","events":["Request Off","3p-7:30p ESPN/Star Logging\r\n8:30p(11p) D+ NBA Nuggets vs. 76ers","Out by 3pm","All Day","9a-5p ESPN/Star Logging","9a-5p ESPN/Star Logging","9a-5p ESPN/Star Logging"]},{"name":"Elizabeth Krajewski","events":["1p(4p) D+ NFL Colts vs. Texans\r\n4p-8p ESPN/Star Logging","All Day","5p(7p) ESPN TGL Presented by SoFi\r\n9p(11p) ESPN NBA G League","All Day","5p(6p) ESPN Thu, 1/8 - ESPN FC\r\n7p(9p) ESPN NBA G League","All Day","1p-9p ESPN/Star Logging"]},{"name":"Michael Lee","events":["3p(6p) ESPN NHL","Available from 5:00pm to 11pm","*7p(10p) ESPN NHL","Available from 5:00pm to 11pm","*7p(10p) ESPN NHL","Available from 5:00pm to 11pm","7p(10p) ESPN NHL*"]},{"name":"Roberto Medina","events":["1p(4p) D+ NFL Cowboys vs. Giants\r\n4p-8p ESPN/Star Logging","All Day","All Day","All Day","3p-7p ESPN/Star Logging\r\n8p(11p) ESPN Missouri High School Basketball","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging"]},{"name":"Rose Miller","events":["11a-3:30p ESPN/Star Logging\r\n4:30p(6:30p) ESPN ACL Myrtle Beach Signature","10a-6p ESPN/Star Logging","Request Off","Request Off","10a-6p ESPN/Star Logging","10a-6p ESPN/Star Logging","7p(9:30a) ESPN FA Cup Soccer\r\n12:30p(1p) ESPN ABC Hockey Saturday Pregame"]},{"name":"Kimberly Morales","events":["9a-5p ESPN/Star Logging","Request Off","Request Off","7am-5pm","*11a-5p ESPN/Star Logging*","*11a-5p ESPN/Star Logging*","9a-5p ESPN/Star Logging"]},{"name":"Maya Peart","events":["Request Off","Request Off","Request Off","Request Off","1:30p-7:30p ESPN/Star Logging\r\n8:30p(9:30p) ESPN Thu, 1/8 - Futbol Americas","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","Until noon"]},{"name":"Matthew Press","events":["5p(8p) ESPN NHL\r\n8p-11p ESPN/Star Logging","All Day","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","Request Off","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","8:10p(11:40p) ESPN Women's Dream 11 Super Smash T20","4p(7p) ESPN NHL\r\n10p(1a) ESPN NHL"]},{"name":"Melissa Robilotta","events":["All Day","Request Off","Request Off","Request Off","Request Off","7:00 PM - 10:00 PM","8a-4p ESPN/Star Logging"]},{"name":"Jack Schneider","events":["All Day","2p-5:30p ESPN/Star Logging\r\n6:40p(10:10p) ESPN Men's Dream 11 Super Smash T20","3p(4p) D+ NBA Today\r\n6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20","8:10p(11:40p) ESPN Men's Dream 11 Super Smash T20","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20","Request Off","2:30p-7:30p ESPN/Star Logging\r\n8:30p(10:30p) D+ 2025 WNBL: Round 13"]},{"name":"Eddie Segarra","events":["*12p-8p ESPN/Star Logging","2p-10p ESPN/Star Logging","2p-10p ESPN/Star Logging","All Day","Request Off","Request Off","Request Off"]},{"name":"Franco Sevillano","events":["Request Off","Request Off","Request Off","Request Off","Request Off","*8:30p(11p) ESPN Men's College Club Hockey","*11a-5p ESPN/Star Logging*"]},{"name":"Willy Sevillano","events":["*10a-6p ESPN/Star Logging","10A+","10A+","10A+","1:30p-7:30p ESPN/Star Logging\r\n8:30p(9:30p) ESPN Kevin Young Show","*12p-8p ESPN/Star Logging","*12p-8p ESPN/Star Logging"]},{"name":"Justin Silverman","events":["9a-5p ESPN/Star Logging","Request Off","Request Off","Request Off","All Day","9a-5p ESPN/Star Logging","9a-5p ESPN/Star Logging"]},{"name":"Chad Townsend","events":["All Day","7PM+","7PM+","7PM+","*8p(10p) ESPN NBA G League","Request Off","11a-7p ESPN/Star Logging"]},{"name":"David Turner","events":["7p(10p) ESPN NHL","*9:30p(12:30a) ESPN NHL","*7:30p(10p) ESPN ESPN+ Hockey Night","*9:30p(12:30a) ESPN NHL","Request Off","Request Off","Request Off"]},{"name":"Nicholas Violante","events":["Out by 2p","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*","9a(9:30a) D+ SC+\r\n10a(12p) ESPN Clinton*","12p(12:30p) D+ WYNTK\r\n12:30p-7p ESPN/Star Logging","All Day","8a-4p ESPN/Star Logging"]},{"name":"Michael Witte","events":["All Day","6pm in time - 2am out time","*7:30p(10:30p) ESPN NHL","6pm in time - 2am out time","*7p(10p) ESPN NHL","*8p(11p) ESPN NHL","3:30p(6:30p) ESPN NHL\r\n8p(11p) ESPN NHL"]},{"name":"Matt Zofchak","events":["All Day","2pm+","5p-9p ESPN/Star Logging\r\n10p(1a) ESPN NHL","2p-10p ESPN BRB","2p-10p ESPN BRB","4p-8p ESPN/Star Logging\r\n9p(12a) ESPN NHL","3p-7p ESPN/Star Logging\r\n8p(11p) ESPN NHL"]},{"name":"Sebastian Diaz","events":["All Day","5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL","Request Off","5:30p-9:30p ESPN/Star Logging\r\n10:30p(1:30a) ESPN NHL","10p(1a) ESPN NHL","4:30p-8:30p ESPN/Star Logging\r\n9:30p(12a) ESPN National Lacrosse League","4p(7p) ESPN NHL\r\n10p(1a) ESPN NHL"]},{"name":"Elijah Hernandez","events":["4:30p-8:30p ESPN/Star Logging\r\n9:30p(12a) D+ NBA Grizzlies vs. Lakers","Before 6pm","7p(9p) ESPN NBA G League\r\n10p(12a) ESPN NBA G League","All Day","All Day","7p(9:30p) D+ NBA 76ers vs. Magic\r\n10p(12:30a) D+ NBA Rockets vs. Trail Blazers","5p(6p) ESPN Sat, 1/10 - ESPN FC\r\n7:30p(10p) ESPN National Lacrosse League"]},{"name":"Julio Marquez","events":["All Day","*10:50p(2:20a) ESPN Women's Dream 11 Super Smash T20","*10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","5p-12am PST","Request Off","*11p(1a) D+ 2025 WNBL: Round 13","6:40p(10:10p) ESPN Women's Dream 11 Super Smash T20\r\n10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20"]},{"name":"Mario Mendoza","events":["4p-12a ESPN/Star Logging","All Day","After 4:30pm","After 4:00pm","After 4pm","After 4:30pm","7p(9:30p) D+ NBA Heat vs. Pacers\r\n10:30p(12:30a) D+ 2025 NBL: Round 16"]},{"name":"Moises Miranda","events":["All Day","All Day","3p-8p ESPN/Star Logging\r\n9p(11p) ESPN NBA G League","7p(9p) ESPN NBA G League\r\n10p(12a) ESPN NBA G League","All Day","7p(9:30p) ESPN National Lacrosse League\r\n10:30p(1a) ESPN National Lacrosse League","2p(4p) ESPN Ivy League Basketball\r\n6p(8p) ESPN Missouri Valley Conference Basketball"]},{"name":"Felix Quinonez","events":["All Day","7p(9:30p) D+ NBA Knicks vs. Pistons\r\n10p(12:30a) D+ NBA Warriors vs. Clippers","3p(6p) ESPN Freddie & Harry\r\n7:30p(9:30p) ESPN NBA G League","Request Off","After 11a","7p(9:30p) ESPN National Lacrosse League\r\n10:30p(1a) ESPN National Lacrosse League","2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"]},{"name":"Greg Tietz","events":["4:25p(7:30p) D+ NFL Chargers vs. Broncos","All Day","Request Off","3p(6p) ESPN Freddie & Harry\r\n8p(9p) ESPN BYU Countdown to Tip-Off*","3p(6p) ESPN Freddie & Harry\r\n7p(9p) ESPN NBA G League","1p-9p ESPN/Star Logging*","2p-6p ESPN/Star Logging\r\n7p(9:30p) ESPN National Lacrosse League"]},{"name":"Leonel Tolentino","events":["Request Off","All Day","*11p(1:30a) D+ NBA Mavericks vs. Kings","*12:20a(3:50a) ESPN Women's Dream 11 Super Smash T20","*10:25p(1:55a) ESPN Men's Dream 11 Super Smash T20","*11:55p(3:25a) ESPN Men's Dream 11 Super Smash T20","After 530p"]}],"startDate":"01/04/2026","label":"Week of 01/04"}];
 
 // Days of the week
 // Sunday-first order per request
@@ -803,6 +877,17 @@ function eventsToLegacyString(events) {
   return str;
 }
 
+// Format a single time range (e.g., "5p-10p ET")
+function formatTimeRange(startTime, endTime) {
+  if (!startTime || !endTime) return '';
+  const fmt = (t) => {
+    const period = t >= 12 ? 'p' : 'a';
+    const hour12 = t % 12 === 0 ? 12 : t % 12;
+    return `${hour12}${period}`;
+  };
+  return `${fmt(startTime)}-${fmt(endTime)} ET`;
+}
+
 // Format time display for event arrays (first start → last end)
 function formatEventsTimeDisplay(events) {
   if (isOffDay(events)) return 'OFF';
@@ -982,10 +1067,89 @@ function getUserSchedule(userName) {
   return state.roster.find(p => normalizeName(p.name).toLowerCase() === target);
 }
 
-function getAvailablePeople(dayIndex) {
+// Convert "HH:MM" to minutes since midnight
+function timeToMinutes(timeStr) {
+  if (!timeStr) return null;
+  const [h, m] = timeStr.split(':').map(n => parseInt(n, 10));
+  return h * 60 + (m || 0);
+}
+
+// Check if a person can cover a shift with 15-min buffer requirement
+function canCoverShift(personEvents, requestedEvents) {
+  const BUFFER_MINUTES = 15;
+
+  // If person is off, they can cover
+  if (isOffDay(personEvents)) return { available: true, reason: 'Day off' };
+
+  // Get the requested shift time range
+  let reqStart = null, reqEnd = null;
+  const reqEvts = Array.isArray(requestedEvents) ? requestedEvents : [requestedEvents];
+  reqEvts.forEach(evt => {
+    if (evt && evt.startTime) {
+      const start = timeToMinutes(evt.startTime);
+      const end = timeToMinutes(evt.endTime);
+      if (reqStart === null || start < reqStart) reqStart = start;
+      if (reqEnd === null || end > reqEnd) reqEnd = end;
+    }
+  });
+
+  if (reqStart === null || reqEnd === null) return { available: false, reason: 'Invalid request times' };
+
+  // Get person's existing shift time range for the day
+  let personStart = null, personEnd = null;
+  const pEvts = Array.isArray(personEvents) ? personEvents : [personEvents];
+  pEvts.forEach(evt => {
+    if (evt && evt.startTime) {
+      const start = timeToMinutes(evt.startTime);
+      const end = timeToMinutes(evt.endTime);
+      if (personStart === null || start < personStart) personStart = start;
+      if (personEnd === null || end > personEnd) personEnd = end;
+    }
+  });
+
+  if (personStart === null || personEnd === null) return { available: true, reason: 'No timed shift' };
+
+  // Check if person's shift ends before requested shift starts (with buffer)
+  if (personEnd + BUFFER_MINUTES <= reqStart) {
+    return { available: true, reason: 'Available after their shift' };
+  }
+
+  // Check if person's shift starts after requested shift ends (with buffer)
+  if (reqEnd + BUFFER_MINUTES <= personStart) {
+    return { available: true, reason: 'Available before their shift' };
+  }
+
+  return { available: false, reason: 'Schedule conflict' };
+}
+
+function getAvailablePeople(dayIndex, requestedEvents = null) {
   return state.roster.filter(person => {
     if (person.name === state.currentUser) return false;
+    // Exclude leads/admins/supervisors - check both original and normalized name
+    const originalName = person.name.toLowerCase();
+    const normalizedName = normalizeName(person.name).toLowerCase();
+    if (EXCLUDED_LEADS.some(lead => {
+      const normalizedLead = normalizeName(lead).toLowerCase();
+      return originalName.includes(lead) ||
+             lead.includes(originalName) ||
+             normalizedName === normalizedLead ||
+             originalName === lead;
+    })) return false;
+
+    // If we have requested events, do time-based availability check
+    if (requestedEvents) {
+      const result = canCoverShift(person.events[dayIndex], requestedEvents);
+      return result.available;
+    }
+
+    // Fallback to simple off-day check
     return isOffDay(person.events[dayIndex]);
+  }).map(person => {
+    // Add availability reason for display
+    const result = requestedEvents
+      ? canCoverShift(person.events[dayIndex], requestedEvents)
+      : { available: true, reason: isOffDay(person.events[dayIndex]) ? 'Day off' : 'Available' };
+    return { ...person, availabilityReason: result.reason };
   });
 }
 
@@ -1067,6 +1231,9 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
               const isOff = Array.isArray(events) && events.length === 0;
               const isTodayClass = isToday(date) ? 'today' : '';
               const offClass = isOff ? 'off' : '';
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const isPast = date < today;
 
               // Get event labels for display
               const labels = getEventsLabels(events);
@@ -1075,8 +1242,10 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
               const timeDisplay = isOff ? '' : formatEventsTimeDisplay(events);
               const calendarTitle = labels.length ? labels.join(' + ') : 'Work Shift';
 
+              const pastClass = isPast ? 'past' : '';
+
               return `
-                <div class="day-card ${isTodayClass} ${offClass}" data-day-index="${i}" data-day="${day}" data-sched-index="${idx}">
+                <div class="day-card ${isTodayClass} ${offClass} ${pastClass}" data-day-index="${i}" data-day="${day}" data-sched-index="${idx}">
                   <div class="day-card-header">
                     <span class="day-name">${shortDays[i]}</span>
                     <span class="day-date">${date.getDate()}</span>
@@ -1090,7 +1259,7 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
                       <div class="shift-time-display">${timeDisplay}</div>
                     `}
                   </div>
-                  ${!isOff ? `
+                  ${!isOff && !isPast ? `
                     <div class="day-card-footer">
                       ${checkIn ? `<div class="shift-checkin">${checkIn}</div>` : '<div class="shift-checkin-spacer"></div>'}
                       <div class="day-actions-row">
@@ -1113,7 +1282,7 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
 
   elements.weekView.innerHTML = sections;
 
-  elements.weekView.querySelectorAll('.day-card:not(.off)').forEach(card => {
+  elements.weekView.querySelectorAll('.day-card:not(.off):not(.past)').forEach(card => {
     card.addEventListener('click', (e) => {
       const dayIndex = parseInt(card.dataset.dayIndex);
       const day = card.dataset.day;
@@ -1273,49 +1442,169 @@ function downloadWeekICS(allWeekEvents, weekDates) {
 }
 
 function renderMyShifts() {
-  const base = state.scheduleStartDate || getCurrentSunday();
-  const weekDates = getWeekDates(0, base);
-  const userSchedule = getCurrentUserSchedule();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  if (!userSchedule) {
+  // Find current week's schedule
+  const currentSunday = getCurrentSunday();
+  const nextSunday = new Date(currentSunday);
+  nextSunday.setDate(nextSunday.getDate() + 7);
+
+  // Get schedules for this week and next week
+  const thisWeekSched = state.scheduleFiles.find(s => {
+    const schedStart = new Date(s.startDate);
+    schedStart.setHours(0, 0, 0, 0);
+    return schedStart.getTime() === currentSunday.getTime();
+  });
+
+  const nextWeekSched = state.scheduleFiles.find(s => {
+    const schedStart = new Date(s.startDate);
+    schedStart.setHours(0, 0, 0, 0);
+    return schedStart.getTime() === nextSunday.getTime();
+  });
+
+  // Fallback to current schedule if no matching week found
+  const fallbackSched = { roster: state.roster, startDate: state.scheduleStartDate || currentSunday };
+  const thisWeek = thisWeekSched || fallbackSched;
+
+  const thisWeekDates = getWeekDates(0, thisWeek.startDate);
+  const nextWeekDates = getWeekDates(0, nextSunday);
+
+  const thisWeekUser = thisWeek.roster?.find(p =>
+    normalizeName(p.name).toLowerCase() === normalizeName(state.currentUser || '').toLowerCase()
+  );
+
+  let html = '';
+
+  // This Week - only show today and future days
+  if (thisWeekUser) {
+    const remainingDays = thisWeekUser.events.map((events, i) => {
+      const date = thisWeekDates[i];
+      if (date < today) return null; // Skip past days
+      return { events, date, dayIndex: i };
+    }).filter(Boolean);
+
+    if (remainingDays.length > 0) {
+      html += `<div class="sidebar-week-section">
+        <div class="sidebar-week-label">This Week</div>
+        ${remainingDays.map(({ events, date, dayIndex }) => {
+          const isOff = isOffDay(events);
+          const isToday = date.toDateString() === today.toDateString();
+          const labels = getEventsLabels(events);
+          const checkIn = isOff ? '' : formatEventsCheckIn(events);
+          const timeDisplay = isOff ? '' : formatEventsTimeDisplay(events);
+
+          const classes = ['sidebar-shift'];
+          if (isOff) classes.push('off');
+          if (isToday) classes.push('today');
+
+          return `
+            <div class="${classes.join(' ')}" data-day-index="${dayIndex}" data-week="this">
+              <div class="sidebar-shift-header">
+                <span class="sidebar-day-name">${shortDays[dayIndex]}</span>
+                <span class="sidebar-day-num">${date.getDate()}</span>
+              </div>
+              <div class="sidebar-shift-body">
+                ${isOff ? `
+                  <span class="sidebar-off-label">Day Off</span>
+                ` : `
+                  ${labels.map(l => `<div class="sidebar-shift-label">${l}</div>`).join('')}
+                  <div class="sidebar-shift-time">${timeDisplay}</div>
+                  ${checkIn ? `<div class="sidebar-shift-checkin">${checkIn}</div>` : ''}
+                `}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>`;
+    }
+  }
+
+  // Next Week
+  html += `<div class="sidebar-week-section">
+    <div class="sidebar-week-label">Next Week</div>`;
+
+  if (nextWeekSched) {
+    const nextWeekUser = nextWeekSched.roster?.find(p =>
+      normalizeName(p.name).toLowerCase() === normalizeName(state.currentUser || '').toLowerCase()
+    );
+
+    if (nextWeekUser) {
+      html += nextWeekUser.events.map((events, i) => {
+        const date = nextWeekDates[i];
+        const isOff = isOffDay(events);
+        const labels = getEventsLabels(events);
+        const checkIn = isOff ? '' : formatEventsCheckIn(events);
+        const timeDisplay = isOff ? '' : formatEventsTimeDisplay(events);
+
+        const classes = ['sidebar-shift'];
+        if (isOff) classes.push('off');
+
+        return `
+          <div class="${classes.join(' ')}" data-day-index="${i}" data-week="next">
+            <div class="sidebar-shift-header">
+              <span class="sidebar-day-name">${shortDays[i]}</span>
+              <span class="sidebar-day-num">${date.getDate()}</span>
+            </div>
+            <div class="sidebar-shift-body">
+              ${isOff ? `
+                <span class="sidebar-off-label">Day Off</span>
+              ` : `
+                ${labels.map(l => `<div class="sidebar-shift-label">${l}</div>`).join('')}
+                <div class="sidebar-shift-time">${timeDisplay}</div>
+                ${checkIn ? `<div class="sidebar-shift-checkin">${checkIn}</div>` : ''}
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+    } else {
+      html += `<div class="sidebar-shift tbd">
+        <div class="sidebar-tbd-label">Schedule not available yet</div>
+      </div>`;
+    }
+  } else {
+    html += `<div class="sidebar-shift tbd">
+      <div class="sidebar-tbd-label">Schedule not available yet</div>
+    </div>`;
+  }
+
+  html += '</div>';
+
+  if (!thisWeekUser && !nextWeekSched) {
     elements.myShiftsList.innerHTML = '<p class="no-shifts">No shifts found.</p>';
     return;
   }
 
-  elements.myShiftsList.innerHTML = userSchedule.events.map((events, i) => {
-    const date = weekDates[i];
-    const isOff = isOffDay(events);
-    const labels = getEventsLabels(events);
-    const checkIn = isOff ? '' : formatEventsCheckIn(events);
-    const timeDisplay = isOff ? '' : formatEventsTimeDisplay(events);
+  elements.myShiftsList.innerHTML = html;
 
-    return `
-      <div class="shift-item ${isOff ? 'off' : ''}" data-day-index="${i}">
-        <div class="shift-day-badge">
-          <span class="day-name">${shortDays[i]}</span>
-          <span class="day-num">${date.getDate()}</span>
-        </div>
-        <div class="shift-info">
-          ${isOff ? `
-            <div class="shift-time-text">Day Off</div>
-          ` : `
-            ${labels.length ? labels.map(l => `<div class="shift-time-text">${l}</div>`).join('') : ''}
-            <div class="shift-time-text">${timeDisplay}</div>
-            ${checkIn ? `<div class="shift-checkin small">${checkIn}</div>` : ''}
-          `}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  elements.myShiftsList.querySelectorAll('.shift-item:not(.off)').forEach(item => {
+  // Add click handlers for this week's shifts
+  elements.myShiftsList.querySelectorAll('.sidebar-shift[data-week="this"]:not(.off)').forEach(item => {
     item.addEventListener('click', () => {
       const dayIndex = parseInt(item.dataset.dayIndex);
       const day = weekDays[dayIndex];
-      const userSchedule = getCurrentUserSchedule();
-      openRequestModal(day, dayIndex, userSchedule.events[dayIndex]);
+      openRequestModal(day, dayIndex, thisWeekUser.events[dayIndex]);
     });
   });
+
+  // Add click handlers for next week's shifts (if schedule exists)
+  if (nextWeekSched) {
+    const nextWeekUser = nextWeekSched.roster?.find(p =>
+      normalizeName(p.name).toLowerCase() === normalizeName(state.currentUser || '').toLowerCase()
+    );
+    if (nextWeekUser) {
+      elements.myShiftsList.querySelectorAll('.sidebar-shift[data-week="next"]:not(.off)').forEach(item => {
+        item.addEventListener('click', () => {
+          const dayIndex = parseInt(item.dataset.dayIndex);
+          const day = weekDays[dayIndex];
+          // Switch to next week's schedule context
+          state.roster = nextWeekSched.roster;
+          state.scheduleStartDate = nextWeekSched.startDate;
+          openRequestModal(day, dayIndex, nextWeekUser.events[dayIndex]);
+        });
+      });
+    }
+  }
 }
 
 function renderBulletin() {
@@ -1631,13 +1920,15 @@ function createCell(text, className) {
   return cell;
 }
 
-function renderAvailableList(dayIndex) {
-  const available = getAvailablePeople(dayIndex);
+function renderAvailableList(dayIndex, requestedEvents = null) {
+  // Use state.selectedShift.events if not passed
+  const events = requestedEvents || (state.selectedShift ? state.selectedShift.events : null);
+  const available = getAvailablePeople(dayIndex, events);
 
   if (!available.length) {
     elements.availableList.innerHTML = `
       <div class="no-available">
-        Everyone is scheduled this day. Your request will be posted to the bulletin for volunteers.
+        No one is available for this time slot. Your request will be posted to the bulletin for volunteers.
       </div>
     `;
     return;
@@ -1646,7 +1937,10 @@ function renderAvailableList(dayIndex) {
   elements.availableList.innerHTML = available.map(person => `
     <div class="available-person">
       <span class="avatar">${getInitials(person.name)}</span>
-      ${person.name}
+      <div class="available-person-info">
+        <span class="available-person-name">${person.name}</span>
+        <span class="available-person-status">${person.availabilityReason}</span>
+      </div>
     </div>
   `).join('');
 }
@@ -1656,11 +1950,11 @@ function renderAvailableList(dayIndex) {
 // ==========================================================================
 
 function openRequestModal(day, dayIndex, events) {
-  state.selectedShift = { day, dayIndex, events, selectedEventScope: 'all' };
+  const hasMultipleEvents = Array.isArray(events) && events.length > 1;
+  state.selectedShift = { day, dayIndex, events, selectedEventScope: hasMultipleEvents ? '0' : 'all' };
 
   const labels = getEventsLabels(events);
   const timeDisplay = formatEventsTimeDisplay(events);
-  const hasMultipleEvents = Array.isArray(events) && events.length > 1;
 
   // Build event selector for multi-event days
   let eventSelectorHtml = '';
@@ -1669,18 +1963,12 @@ function openRequestModal(day, dayIndex, events) {
       <div class="event-selector">
         <h4>Which shift needs coverage?</h4>
         <div class="event-options">
-          <label class="event-option selected">
-            <input type="radio" name="eventScope" value="all" checked />
-            <div class="event-option-info">
-              <div class="event-option-label">Entire day</div>
-              <div class="event-option-detail">${labels.join(' + ')} (${timeDisplay})</div>
-            </div>
-          </label>
           ${events.map((evt, idx) => {
             const evtTime = evt.startTime && evt.endTime ? formatEventTime(evt) : '';
+            const isFirst = idx === 0;
             return `
-              <label class="event-option">
-                <input type="radio" name="eventScope" value="${idx}" />
+              <label class="event-option${isFirst ? ' selected' : ''}">
+                <input type="radio" name="eventScope" value="${idx}"${isFirst ? ' checked' : ''} />
                 <div class="event-option-info">
                   <div class="event-option-label">${evt.label || 'Event ' + (idx + 1)}</div>
                   ${evtTime ? `<div class="event-option-detail">${evtTime}</div>` : ''}
@@ -1688,6 +1976,14 @@ function openRequestModal(day, dayIndex, events) {
               </label>
             `;
           }).join('')}
+          <div class="event-option-divider"></div>
+          <label class="event-option">
+            <input type="radio" name="eventScope" value="all" />
+            <div class="event-option-info">
+              <div class="event-option-label">Entire day</div>
+              <div class="event-option-detail">${labels.join(' + ')} (${timeDisplay})</div>
+            </div>
+          </label>
         </div>
       </div>
     `;
@@ -1870,9 +2166,23 @@ function closeConfirmModal() {
 // Toast
 // ==========================================================================
 
-function showToast(message, showAction = false, actionText = 'View Request') {
+function showToast(message, showAction = false, actionText = 'View Request', type = 'success') {
   const toastMessage = elements.toast.querySelector('.toast-message');
+  const successIcon = elements.toast.querySelector('.toast-icon-success');
+  const errorIcon = elements.toast.querySelector('.toast-icon-error');
+
   toastMessage.textContent = message;
+
+  // Toggle icons based on type
+  if (type === 'error') {
+    successIcon.classList.add('hidden');
+    errorIcon.classList.remove('hidden');
+    elements.toast.classList.add('toast-error');
+  } else {
+    successIcon.classList.remove('hidden');
+    errorIcon.classList.add('hidden');
+    elements.toast.classList.remove('toast-error');
+  }
 
   if (showAction) {
     elements.toastAction.textContent = actionText;
@@ -2125,7 +2435,7 @@ function handleLogin(e) {
     renderApprovals();
     renderTeamSchedule();
   } else {
-    showToast('Invalid credentials. Try any name from the schedule with password "password".');
+    showToast('Invalid credentials. Please check your username and password.', false, '', 'error');
   }
 }
 
@@ -2373,6 +2683,26 @@ window.handleSwapClick = function(requestId) {
 
 window.handleApprove = function(approvalId) {
   const approval = state.approvals.find(a => a.id === approvalId);
+
+  // Record approval details
+  const completedApproval = {
+    ...approval,
+    status: 'approved',
+    approvedBy: state.currentUser,
+    approvedAt: new Date().toISOString()
+  };
+
+  // Add to activity log
+  state.activityLog.push({
+    id: Date.now(),
+    type: approval.type === 'swap' ? 'swap_approved' : 'coverage_approved',
+    requesterName: approval.requesterName,
+    responderName: approval.responderName,
+    shift: approval.requesterShift,
+    approvedBy: state.currentUser,
+    timestamp: new Date().toISOString()
+  });
+
   state.approvals = state.approvals.filter(a => a.id !== approvalId);
 
   // Remove from coverage requests
@@ -2382,13 +2712,28 @@ window.handleApprove = function(approvalId) {
 
   renderApprovals();
   renderBulletin();
-  showToast('Request approved! Both parties have been notified.');
+  showToast(`Request approved by ${state.currentUser}! Both parties have been notified.`);
 };
 
 window.handleDeny = function(approvalId) {
+  const approval = state.approvals.find(a => a.id === approvalId);
+
+  // Add to activity log
+  if (approval) {
+    state.activityLog.push({
+      id: Date.now(),
+      type: approval.type === 'swap' ? 'swap_denied' : 'coverage_denied',
+      requesterName: approval.requesterName,
+      responderName: approval.responderName,
+      shift: approval.requesterShift,
+      deniedBy: state.currentUser,
+      timestamp: new Date().toISOString()
+    });
+  }
+
   state.approvals = state.approvals.filter(a => a.id !== approvalId);
   renderApprovals();
-  showToast('Request denied. The requester has been notified.');
+  showToast(`Request denied by ${state.currentUser}. The requester has been notified.`);
 };
 
 window.handleCancelRequest = function(requestId) {
@@ -2420,6 +2765,23 @@ window.handleViewSwapRequest = function(requestId) {
 
 elements.loginForm.addEventListener('submit', handleLogin);
 elements.logoutBtn.addEventListener('click', handleLogout);
+
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', function() {
+  const passwordInput = elements.passwordInput;
+  const eyeOpen = this.querySelector('.eye-open');
+  const eyeClosed = this.querySelector('.eye-closed');
+
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.classList.add('hidden');
+    eyeClosed.classList.remove('hidden');
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.classList.remove('hidden');
+    eyeClosed.classList.add('hidden');
+  }
+});
 elements.roleToggle.addEventListener('click', handleRoleSwitch);
 elements.sidebarTabs.forEach(tab => tab.addEventListener('click', handleTabSwitch));
 elements.closeModal.addEventListener('click', closeRequestModal);
@@ -2503,4 +2865,3 @@ elements.notifyTeams.addEventListener('change', (e) => {
 // ==========================================================================
 
 elements.usernameInput.value = 'Andrew Amisola';
-elements.passwordInput.value = 'password';

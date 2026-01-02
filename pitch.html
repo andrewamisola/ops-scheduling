@@ -713,9 +713,9 @@
   <!-- Slide 1: Title -->
   <section class="slide slide-title">
     <div class="slide-content">
-      <div class="proposal-badge">Internal Tool Prototype</div>
-      <h1>A simpler way to<br/>handle coverage</h1>
-      <p class="subtitle">Right now, getting coverage means massive emails and a lot of manual checking. I built a prototype to make that process clearer and faster.</p>
+      <div class="proposal-badge">Proof of Concept</div>
+      <h1>A more intuitive way to<br/>handle scheduling</h1>
+      <p class="subtitle">I've been realizing some pain points in our operations, particularly with scheduling and requesting coverage. I developed a working prototype that could make this a lot more intuitive.</p>
       <p class="author">Built by <strong>Andrew Amisola</strong></p>
     </div>
     <div class="slide-counter">1 / 6</div>
@@ -724,30 +724,30 @@
   <!-- Slide 2: Problem -->
   <section class="slide slide-dark">
     <div class="slide-content">
-      <div class="section-label">The Current Process</div>
-      <h2>How coverage works right now</h2>
-      <p class="section-intro">It works, but it's unintuitive and slow:</p>
+      <div class="section-label">Current Process</div>
+      <h2>How it works right now</h2>
+      <p class="section-intro">It works, but there's friction at every step:</p>
 
       <div class="problem-list">
         <div class="problem-item">
           <div class="problem-num">1</div>
           <div>
-            <h3>Massive emails go out</h3>
-            <p>Someone needs coverage, so they send out a big email. Replies start coming in from people who may or may not actually be available.</p>
+            <h3>Lawrence sends us logging schedules</h3>
+            <p>We receive the schedule, then have to manually look through it to find our own shifts.</p>
           </div>
         </div>
         <div class="problem-item">
           <div class="problem-num">2</div>
           <div>
-            <h3>Manual checking</h3>
-            <p>Everyone has to pull up the schedule and cross-reference to see if they're even off that day before responding.</p>
+            <h3>Need coverage? Mass email or hunt people down</h3>
+            <p>If we need coverage, we have to mass-email everyone or individually hunt down who's available that day.</p>
           </div>
         </div>
         <div class="problem-item">
           <div class="problem-num">3</div>
           <div>
-            <h3>Leads piece it together</h3>
-            <p>Leads have to track who offered, confirm everything, and document it—often across multiple threads.</p>
+            <h3>Tons of untracked emails</h3>
+            <p>Leads have to track who offered, confirm everything, and document it—often across multiple email threads with no central record.</p>
           </div>
         </div>
       </div>
@@ -760,14 +760,14 @@
     <div class="slide-content">
       <div class="component-showcase">
         <div class="showcase-text">
-          <div class="section-label">The Prototype</div>
+          <div class="section-label">The New Way</div>
           <h2>Ops Scheduling</h2>
-          <p>Upload the schedule, and it turns into an interactive dashboard. You can request coverage directly from your shift, it only surfaces people who are actually off, posts to a bulletin, and gives leads a clean approval queue.</p>
-          <p>Less noise. Less back-and-forth. A much clearer process for everyone.</p>
+          <p>Lawrence can upload the log schedules through the web-based app. Operators log in and their personal schedules are highlighted automatically.</p>
+          <p>To request coverage, it's simple: Click on your desired event, request coverage or swap. It will notify those ONLY available to take it, and place it on a public Bulletin board.</p>
 
           <div class="try-box">
             <h4>Try it yourself</h4>
-            <p>Upload any schedule XLSX. Log in with any name from the roster. Password is <code>password</code>.</p>
+            <p>Preloaded with this week and next week's schedules from my POV for demonstration.</p>
           </div>
         </div>
 
@@ -849,14 +849,14 @@
   <!-- Slide 4: Components -->
   <section class="slide slide-dark">
     <div class="slide-content">
-      <div class="section-label">Key Components</div>
+      <div class="section-label">Key Features</div>
       <h2>What the tool does</h2>
 
       <div class="components-grid">
         <!-- Bulletin Card -->
         <div class="component-item">
           <h3>Public Bulletin</h3>
-          <p>Only people who are actually off see the request</p>
+          <p>Displays open/pending requests needing approval</p>
           <div class="app-demo" style="padding: 24px;">
             <div class="bulletin-card">
               <div class="bulletin-header">
@@ -876,10 +876,10 @@
           </div>
         </div>
 
-        <!-- Lead Approval -->
+        <!-- Lead View -->
         <div class="component-item">
-          <h3>Clean Approval Queue</h3>
-          <p>Leads see everything in one place</p>
+          <h3>Lead View</h3>
+          <p>Requests waiting approval—accept or deny, with a log to track all schedule changes</p>
           <div class="app-demo" style="padding: 24px;">
             <div class="approval-card">
               <div class="approval-header">
@@ -903,10 +903,10 @@
           </div>
         </div>
 
-        <!-- Request card -->
+        <!-- Notifications -->
         <div class="component-item">
-          <h3>Request Tracking</h3>
-          <p>You always know where things stand</p>
+          <h3>Flexible Notifications</h3>
+          <p>All actions can notify via your choice: email, text, or Teams DM</p>
           <div class="app-demo" style="padding: 24px;">
             <div class="bulletin-card" style="background: var(--blue-50); border-color: var(--blue-200);">
               <div class="bulletin-header">
@@ -933,23 +933,23 @@
   <section class="slide slide-how">
     <div class="slide-content">
       <div class="section-label">The Flow</div>
-      <h2>Three steps, no noise</h2>
+      <h2>Simple. Centralized. Tracked.</h2>
 
       <div class="flow-steps">
         <div class="flow-step">
           <div class="flow-num">1</div>
-          <h3>Request</h3>
-          <p>Click your shift, add a note if you want, submit. No massive emails—it just posts to the bulletin.</p>
+          <h3>Click & Request</h3>
+          <p>Click on your desired event, request coverage or swap. It posts to the bulletin automatically.</p>
         </div>
         <div class="flow-step">
           <div class="flow-num">2</div>
-          <h3>Offer</h3>
-          <p>Only people who are actually off see it. One click to offer coverage. No manual checking required.</p>
+          <h3>Smart Notifications</h3>
+          <p>It notifies ONLY those available to take it. No mass emails, no hunting people down.</p>
         </div>
         <div class="flow-step">
           <div class="flow-num">3</div>
-          <h3>Approve</h3>
-          <p>Lead sees who offered, approves it. Everyone gets notified. Done—no chasing threads.</p>
+          <h3>Lead Approves</h3>
+          <p>Lead sees who offered, approves or denies. Everything is logged. Everyone gets notified.</p>
         </div>
       </div>
     </div>
@@ -959,18 +959,18 @@
   <!-- Slide 6: Try it -->
   <section class="slide slide-try">
     <div class="slide-content">
-      <div class="section-label">Try It Yourself</div>
-      <h2>It's a working prototype</h2>
-      <p class="subtitle">Upload a real schedule, walk through the flow, see if it makes sense for how we work.</p>
+      <div class="section-label">Try It</div>
+      <h2>A more intuitive and effective way</h2>
+      <p class="subtitle">Overall, it's a more intuitive and effective way of centralizing all scheduling communication. If this seems like a useful tool, I'd be willing to expand on it based on feedback.</p>
 
       <div class="instructions">
         <div class="instruction-card">
-          <h4>1. Upload a schedule</h4>
-          <p>Drop in any XLSX. It parses names and shifts automatically.</p>
+          <h4>1. Schedules preloaded</h4>
+          <p>This week and next week's schedules are already loaded for demonstration.</p>
         </div>
         <div class="instruction-card">
-          <h4>2. Log in as anyone</h4>
-          <p>Pick any name from the roster. Password is <code>password</code>.</p>
+          <h4>2. From my POV</h4>
+          <p>Already logged in as me so you can see how it looks from an operator's perspective.</p>
         </div>
         <div class="instruction-card">
           <h4>3. Try the whole flow</h4>
