@@ -2902,11 +2902,7 @@ const mobileElements = {
   closeDrawerBtn: document.getElementById('closeDrawerBtn'),
   mobileUserAvatar: document.getElementById('mobileUserAvatar'),
   mobileUserName: document.getElementById('mobileUserName'),
-  mobileUserRole: document.getElementById('mobileUserRole'),
-  mobileNavTabs: document.querySelectorAll('.mobile-nav-tab'),
-  mobileTabContent: document.getElementById('mobileTabContent'),
-  mobileBulletinBadge: document.getElementById('mobileBulletinBadge'),
-  mobileNotifyBtn: document.getElementById('mobileNotifyBtn'),
+  mobileBulletinContent: document.getElementById('mobileBulletinContent'),
   mobileLogoutBtn: document.getElementById('mobileLogoutBtn')
 };
 
@@ -2923,14 +2919,9 @@ function openMobileDrawer() {
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
 
-  // Sync user info
+  // Sync user info and load bulletin
   syncMobileUserInfo();
-
-  // Load current tab content
-  const activeTab = document.querySelector('.mobile-nav-tab.active');
-  if (activeTab) {
-    loadMobileTabContent(activeTab.dataset.tab);
-  }
+  loadMobileBulletin();
 }
 
 function closeMobileDrawer() {
@@ -2954,36 +2945,20 @@ function syncMobileUserInfo() {
   if (mobileElements.mobileUserName && elements.userName) {
     mobileElements.mobileUserName.textContent = elements.userName.textContent;
   }
-  if (mobileElements.mobileUserRole) {
-    const activeRole = document.querySelector('.role-btn.active');
-    mobileElements.mobileUserRole.textContent = activeRole ? activeRole.textContent : 'Operator';
-  }
-  if (mobileElements.mobileBulletinBadge && elements.bulletinBadge) {
-    mobileElements.mobileBulletinBadge.textContent = elements.bulletinBadge.textContent;
-  }
 }
 
-function loadMobileTabContent(tabName) {
-  const contentContainer = mobileElements.mobileTabContent;
-  if (!contentContainer) return;
+function loadMobileBulletin() {
+  const container = mobileElements.mobileBulletinContent;
+  if (!container || !elements.bulletinList) return;
 
-  // Clone content from desktop sidebar
-  if (tabName === 'myShifts') {
-    const myShiftsContent = elements.myShiftsList ? elements.myShiftsList.cloneNode(true) : null;
-    contentContainer.innerHTML = '';
-    if (myShiftsContent && myShiftsContent.innerHTML.trim()) {
-      contentContainer.appendChild(myShiftsContent);
-    } else {
-      contentContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No shifts to display</p>';
-    }
-  } else if (tabName === 'bulletin') {
-    const bulletinContent = elements.bulletinList ? elements.bulletinList.cloneNode(true) : null;
-    contentContainer.innerHTML = '';
-    if (bulletinContent && bulletinContent.innerHTML.trim()) {
-      contentContainer.appendChild(bulletinContent);
-    } else {
-      contentContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No open requests</p>';
-    }
+  // Clone bulletin content
+  const bulletinClone = elements.bulletinList.cloneNode(true);
+  container.innerHTML = '<p class="mobile-bulletin-desc">Shifts needing coverage</p>';
+
+  if (bulletinClone.innerHTML.trim()) {
+    container.appendChild(bulletinClone);
+  } else {
+    container.innerHTML += '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No open requests</p>';
   }
 }
 
@@ -2998,28 +2973,6 @@ if (mobileElements.closeDrawerBtn) {
 
 if (mobileElements.mobileDrawerOverlay) {
   mobileElements.mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
-}
-
-// Mobile tab switching
-mobileElements.mobileNavTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    // Update active state
-    mobileElements.mobileNavTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-
-    // Load content
-    loadMobileTabContent(tab.dataset.tab);
-  });
-});
-
-// Mobile notification button
-if (mobileElements.mobileNotifyBtn) {
-  mobileElements.mobileNotifyBtn.addEventListener('click', () => {
-    closeMobileDrawer();
-    setTimeout(() => {
-      elements.notifyModal.classList.remove('hidden');
-    }, 300);
-  });
 }
 
 // Mobile logout button

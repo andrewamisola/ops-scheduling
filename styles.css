@@ -84,9 +84,17 @@ body {
   background: var(--background);
   background-attachment: fixed;
   min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for mobile */
   -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%; /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+  zoom: 0.75; /* Desktop zoom */
+}
+
+/* Remove zoom on mobile/tablet */
+@media (max-width: 900px) {
+  body {
+    zoom: 1;
+    min-height: 100dvh;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2899,142 +2907,63 @@ textarea {
 .mobile-drawer-content {
   flex: 1;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  padding: 16px;
 }
 
-.mobile-user-section {
+.mobile-bulletin-content {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 20px;
-  background: var(--blue-50);
-  border-bottom: 1px solid var(--border-light);
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-bulletin-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
 }
 
 .mobile-avatar {
-  width: 48px !important;
-  height: 48px !important;
-  font-size: 16px !important;
-}
-
-.mobile-user-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 12px !important;
 }
 
 .mobile-user-name {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-primary);
-}
-
-.mobile-user-role {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.mobile-nav-tabs {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-  gap: 4px;
-}
-
-.mobile-nav-tab {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border-radius: var(--radius-md);
-  background: transparent;
-  border: none;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s var(--ease-out);
-  text-align: left;
-}
-
-.mobile-nav-tab svg {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-}
-
-.mobile-nav-tab:hover {
-  background: var(--gray-100);
-  color: var(--text-primary);
-}
-
-.mobile-nav-tab.active {
-  background: var(--blue-50);
-  color: var(--blue-700);
-  font-weight: 600;
-}
-
-.mobile-nav-tab.active svg {
-  color: var(--blue-600);
-}
-
-.mobile-badge {
-  background: var(--blue-600);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  margin-left: auto;
-}
-
-.mobile-tab-content {
-  flex: 1;
-  padding: 16px;
-  overflow-y: auto;
 }
 
 .mobile-drawer-footer {
   padding: 16px;
   border-top: 1px solid var(--border-light);
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.mobile-action-btn {
+.mobile-user-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  background: var(--gray-50);
-  border: none;
-  font-size: 14px;
+  gap: 10px;
+}
+
+.mobile-signout-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1px solid var(--gray-300);
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s var(--ease-out);
 }
 
-.mobile-action-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.mobile-action-btn:hover {
+.mobile-signout-btn:hover {
   background: var(--gray-100);
-  color: var(--text-primary);
-}
-
-.mobile-action-btn.mobile-logout {
-  color: var(--error);
-}
-
-.mobile-action-btn.mobile-logout:hover {
-  background: #FFEBEE;
+  border-color: var(--gray-400);
 }
 
 /* ==========================================================================
@@ -3116,32 +3045,40 @@ textarea {
 
 /* Mobile phones */
 @media (max-width: 600px) {
-  /* Login card optimizations */
+  /* Login - fixed centered, no scroll */
   .login {
-    padding: 16px;
-    padding-top: 80px; /* Account for banner */
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-    align-items: flex-start;
+    padding: 20px;
+    padding-top: 60px; /* Account for banner */
+    padding-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
   }
 
   .login-card {
-    padding: 32px 24px;
+    padding: 28px 24px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
-    margin-top: 20px;
+    margin: 0;
+    max-height: calc(100vh - 100px);
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
   }
 
   .login-brand {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
 
   .login-brand .logo {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 12px;
   }
 
   .login-brand h1 {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .login-brand .tagline {
@@ -3149,36 +3086,41 @@ textarea {
   }
 
   .login-form {
-    gap: 16px;
+    gap: 14px;
   }
 
   .login-form .btn-primary {
-    padding: 16px;
-    font-size: 16px;
+    padding: 14px;
+    font-size: 15px;
   }
 
   .input-group label {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   input, textarea, select {
-    padding: 14px 16px;
+    padding: 12px 14px;
     font-size: 16px; /* Prevents iOS zoom on focus */
     border-radius: var(--radius-md);
   }
 
   .password-wrapper input {
-    padding-right: 50px;
+    padding-right: 48px;
   }
 
   .toggle-password {
-    right: 14px;
-    padding: 8px;
+    right: 12px;
+    padding: 6px;
   }
 
   .toggle-password svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .login-hint {
+    margin-top: 16px;
+    font-size: 12px;
   }
 
   /* Main content adjustments */
@@ -3272,6 +3214,27 @@ textarea {
     padding-bottom: calc(10px + env(safe-area-inset-bottom));
     font-size: 9px;
   }
+
+  /* Team schedule - card-based on mobile */
+  .team-schedule {
+    padding: 16px;
+  }
+
+  .schedule-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: transparent;
+  }
+
+  .schedule-grid .grid-cell {
+    display: none; /* Hide original grid */
+  }
+
+  .expand-btn {
+    padding: 14px;
+    font-size: 13px;
+  }
 }
 
 /* Very small phones */
@@ -3298,39 +3261,18 @@ textarea {
   }
 }
 
-/* Touch-friendly button sizes */
+/* Touch-friendly improvements */
 @media (pointer: coarse) {
-  button,
-  .btn-primary,
-  .btn-ghost,
-  .btn-outline,
-  .tab-btn,
-  .role-btn,
-  .tz-btn {
-    min-height: 44px;
-  }
-
   .day-card {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .day-action {
-    min-height: 44px;
-    padding: 10px 12px;
-  }
-
   /* Larger touch targets for checkboxes/radios */
   input[type="checkbox"],
   input[type="radio"] {
-    width: 22px;
-    height: 22px;
-  }
-
-  .filter-toggle,
-  .notify-type-option {
-    min-height: 44px;
-    padding: 8px 0;
+    width: 20px;
+    height: 20px;
   }
 }
 
