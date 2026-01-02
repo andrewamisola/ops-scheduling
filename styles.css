@@ -2830,16 +2830,15 @@ textarea {
   color: var(--blue-600);
 }
 
-/* Mobile Drawer - Hidden by default */
+/* Mobile Bulletin Page - Full screen overlay */
 .mobile-drawer-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 998;
   opacity: 0;
-  transition: opacity 0.3s var(--ease-out);
+  transition: opacity 0.25s var(--ease-out);
 }
 
 .mobile-drawer-overlay.visible {
@@ -2849,41 +2848,38 @@ textarea {
 .mobile-drawer {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 320px;
-  max-width: 85vw;
+  inset: 0;
   background: var(--white);
   z-index: 999;
-  transform: translateX(-100%);
-  transition: transform 0.3s var(--ease-out);
   flex-direction: column;
-  box-shadow: var(--shadow-xl);
+  transform: translateY(100%);
+  transition: transform 0.3s var(--ease-out);
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 .mobile-drawer.open {
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .mobile-drawer-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border-light);
+  background: var(--white);
 }
 
 .mobile-drawer-header h2 {
   font-size: 20px;
+  font-weight: 700;
   color: var(--blue-800);
 }
 
 .close-drawer-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--gray-100);
   border: none;
@@ -2891,23 +2887,19 @@ textarea {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s var(--ease-out);
 }
 
 .close-drawer-btn svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: var(--gray-600);
-}
-
-.close-drawer-btn:hover {
-  background: var(--gray-200);
 }
 
 .mobile-drawer-content {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 16px 20px;
+  background: var(--gray-50);
 }
 
 .mobile-bulletin-content {
@@ -2935,8 +2927,10 @@ textarea {
 }
 
 .mobile-drawer-footer {
-  padding: 16px;
+  padding: 12px 20px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--border-light);
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2958,12 +2952,6 @@ textarea {
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s var(--ease-out);
-}
-
-.mobile-signout-btn:hover {
-  background: var(--gray-100);
-  border-color: var(--gray-400);
 }
 
 /* ==========================================================================
@@ -2974,6 +2962,7 @@ textarea {
 @media (max-width: 900px) {
   .hamburger-btn {
     display: flex;
+    order: 2; /* Move to right */
   }
 
   .mobile-drawer,
@@ -2985,7 +2974,7 @@ textarea {
     display: block;
   }
 
-  /* Header adjustments */
+  /* Header - clean: just title left, hamburger right */
   .header {
     padding: 12px 16px;
     gap: 12px;
@@ -2994,52 +2983,41 @@ textarea {
   .header-left {
     flex: 1;
     min-width: 0;
+    order: 1;
   }
 
   .header-left .logo {
-    display: none; /* Hide logo to save space */
+    display: none;
   }
 
   .header-title h1 {
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
+  /* Hide entire header-right on mobile */
   .header-right {
-    gap: 8px;
+    display: none;
   }
 
-  .header-right .user-badge,
-  .header-right .role-toggle,
-  .header-right #logoutBtn {
-    display: none; /* Hide, moved to drawer */
-  }
-
-  .header-right .notify-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* Prototype banner - smaller on mobile */
+  /* Prototype banner - minimal on mobile */
   .prototype-banner {
-    padding: 6px 12px;
-    font-size: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
+    padding: 4px 12px;
+    font-size: 9px;
   }
 
   .prototype-banner .vision-link {
-    margin-left: 0;
-    margin-top: 4px;
-    width: 100%;
-    justify-content: center;
+    display: none;
+  }
+
+  .prototype-badge {
+    font-size: 8px;
+    padding: 2px 6px;
   }
 
   .app {
-    padding-top: 60px; /* Taller banner on mobile */
+    padding-top: 32px;
   }
 }
 
@@ -3215,25 +3193,68 @@ textarea {
     font-size: 9px;
   }
 
-  /* Team schedule - card-based on mobile */
+  /* Team schedule - horizontal scroll with sticky headers */
+  .team-schedule-section {
+    margin-top: 16px;
+  }
+
   .team-schedule {
-    padding: 16px;
+    padding: 0;
+    margin: 16px -16px 0;
+    border-radius: 0;
+    overflow: hidden;
   }
 
   .schedule-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    background: transparent;
+    display: grid;
+    grid-template-columns: 120px repeat(7, 100px);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--white);
   }
 
   .schedule-grid .grid-cell {
-    display: none; /* Hide original grid */
+    padding: 10px 8px;
+    font-size: 11px;
+    min-width: 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .schedule-grid .grid-cell.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 10px;
+    padding: 8px 6px;
+  }
+
+  .schedule-grid .grid-cell.name {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    background: var(--gray-50);
+    font-size: 11px;
+    min-width: 120px;
+  }
+
+  .schedule-grid .grid-cell.header.name {
+    z-index: 15;
+    left: 0;
+  }
+
+  .schedule-grid .grid-cell .time {
+    font-size: 11px;
+  }
+
+  .schedule-grid .grid-cell .zone {
+    font-size: 9px;
   }
 
   .expand-btn {
     padding: 14px;
     font-size: 13px;
+    border-radius: var(--radius-md);
+    margin: 0;
   }
 }
 
