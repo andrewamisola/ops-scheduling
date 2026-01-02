@@ -2903,7 +2903,9 @@ const mobileElements = {
   mobileUserAvatar: document.getElementById('mobileUserAvatar'),
   mobileUserName: document.getElementById('mobileUserName'),
   mobileBulletinContent: document.getElementById('mobileBulletinContent'),
-  mobileLogoutBtn: document.getElementById('mobileLogoutBtn')
+  mobileLogoutBtn: document.getElementById('mobileLogoutBtn'),
+  mobileRoleToggle: document.getElementById('mobileRoleToggle'),
+  mobileRoleBtns: document.querySelectorAll('.mobile-role-btn')
 };
 
 function openMobileDrawer() {
@@ -2919,8 +2921,9 @@ function openMobileDrawer() {
   // Prevent body scroll
   document.body.style.overflow = 'hidden';
 
-  // Sync user info and load bulletin
+  // Sync user info, role toggle, and load bulletin
   syncMobileUserInfo();
+  syncMobileRoleToggle();
   loadMobileBulletin();
 }
 
@@ -2982,6 +2985,46 @@ if (mobileElements.mobileLogoutBtn) {
     handleLogout();
   });
 }
+
+// Mobile role toggle - sync with desktop
+function syncMobileRoleToggle() {
+  const activeDesktopRole = document.querySelector('.role-btn.active');
+  if (!activeDesktopRole) return;
+
+  const activeRole = activeDesktopRole.dataset.role;
+  mobileElements.mobileRoleBtns.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.role === activeRole);
+  });
+}
+
+// Mobile role button clicks
+mobileElements.mobileRoleBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const role = btn.dataset.role;
+
+    // Update mobile buttons
+    mobileElements.mobileRoleBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Sync with desktop toggle
+    const desktopBtns = document.querySelectorAll('.role-btn');
+    desktopBtns.forEach(b => {
+      b.classList.toggle('active', b.dataset.role === role);
+    });
+
+    // Toggle lead mode on dashboard
+    const dashboard = document.getElementById('dashboardView');
+    const leadApprovals = document.getElementById('leadApprovals');
+
+    if (role === 'Lead') {
+      dashboard.classList.add('lead-mode');
+      if (leadApprovals) leadApprovals.classList.remove('hidden');
+    } else {
+      dashboard.classList.remove('lead-mode');
+      if (leadApprovals) leadApprovals.classList.add('hidden');
+    }
+  });
+});
 
 // Close drawer on escape key
 document.addEventListener('keydown', (e) => {
