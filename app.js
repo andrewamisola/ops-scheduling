@@ -1059,8 +1059,9 @@ const sections = (state.scheduleFiles.length ? state.scheduleFiles : [{ roster: 
           <div class="week-grid">
             ${weekDays.map((day, i) => {
               const date = weekDates[i];
-              const events = userSchedule.events[i];
-              const isOff = isOffDay(events);
+              const rawEvent = userSchedule.events[i];
+              const events = normalizeShift(rawEvent);
+              const isOff = isOffDay(rawEvent);
               const isTodayClass = isToday(date) ? 'today' : '';
               const offClass = isOff ? 'off' : '';
 
