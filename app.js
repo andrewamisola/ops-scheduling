@@ -2970,13 +2970,23 @@ if (mobileElements.hamburgerBtn) {
   mobileElements.hamburgerBtn.addEventListener('click', openMobileDrawer);
 }
 
-// User badge also opens drawer on mobile
+// User avatar opens drawer on mobile
+const userAvatar = document.getElementById('userAvatar');
+if (userAvatar) {
+  userAvatar.addEventListener('click', (e) => {
+    // Only on mobile (<=900px)
+    if (window.innerWidth <= 900) {
+      e.stopPropagation();
+      openMobileDrawer();
+    }
+  });
+}
+
+// User badge also opens drawer on mobile (fallback)
 const userBadge = document.getElementById('userBadge');
 if (userBadge) {
   userBadge.addEventListener('click', (e) => {
-    // Only on mobile (<=900px)
     if (window.innerWidth <= 900) {
-      e.preventDefault();
       openMobileDrawer();
     }
   });

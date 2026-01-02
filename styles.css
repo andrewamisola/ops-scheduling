@@ -3069,10 +3069,11 @@ textarea {
     display: none;
   }
 
-  /* Make user badge clickable as menu trigger */
+  /* Make avatar clickable as menu trigger */
   .header-right .user-badge {
     cursor: pointer;
-    order: 2;
+    padding: 0;
+    background: none;
   }
 
   /* Hide name on mobile, just show avatar */
@@ -3081,9 +3082,11 @@ textarea {
   }
 
   .header-right .user-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
   }
 
   /* Prototype banner - minimal on mobile */
