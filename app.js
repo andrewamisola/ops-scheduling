@@ -2892,6 +2892,159 @@ elements.notifyTeams.addEventListener('change', (e) => {
 });
 
 // ==========================================================================
+// Mobile Drawer
+// ==========================================================================
+
+const mobileElements = {
+  hamburgerBtn: document.getElementById('hamburgerBtn'),
+  mobileDrawer: document.getElementById('mobileDrawer'),
+  mobileDrawerOverlay: document.getElementById('mobileDrawerOverlay'),
+  closeDrawerBtn: document.getElementById('closeDrawerBtn'),
+  mobileUserAvatar: document.getElementById('mobileUserAvatar'),
+  mobileUserName: document.getElementById('mobileUserName'),
+  mobileUserRole: document.getElementById('mobileUserRole'),
+  mobileNavTabs: document.querySelectorAll('.mobile-nav-tab'),
+  mobileTabContent: document.getElementById('mobileTabContent'),
+  mobileBulletinBadge: document.getElementById('mobileBulletinBadge'),
+  mobileNotifyBtn: document.getElementById('mobileNotifyBtn'),
+  mobileLogoutBtn: document.getElementById('mobileLogoutBtn')
+};
+
+function openMobileDrawer() {
+  mobileElements.mobileDrawerOverlay.classList.remove('hidden');
+  mobileElements.mobileDrawer.style.display = 'flex';
+
+  // Trigger reflow for animation
+  void mobileElements.mobileDrawer.offsetWidth;
+
+  mobileElements.mobileDrawerOverlay.classList.add('visible');
+  mobileElements.mobileDrawer.classList.add('open');
+
+  // Prevent body scroll
+  document.body.style.overflow = 'hidden';
+
+  // Sync user info
+  syncMobileUserInfo();
+
+  // Load current tab content
+  const activeTab = document.querySelector('.mobile-nav-tab.active');
+  if (activeTab) {
+    loadMobileTabContent(activeTab.dataset.tab);
+  }
+}
+
+function closeMobileDrawer() {
+  mobileElements.mobileDrawerOverlay.classList.remove('visible');
+  mobileElements.mobileDrawer.classList.remove('open');
+
+  // Re-enable body scroll
+  document.body.style.overflow = '';
+
+  // Hide after animation
+  setTimeout(() => {
+    mobileElements.mobileDrawerOverlay.classList.add('hidden');
+    mobileElements.mobileDrawer.style.display = 'none';
+  }, 300);
+}
+
+function syncMobileUserInfo() {
+  if (mobileElements.mobileUserAvatar && elements.userAvatar) {
+    mobileElements.mobileUserAvatar.textContent = elements.userAvatar.textContent;
+  }
+  if (mobileElements.mobileUserName && elements.userName) {
+    mobileElements.mobileUserName.textContent = elements.userName.textContent;
+  }
+  if (mobileElements.mobileUserRole) {
+    const activeRole = document.querySelector('.role-btn.active');
+    mobileElements.mobileUserRole.textContent = activeRole ? activeRole.textContent : 'Operator';
+  }
+  if (mobileElements.mobileBulletinBadge && elements.bulletinBadge) {
+    mobileElements.mobileBulletinBadge.textContent = elements.bulletinBadge.textContent;
+  }
+}
+
+function loadMobileTabContent(tabName) {
+  const contentContainer = mobileElements.mobileTabContent;
+  if (!contentContainer) return;
+
+  // Clone content from desktop sidebar
+  if (tabName === 'myShifts') {
+    const myShiftsContent = elements.myShiftsList ? elements.myShiftsList.cloneNode(true) : null;
+    contentContainer.innerHTML = '';
+    if (myShiftsContent && myShiftsContent.innerHTML.trim()) {
+      contentContainer.appendChild(myShiftsContent);
+    } else {
+      contentContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No shifts to display</p>';
+    }
+  } else if (tabName === 'bulletin') {
+    const bulletinContent = elements.bulletinList ? elements.bulletinList.cloneNode(true) : null;
+    contentContainer.innerHTML = '';
+    if (bulletinContent && bulletinContent.innerHTML.trim()) {
+      contentContainer.appendChild(bulletinContent);
+    } else {
+      contentContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px;">No open requests</p>';
+    }
+  }
+}
+
+// Mobile drawer event listeners
+if (mobileElements.hamburgerBtn) {
+  mobileElements.hamburgerBtn.addEventListener('click', openMobileDrawer);
+}
+
+if (mobileElements.closeDrawerBtn) {
+  mobileElements.closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+}
+
+if (mobileElements.mobileDrawerOverlay) {
+  mobileElements.mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+}
+
+// Mobile tab switching
+mobileElements.mobileNavTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // Update active state
+    mobileElements.mobileNavTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Load content
+    loadMobileTabContent(tab.dataset.tab);
+  });
+});
+
+// Mobile notification button
+if (mobileElements.mobileNotifyBtn) {
+  mobileElements.mobileNotifyBtn.addEventListener('click', () => {
+    closeMobileDrawer();
+    setTimeout(() => {
+      elements.notifyModal.classList.remove('hidden');
+    }, 300);
+  });
+}
+
+// Mobile logout button
+if (mobileElements.mobileLogoutBtn) {
+  mobileElements.mobileLogoutBtn.addEventListener('click', () => {
+    closeMobileDrawer();
+    handleLogout();
+  });
+}
+
+// Close drawer on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobileElements.mobileDrawer.classList.contains('open')) {
+    closeMobileDrawer();
+  }
+});
+
+// Close drawer on window resize to desktop
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900 && mobileElements.mobileDrawer.classList.contains('open')) {
+    closeMobileDrawer();
+  }
+});
+
+// ==========================================================================
 // Initialize
 // ==========================================================================
 
