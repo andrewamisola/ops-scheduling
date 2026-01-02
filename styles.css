@@ -2962,7 +2962,7 @@ textarea {
 @media (max-width: 900px) {
   .hamburger-btn {
     display: flex;
-    order: 2; /* Move to right */
+    order: 3; /* Move to right */
   }
 
   .mobile-drawer,
@@ -2974,10 +2974,10 @@ textarea {
     display: block;
   }
 
-  /* Header - clean: just title left, hamburger right */
+  /* Header - title left, user + hamburger right */
   .header {
-    padding: 12px 16px;
-    gap: 12px;
+    padding: 10px 16px;
+    gap: 10px;
   }
 
   .header-left {
@@ -2991,14 +2991,42 @@ textarea {
   }
 
   .header-title h1 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     white-space: nowrap;
   }
 
-  /* Hide entire header-right on mobile */
+  /* Show only user avatar+name on mobile header */
   .header-right {
+    display: flex;
+    order: 2;
+    gap: 10px;
+  }
+
+  .header-right .notify-btn,
+  .header-right .role-toggle,
+  .header-right #logoutBtn {
     display: none;
+  }
+
+  .header-right .user-badge {
+    display: flex;
+    padding: 4px 10px 4px 4px;
+    background: var(--gray-100);
+  }
+
+  .header-right .user-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .header-right .user-name {
+    font-size: 13px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* Prototype banner - minimal on mobile */
@@ -3018,6 +3046,34 @@ textarea {
 
   .app {
     padding-top: 32px;
+  }
+
+  /* Toast fix for mobile */
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 80px;
+    padding: 12px 16px;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .toast-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .toast-message {
+    flex: 1;
+    font-size: 14px;
+    min-width: 0;
+  }
+
+  .toast-action {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 12px;
   }
 }
 
@@ -3193,7 +3249,7 @@ textarea {
     font-size: 9px;
   }
 
-  /* Team schedule - horizontal scroll with sticky headers */
+  /* Team schedule - horizontal scroll with sticky name column */
   .team-schedule-section {
     margin-top: 16px;
   }
@@ -3202,15 +3258,17 @@ textarea {
     padding: 0;
     margin: 16px -16px 0;
     border-radius: 0;
-    overflow: hidden;
+    max-height: 400px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .schedule-grid {
     display: grid;
-    grid-template-columns: 120px repeat(7, 100px);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    grid-template-columns: 100px repeat(7, 90px);
     background: var(--white);
+    width: max-content;
+    min-width: 100%;
   }
 
   .schedule-grid .grid-cell {
@@ -3218,14 +3276,16 @@ textarea {
     font-size: 11px;
     min-width: 0;
     border-bottom: 1px solid var(--border-light);
+    border-right: 1px solid var(--border-light);
   }
 
   .schedule-grid .grid-cell.header {
     position: sticky;
     top: 0;
     z-index: 10;
-    font-size: 10px;
+    font-size: 9px;
     padding: 8px 6px;
+    background: var(--blue-50);
   }
 
   .schedule-grid .grid-cell.name {
@@ -3233,21 +3293,23 @@ textarea {
     left: 0;
     z-index: 5;
     background: var(--gray-50);
-    font-size: 11px;
-    min-width: 120px;
+    font-size: 10px;
+    min-width: 100px;
   }
 
   .schedule-grid .grid-cell.header.name {
-    z-index: 15;
+    z-index: 20;
     left: 0;
+    background: var(--blue-100);
   }
 
   .schedule-grid .grid-cell .time {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .schedule-grid .grid-cell .zone {
     font-size: 9px;
+    display: none; /* Hide zone on mobile to save space */
   }
 
   .expand-btn {
